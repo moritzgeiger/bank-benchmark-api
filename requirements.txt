@@ -4,10 +4,18 @@ setuptools>=26
 twine
 wheel>=0.29
 
+# scraping
+requests
+bs4
+os
+shutil
+
+# pdf handling
+PyPDF2
+
 # data science
 numpy
 pandas
-scikit-learn
 
 # tests/linter
 black
