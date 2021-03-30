@@ -30,6 +30,9 @@ google-cloud-storage
 mlflow
 s3fs
 
+# deploying
+flask-restful
+
 # utilities
 six>=1.14
 joblib
