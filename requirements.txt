@@ -22,12 +22,6 @@ flake8
 pytest
 yapf
 
-# API
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
-
 # deploying
 flask-restful
 Click
@@ -36,8 +30,7 @@ gunicorn
 itsdangerous
 Jinja2
 MarkupSafe
-Werkzeug
-uvicorn
+Werkzeugs
 
 # utilities
 six>=1.14

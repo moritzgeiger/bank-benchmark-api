@@ -43,4 +43,5 @@ def api_id():
     return 'pong'
 
 ## run app
-app.run()
+if __name__ == '__main__':
+    app.run()
