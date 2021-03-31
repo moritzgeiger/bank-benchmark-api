@@ -7,8 +7,6 @@ wheel>=0.29
 # scraping
 requests
 bs4
-os
-shutil
 
 # pdf handling
 PyPDF2
@@ -24,22 +22,15 @@ flake8
 pytest
 yapf
 
-# API
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
-
 # deploying
 flask-restful
-Click==7.0
-Flask==1.1.1
-gunicorn==19.9.0
-itsdangerous==1.1.0
-Jinja2==2.10.1
-MarkupSafe==1.1.1
-Werkzeug==0.15.6
-uvicorn
+Click
+Flask
+gunicorn
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
 
 # utilities
 six>=1.14

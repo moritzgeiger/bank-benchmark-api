@@ -52,7 +52,7 @@ count_lines:
 # ----------------------------------
 
 flask:
-	@python main.py
+	@python app.py
 
 # ----------------------------------
 #      UPLOAD PACKAGE TO PYPI
