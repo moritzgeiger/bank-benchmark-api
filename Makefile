@@ -50,6 +50,13 @@ count_lines:
 # ----------------------------------
 #      UPLOAD PACKAGE TO PYPI
 # ----------------------------------
+
+flask:
+	@python main.py
+
+# ----------------------------------
+#      UPLOAD PACKAGE TO PYPI
+# ----------------------------------
 PYPI_USERNAME=<AUTHOR>
 build:
 	@python setup.py sdist bdist_wheel
