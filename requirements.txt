@@ -30,7 +30,7 @@ gunicorn
 itsdangerous
 Jinja2
 MarkupSafe
-Werkzeugs
+Werkzeug
 
 # utilities
 six>=1.14

@@ -1,5 +1,8 @@
 import flask
 from flask import request, jsonify
+import requests
+
+
 
 ## init app
 app = flask.Flask(__name__)
@@ -38,9 +41,15 @@ def reverse():
 
     return word[::-1]
 
-@app.route('/ping', methods=['GET'])
-def api_id():
-    return 'pong'
+@app.route('/bankstatus', methods=['GET'])
+def bank_status():
+    if 'url' in request.args:
+        url = request.args['url']
+        headers = {'Accept-Language': 'pt-PT'}
+        response = requests.get(url, headers=headers)
+        return {'status':response.status_code, 'url':url}
+    else:
+        return {'error': {'message':'no bank url provided'}}
 
 ## run app
 if __name__ == '__main__':
