@@ -7,7 +7,6 @@ wheel>=0.29
 # scraping
 requests
 bs4
-shutil
 
 # pdf handling
 PyPDF2
