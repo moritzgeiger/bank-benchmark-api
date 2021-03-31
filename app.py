@@ -51,6 +51,12 @@ def bank_status():
     else:
         return {'error': {'message':'no bank url provided'}}
 
+@app.route('/pdfstatus', methods=['GET'])
+def pdf_status():
+    pass ## return pdf size or num of pdfs
+    ## todo: what endpoints do we need
+    # todo: route to check for new data 
+
 ## run app
 if __name__ == '__main__':
     app.run()
