@@ -3,6 +3,10 @@ from flask import request, jsonify
 import requests
 
 
+### importing classes
+from bank_benchmark_api.add_bank import AddBank
+from bank_benchmark_api.sourcing import PdfSourcing
+
 
 ## init app
 app = flask.Flask(__name__)
@@ -55,7 +59,25 @@ def bank_status():
 def pdf_status():
     pass ## return pdf size or num of pdfs
     ## todo: what endpoints do we need
-    # todo: route to check for new data 
+    # todo: route to check for new data
+
+@app.route('/addbank', methods=['GET'])
+def add_bank():
+    if all([x in request.args for x in ['name', 'url']]):
+        url = request.args['url']
+        name = request.args['name']
+        adding = AddBank()
+        adding.input_details(name_bank=name, url=url)
+        return {'status':f'bank {name} has been added/updated to the database'}
+    else:
+        return {'error': {'message':'no bank url or name provided'}}
+
+@app.route('/allbanks', methods=['GET'])
+def all_banks():
+    sourcing = PdfSourcing()
+    banks = sourcing.rerun_sourcing()
+    return banks
+
 
 ## run app
 if __name__ == '__main__':
