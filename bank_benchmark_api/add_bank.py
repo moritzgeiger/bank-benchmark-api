@@ -19,9 +19,9 @@ class AddBank:
         pass
 
     ## Building an initial dictionary which is maintained in the backoffice of the app via input field.
-    def input_details(name_bank, url):
+    def input_details(self, name_bank, url):
         ## LOAD BANKS .json
-        with open('../raw_data/banks.json') as json_file:
+        with open('bank_benchmark_api/data/banks.json') as json_file:
             banks = json.load(json_file)
         
         ## INSPECT INPUT
@@ -33,5 +33,5 @@ class AddBank:
         banks[name_bank] = {'url':url}
 
         ## SAVE BANK.json back to directory
-        with open('../raw_data/banks.json', 'w') as fp:
+        with open('bank_benchmark_api/data/banks.json', 'w') as fp:
             json.dump(banks, fp)

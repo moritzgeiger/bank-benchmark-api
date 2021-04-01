@@ -61,13 +61,18 @@ def pdf_status():
     ## todo: what endpoints do we need
     # todo: route to check for new data
 
+
+#########################
+##### BANK DETAILS ######
+#########################
+
 @app.route('/addbank', methods=['GET'])
 def add_bank():
     if all([x in request.args for x in ['name', 'url']]):
         url = request.args['url']
         name = request.args['name']
         adding = AddBank()
-        adding.input_details(name_bank=name, url=url)
+        adding.input_details(name, url)
         return {'status':f'bank {name} has been added/updated to the database'}
     else:
         return {'error': {'message':'no bank url or name provided'}}

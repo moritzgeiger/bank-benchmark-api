@@ -13,7 +13,7 @@ import cloudinary.uploader
 import json
 
 # load banks file
-with open('raw_data/banks.json') as json_file:
+with open('bank_benchmark_api/data/banks.json') as json_file:
     banks = json.load(json_file)
 
 class PdfSourcing:
@@ -45,7 +45,7 @@ class PdfSourcing:
                 print(f'could not reach page: {url}')
         
         ## SAVE BANK.json back to directory
-        with open('raw_data/banks.json', 'w') as fp:
+        with open('bank_benchmark_api/data/banks.json', 'w') as fp:
             json.dump(banks, fp)
         
         return banks
@@ -76,17 +76,19 @@ class PdfSourcing:
                     print(f'could not execute parsing for: {url}')
             
             ## SAVE BANK.json back to directory
-            with open('raw_data/banks.json', 'w') as fp:
+            with open('bank_benchmark_api/data/banks.json', 'w') as fp:
                 json.dump(banks, fp)
 
             return banks
 
     def rerun_sourcing(self, banks=banks):
+        with open('bank_benchmark_api/data/banks.json') as json_file:
+            banks = json.load(json_file)
         banks = self.find_price_pages()
         banks = self.get_pdf_urls(banks)
         
         ## SAVE BANK.json back to directory
-        with open('raw_data/banks.json', 'w') as fp:
+        with open('bank_benchmark_api/data/banks.json', 'w') as fp:
             json.dump(banks, fp)
 
         return banks
