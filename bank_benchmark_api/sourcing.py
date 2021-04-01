@@ -6,28 +6,38 @@ import PyPDF2
 from bs4 import BeautifulSoup
 import os
 import shutil
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlencode, quote_plus
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 import cloudinary.uploader
 import json
 
-# load banks file
-with open('bank_benchmark_api/data/banks.json') as json_file:
-    banks = json.load(json_file)
+
+bank_dir = 'bank_benchmark_api/data/banks.json'
+# # load banks file
+# with open('bank_benchmark_api/data/banks.json') as json_file:
+#     banks = json.load(json_file)
 
 class PdfSourcing:
-    def __init__(self, banks=banks):
-        self.banks = banks
-
-    def find_price_pages(self, banks=banks, search=['preçário', 'pricelist', 'precario']):    
+    def __init__(self):
+        pass
+#### add ad test more search terms!!!!
+    def find_price_pages(self, bank_dir=bank_dir, search=['preçário']):    
         search = [x.lower() for x in search]
+        # load banks file
+        with open(bank_dir) as json_file:
+            banks = json.load(json_file)
+
         for k, v in banks.items():
             url = v.get('url')
             print(f'parsing url: {url}')
             # only look for the pt page
             headers = {'Accept-Language': 'pt-PT'}
-            r = requests.get(url, headers=headers)
+            try:
+                r = requests.get(url, headers=headers)
+            except:
+                print(f'coud not reach url: {url}')
+                break
             soup = BeautifulSoup(r.content, 'html.parser')
             if r.status_code == 200:
                 # going through every link on the page to see if 'precarios' is in the link
@@ -39,18 +49,24 @@ class PdfSourcing:
                     if any([x in searchstring for x in search]):
                         print(f'found terms of {search} in string {searchstring}')
                         # some links in the source code are relative, some are absolute -- using urljoin
+                        # url_prices = quote_plus(url_prices)
                         v['pricelist_url'] = urljoin(url,url_prices)
                         print(f'added link to banks: {urljoin(url,url_prices)}')
             else:
                 print(f'could not reach page: {url}')
         
         ## SAVE BANK.json back to directory
-        with open('bank_benchmark_api/data/banks.json', 'w') as fp:
+        with open(bank_dir, 'w') as fp:
             json.dump(banks, fp)
         
         return banks
 
-    def get_pdf_urls(self, banks=banks):
+    def get_pdf_urls(self, bank_dir=bank_dir):
+        # load banks file
+        print(f'loading banks from origin {bank_dir}')
+        with open(bank_dir) as json_file:
+            banks = json.load(json_file)
+        
         for val in banks.values():
             url = val.get('pricelist_url')
             val['pdfs'] = list()
@@ -66,29 +82,33 @@ class PdfSourcing:
                     soup = BeautifulSoup(r.content, 'html.parser')
                     print(f'looking for pdfs in: {url}')
                     for link in soup.find_all('a', href=True):
-                        if '.pdf' in link.get('href'):
+                        href = link.get('href')
+                        if '.pdf' in href:
                             # some pdf links are absolute links
-                            ## tru out r.url
-                            pdf = urljoin(val.get('url'),link.get('href'))
-                            print(f'found and added pdf: {pdf}')
+
+                            # href = quote_plus(href)
+                            pdf = urljoin(val.get('url'),href)
                             val['pdfs'].append(f'{pdf}')
+                            print(f'found and added pdf: {pdf}')
+                    print(f'final list of pdfs: {val.get("pdfs")}')
                 else:
-                    print(f'could not execute parsing for: {url}')
+                    print(f'could parse though: {url}')
             
-            ## SAVE BANK.json back to directory
-            with open('bank_benchmark_api/data/banks.json', 'w') as fp:
-                json.dump(banks, fp)
+        ## SAVE BANK.json back to directory
+        print('saving banks back to origin {bank_dir}') 
+        with open(bank_dir, 'w') as fp:
+            json.dump(banks, fp)
 
-            return banks
+        return banks
 
-    def rerun_sourcing(self, banks=banks):
-        with open('bank_benchmark_api/data/banks.json') as json_file:
-            banks = json.load(json_file)
+    def rerun_sourcing(self, bank_dir=bank_dir):
+        # with open(bank_dir) as json_file:
+        #     banks = json.load(json_file)
         banks = self.find_price_pages()
-        banks = self.get_pdf_urls(banks)
+        banks = self.get_pdf_urls()
         
         ## SAVE BANK.json back to directory
-        with open('bank_benchmark_api/data/banks.json', 'w') as fp:
+        with open(bank_dir, 'w') as fp:
             json.dump(banks, fp)
 
         return banks
