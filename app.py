@@ -20,6 +20,10 @@ def home():
                 <p>endpoints: ping (returns "pong")</p>
                 <p>endpoints: double (returns number x 2)</p>
                 <p>endpoints: reversed (returns string reversed)</p>'''
+### fun
+@app.route('/meme', methods=['GET'])
+def meme():
+    return '<img src="https://wyncode.co/uploads/2014/08/121.jpg">'
 
 @app.route('/double', methods=['GET'])
 def double():
@@ -68,6 +72,7 @@ def pdf_status():
 
 @app.route('/addbank', methods=['GET'])
 def add_bank():
+    print('add_bank was called')
     if all([x in request.args for x in ['name', 'url']]):
         url = request.args['url']
         name = request.args['name']
@@ -79,15 +84,24 @@ def add_bank():
 
 @app.route('/allbanks', methods=['GET'])
 def all_banks():
+    print('all_banks was called')
     sourcing = PdfSourcing()
     banks = sourcing.rerun_sourcing()
     return banks
 
-@app.route('/geturls', methods=['GET'])
-def get_urls():
-    sourcing = PdfSourcing()
-    banks = sourcing.get_pdf_urls()
-    return banks
+@app.route('/rmbank', methods=['GET'])
+def rm_bank():
+    print('rm_bank was called')
+    if 'name' in request.args:
+        name = request.args['name']
+        removing = AddBank()
+        try:
+            removing.rm_bank(name)
+            return {'message':f'bank {name} has been removed from the database'}
+        except:
+            return {'message':f'name {name} does not exist in database'}
+    else:
+        return {'error': {'message':'no bank name provided'}}
 
 
 

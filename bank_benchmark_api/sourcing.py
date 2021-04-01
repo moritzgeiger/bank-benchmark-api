@@ -10,10 +10,11 @@ from urllib.parse import urljoin, urlencode, quote_plus
 from urllib.request import Request, urlopen
 # from io import StringIO, BytesIO
 import cloudinary.uploader
-# import json
+import json
 
 
 bank_dir = 'bank_benchmark_api/data/banks.json'
+search_terms = ['preçário', 'pricelist', 'precario']
 # # load banks file
 # with open('bank_benchmark_api/data/banks.json') as json_file:
 #     banks = json.load(json_file)
@@ -21,8 +22,8 @@ bank_dir = 'bank_benchmark_api/data/banks.json'
 class PdfSourcing:
     def __init__(self):
         pass
-#### add ad test more search terms!!!!
-    def find_price_pages(self, bank_dir=bank_dir, search=['preçário']):    
+
+    def find_price_pages(self, bank_dir=bank_dir, search=search_terms):    
         search = [x.lower() for x in search]
         # load banks file
         with open(bank_dir) as json_file:
