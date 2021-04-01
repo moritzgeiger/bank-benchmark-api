@@ -10,7 +10,7 @@ from urllib.parse import urljoin, urlencode, quote_plus
 from urllib.request import Request, urlopen
 # from io import StringIO, BytesIO
 import cloudinary.uploader
-import json
+# import json
 
 
 bank_dir = 'bank_benchmark_api/data/banks.json'
