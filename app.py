@@ -5,8 +5,8 @@ import requests
 
 ### importing classes
 from bank_benchmark_api.add_bank import AddBank
-from bank_benchmark_api.sourcing import PdfSourcing
-
+# from bank_benchmark_api.sourcing import PdfSourcing
+from bank_benchmark_api.sourcing_each import PdfSourcing
 
 ## init app
 app = flask.Flask(__name__)
@@ -107,6 +107,23 @@ def rm_bank():
     else:
         return {'error': {'message':'no bank name provided'}}
 
+
+@app.route('/getpdfs', methods=['POST'])
+def get_pdfs():
+    print('get_banks was called')
+    requirements = ['url', 'name', 'num_pdfs', 'last_updated', 'sum_sizes', 'bp_bank_id']
+    validator = []
+    r = request.json
+    print(f'validating request keys')
+    for k, v in r.items():
+        print(f'checking if requirements are in {v.keys()}')
+        validator.append([x in v.keys() for x in requirements])
+    print(validator)
+    if all(validator):
+        return 'good'
+    
+    else:
+        return f'one of these keys were not passed {requirements}'
 
 
 ## run app
