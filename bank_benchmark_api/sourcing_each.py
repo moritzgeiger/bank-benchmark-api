@@ -77,7 +77,7 @@ class PdfSourcing:
     def get_banks_pdf_urls(self):
    
         for bank_id, vals in self.bank_dict.items():
-            price_page = val.get('price_page')
+            price_page = vals.get('price_page')
             # creating empty list for pdf urls
             vals['list_pdfs'] = []
             # some banks direclty link to a pdf address
@@ -96,7 +96,7 @@ class PdfSourcing:
                             # some pdf links are absolute links
 
                             # href = quote_plus(href)
-                            pdf = urljoin(val.get('url'),href)
+                            pdf = urljoin(vals.get('url'),href)
                             vals['list_pdfs'].append(f'{pdf}')
                             print(f'found and added pdf: {pdf}')
                     print(f'final list of pdfs added: {vals.get("list_pdfs")}')
@@ -105,9 +105,16 @@ class PdfSourcing:
 
         return self.bank_dict
 
-    ## todo: nuber of pdfs
-    ## todo: nuber of last_updated
-    ## todo: nuber of sum_sizes
+    def get_num_pdfs(self):
+        for bank_id, vals in self.bank_dict.items():
+            len_list = len(vals.get('list_pdfs'))
+            vals["num_pdfs"] = len_list
+        
+        return self.bank_dict
+
+
+    ## todo: date of last_updated
+    ## todo: size of sum_sizes
 
     def rerun_sourcing(self):
         # with open(bank_dir) as json_file:
@@ -115,5 +122,6 @@ class PdfSourcing:
         banks = self.get_bp_pdf_urls()
         banks = self.find_price_pages()
         banks = self.get_banks_pdf_urls()
+        banks = self.get_num_pdfs()
 
         return banks
