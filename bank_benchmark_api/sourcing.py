@@ -8,12 +8,14 @@ import os
 import shutil
 from urllib.parse import urljoin, urlencode, quote_plus
 from urllib.request import Request, urlopen
-from io import StringIO, BytesIO
+# from io import StringIO, BytesIO
 import cloudinary.uploader
 import json
 
+from bank_benchmark_api.data.bank_details import bp_bank_id
 
 bank_dir = 'bank_benchmark_api/data/banks.json'
+search_terms = ['preçário', 'pricelist', 'precario']
 # # load banks file
 # with open('bank_benchmark_api/data/banks.json') as json_file:
 #     banks = json.load(json_file)
@@ -21,8 +23,8 @@ bank_dir = 'bank_benchmark_api/data/banks.json'
 class PdfSourcing:
     def __init__(self):
         pass
-#### add ad test more search terms!!!!
-    def find_price_pages(self, bank_dir=bank_dir, search=['preçário']):    
+
+    def find_price_pages(self, bank_dir=bank_dir, search=search_terms):    
         search = [x.lower() for x in search]
         # load banks file
         with open(bank_dir) as json_file:
@@ -49,6 +51,8 @@ class PdfSourcing:
                     if any([x in searchstring for x in search]):
                         print(f'found terms of {search} in string {searchstring}')
                         # some links in the source code are relative, some are absolute -- using urljoin
+                        #################### FIGURE OUT ENCODING URL!!! ###
+                        
                         # url_prices = quote_plus(url_prices)
                         v['pricelist_url'] = urljoin(url,url_prices)
                         print(f'added link to banks: {urljoin(url,url_prices)}')
@@ -61,7 +65,30 @@ class PdfSourcing:
         
         return banks
 
-    def get_pdf_urls(self, bank_dir=bank_dir):
+    def get_bp_pdf_urls(self):
+        # load banks file
+        with open(bank_dir) as json_file:
+            banks = json.load(json_file)
+        
+        ## setting url canvas
+        url_pre = 'https://clientebancario.bportugal.pt/sites/default/files/precario/'
+        url_suff = '_PRE.pdf'
+        for bank, val in banks.items():
+            try:    
+                bank_id = bp_bank_id[bank]['id_pb']
+                val['pb_bank_pdf'] = f'{url_pre}{bank_id}_/{bank_id}{url_suff}'
+                val['pb_bank_id'] = bank_id
+            except:
+                print(f'bp_bank_id does not have {bank} to add id to. Please update the variable.')
+
+        ## SAVE BANK.json back to directory
+        print('saving banks back to origin {bank_dir}') 
+        with open(bank_dir, 'w') as fp:
+            json.dump(banks, fp)
+        
+        return banks
+
+    def get_banks_pdf_urls(self, bank_dir=bank_dir):
         # load banks file
         print(f'loading banks from origin {bank_dir}')
         with open(bank_dir) as json_file:
@@ -104,8 +131,9 @@ class PdfSourcing:
     def rerun_sourcing(self, bank_dir=bank_dir):
         # with open(bank_dir) as json_file:
         #     banks = json.load(json_file)
+        banks = self.get_bp_pdf_urls()
         banks = self.find_price_pages()
-        banks = self.get_pdf_urls()
+        banks = self.get_banks_pdf_urls()
         
         ## SAVE BANK.json back to directory
         with open(bank_dir, 'w') as fp:

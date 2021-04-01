@@ -8,7 +8,7 @@ import os
 import shutil
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
-from io import StringIO, BytesIO
+# from io import StringIO, BytesIO
 import cloudinary.uploader
 import json
 
@@ -35,3 +35,17 @@ class AddBank:
         ## SAVE BANK.json back to directory
         with open('bank_benchmark_api/data/banks.json', 'w') as fp:
             json.dump(banks, fp)
+
+    def rm_bank(self, name_bank):
+        ## LOAD BANKS .json
+        with open('bank_benchmark_api/data/banks.json') as json_file:
+            banks = json.load(json_file)
+        
+        ## pop bank
+        banks.pop(name_bank)
+        
+        ## SAVE BANK.json back to directory
+        with open('bank_benchmark_api/data/banks.json', 'w') as fp:
+            json.dump(banks, fp)
+
+    

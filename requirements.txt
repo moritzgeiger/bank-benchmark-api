@@ -10,10 +10,7 @@ bs4
 
 # pdf handling
 PyPDF2
-json
-io
 cloudinary
-urllib
 
 # data science
 numpy
