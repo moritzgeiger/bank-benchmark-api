@@ -114,16 +114,20 @@ def get_pdfs():
     requirements = ['url', 'name', 'num_pdfs', 'last_updated', 'sum_sizes', 'bp_bank_id']
     validator = []
     r = request.json
-    print(f'validating request keys')
-    for k, v in r.items():
-        print(f'checking if requirements are in {v.keys()}')
-        validator.append([x in v.keys() for x in requirements])
-    print(validator)
+    for vals in r.values():
+        print(f'checking if requirements are in {vals.keys()}')
+        validator.append([x in vals.keys() for x in requirements])
+    validator = [j for i in validator for j in i]
+    print(f'matched these positions in keys: {validator}')
+    
     if all(validator):
-        return 'good'
+        print(f'sorcing has started')
+        sourcing = PdfSourcing(r)
+        banks = sourcing.rerun_sourcing()
+        return banks
     
     else:
-        return f'one of these keys were not passed {requirements}'
+        return {'error': f'one of these required keys were not passed {requirements}'}
 
 
 ## run app
