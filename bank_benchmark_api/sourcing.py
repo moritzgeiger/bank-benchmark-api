@@ -50,6 +50,8 @@ class PdfSourcing:
                     if any([x in searchstring for x in search]):
                         print(f'found terms of {search} in string {searchstring}')
                         # some links in the source code are relative, some are absolute -- using urljoin
+                        #################### FIGURE OUT ENCODING URL!!! ###
+                        
                         # url_prices = quote_plus(url_prices)
                         v['pricelist_url'] = urljoin(url,url_prices)
                         print(f'added link to banks: {urljoin(url,url_prices)}')
