@@ -83,6 +83,13 @@ def all_banks():
     banks = sourcing.rerun_sourcing()
     return banks
 
+@app.route('/geturls', methods=['GET'])
+def get_urls():
+    sourcing = PdfSourcing()
+    banks = sourcing.get_pdf_urls()
+    return banks
+
+
 
 ## run app
 if __name__ == '__main__':
