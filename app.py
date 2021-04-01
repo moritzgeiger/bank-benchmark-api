@@ -86,7 +86,7 @@ def pdf_status():
 
 @app.route('/getpdfs', methods=['POST'])
 def get_pdfs():
-    print('get_banks was called')
+    print('get_pdfs was called')
     requirements = ['url', 'name', 'num_pdfs', 'last_updated', 'sum_sizes', 'bp_bank_id']
     validator = []
     r = request.json
