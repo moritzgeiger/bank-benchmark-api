@@ -8,7 +8,7 @@ import os
 import shutil
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
-from io import StringIO, BytesIO
+# from io import StringIO, BytesIO
 import cloudinary.uploader
 import json
 

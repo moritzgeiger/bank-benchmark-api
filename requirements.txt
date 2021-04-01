@@ -10,7 +10,6 @@ bs4
 
 # pdf handling
 PyPDF2
-io
 cloudinary
 urllib
 
