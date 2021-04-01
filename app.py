@@ -13,17 +13,22 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 ## adding endpoints
+
+
+#############################
+###### TESTING ENDPOINTS ####
+#############################
+
 @app.route('/', methods=['GET'])
 def home():
     return '''<h1>Welcome to the benchmark API</h1>
                 <p>A prototype API to get banking prices.</p>
-                <p>endpoint: allbanks (returns all banks and pdf urls)</p>
-                <p>endpoint: addbank (adds a banks to the db)</p>
-                <p>endpoint: rmbank (removes bank from db)</p>
-                <p>endpoint: meme (returns a meme)</p>
-                <p>endpoint: ping (returns "pong")</p>
-                <p>endpoint: double (returns number x 2)</p>
-                <p>endpoint: reversed (returns string reversed)</p>'''
+                <p>endpoint: /getpdfs (post) accepts dictionary of dictionaries</p>
+                
+                <p>endpoint: /meme (returns a meme)</p>
+                <p>endpoint: /ping (returns "pong")</p>
+                <p>endpoint: /double (returns number x 2)</p>
+                <p>endpoint: /reversed (returns string reversed)</p>'''
 ### fun
 @app.route('/meme', methods=['GET'])
 def meme():
@@ -53,6 +58,11 @@ def reverse():
 
     return word[::-1]
 
+############################
+######## STATUS UPDATES ####
+############################
+
+# not done yet
 @app.route('/bankstatus', methods=['GET'])
 def bank_status():
     if 'url' in request.args:
@@ -73,40 +83,6 @@ def pdf_status():
 #########################
 ##### BANK DETAILS ######
 #########################
-
-@app.route('/addbank', methods=['GET'])
-def add_bank():
-    print('add_bank was called')
-    if all([x in request.args for x in ['name', 'url']]):
-        url = request.args['url']
-        name = request.args['name']
-        adding = AddBank()
-        adding.input_details(name, url)
-        return {'status':f'bank {name} has been added/updated to the database'}
-    else:
-        return {'error': {'message':'no bank url or name provided'}}
-
-@app.route('/allbanks', methods=['GET'])
-def all_banks():
-    print('all_banks was called')
-    sourcing = PdfSourcing()
-    banks = sourcing.rerun_sourcing()
-    return banks
-
-@app.route('/rmbank', methods=['GET'])
-def rm_bank():
-    print('rm_bank was called')
-    if 'name' in request.args:
-        name = request.args['name']
-        removing = AddBank()
-        try:
-            removing.rm_bank(name)
-            return {'message':f'bank {name} has been removed from the database'}
-        except:
-            return {'error': {'message':f'name {name} does not exist in database'}}
-    else:
-        return {'error': {'message':'no bank name provided'}}
-
 
 @app.route('/getpdfs', methods=['POST'])
 def get_pdfs():
