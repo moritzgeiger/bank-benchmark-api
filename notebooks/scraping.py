@@ -20,19 +20,21 @@ commission = {'abanca': {'1':'Emissão de extrato','2':'Fotocópias de segundas 
 
 
 class Scraping:
-    def __init__(self, pdf, page):
+    def __init__(self, pdf, page, x, splitting_right=False):
         self.pdf = pdf
         self.page = page
+        self.splitting_right= splitting_right
+        self.x = x
 
 
-    def extract_clean(self,splitting_right=False):
+    def extract_clean(self):
         file = pdfplumber.open(self.pdf)
         page = file.pages[self.page]
         text = page.extract_text()
         text = text.replace('Isento', '0,00')
         text = text.replace('n/a', str(np.nan))
         text = re.sub('--', str(np.nan), text)
-        if splitting_right == True:
+        if self.splitting_right == True:
             text = text.replace('\n','. ')
             # text = len_sentences(text)
             text = nltk.sent_tokenize(text)
@@ -42,17 +44,17 @@ class Scraping:
         text = nltk.sent_tokenize(text)
         return text
 
-    def search_com(self, x, splitting_right=False):
+    def search_com(self):
         decod = {}
-        if x not in commission:
+        if self.x not in commission:
             return 'not in the dictionary'
-        decod = commission[x]
+        decod = commission[self.x]
         file = self.extract_clean()
         return decod, file
 
-    def values(self,x):
-        file = self.search_com(x)[1]
-        names = self.search_com(x)[0]
+    def values(self):
+        file = self.search_com()[1]
+        names = self.search_com()[0]
         lista = {}
         keys = [x for x in names.keys()]
         for key in keys:
@@ -71,3 +73,21 @@ class Scraping:
         return lista
 
 
+    def n_account(self):
+        accounts = []
+        finals = []
+        if self.splitting_right == True:
+            for sentence in self.search_com()[1]:
+                if 'Conta' in sentence:
+                    finals.append(sentence)
+            return finals
+        for sentence in self.search_com()[1]:
+            contas = re.split('Conta',sentence)
+            accounts.append(contas)
+        for account in accounts:
+            if len(account)>1:
+                account = ['Conta'+ x for x in account]
+                finals.append(account)
+
+
+        return finals
