@@ -33,8 +33,8 @@ class PdfSourcing:
             headers = {'Accept-Language': 'pt-PT'}
             try:
                 r = requests.get(url, headers=headers)
-            except:
-                print(f'coud not reach url: {url}')
+            except Exception as e:
+                print(f'coud not reach url: {url}, error: {e}')
 
             soup = BeautifulSoup(r.content, 'html.parser')
             if r.status_code == 200:
@@ -54,7 +54,7 @@ class PdfSourcing:
                         vals["price_page"] = urljoin(url,url_prices)
                         print(f'added link to id {bank_id}: {urljoin(url,url_prices)}')
             else:
-                print(f'could not reach page: {url}')
+                print(f'could not reach page: {url}, status code: {r.status_code}')
                 vals["price_page"] = {'error':'page not reachable'}
 
         return self.bank_dict
@@ -143,10 +143,6 @@ class PdfSourcing:
                 vals['sum_sizes'] = sum(filesizes)
 
         return self.bank_dict
-
-
-    ## todo: date of last_updated
-    ## todo: size of sum_sizes
 
     def rerun_sourcing(self):
         # with open(bank_dir) as json_file:
