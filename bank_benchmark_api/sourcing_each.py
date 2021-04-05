@@ -8,17 +8,16 @@ import os
 import shutil
 from urllib.parse import urljoin, urlencode, quote_plus
 from urllib.request import Request, urlopen
-# from io import StringIO, BytesIO
+from io import StringIO, BytesIO
 import cloudinary.uploader
 import json
+from datetime import date
+import sys
 
 from bank_benchmark_api.data.bank_details import bp_bank_id
 
+## set the global search terms to look for on a banks website. don't choose to many words as it might catch other / irelevant links.
 search_terms = ['preçário', 'pricelist', 'precario']
-# # load banks file
-# with open('bank_benchmark_api/data/banks.json') as json_file:
-#     banks = json.load(json_file)
-
 
 class PdfSourcing:
     def __init__(self, bank_dict):
@@ -36,7 +35,7 @@ class PdfSourcing:
                 r = requests.get(url, headers=headers)
             except:
                 print(f'coud not reach url: {url}')
-                break
+
             soup = BeautifulSoup(r.content, 'html.parser')
             if r.status_code == 200:
                 # going through every link on the page to see if 'precarios' is in the link
@@ -56,12 +55,13 @@ class PdfSourcing:
                         print(f'added link to id {bank_id}: {urljoin(url,url_prices)}')
             else:
                 print(f'could not reach page: {url}')
+                vals["price_page"] = {'error':'page not reachable'}
 
         return self.bank_dict
 
     ### will only run after find_price_pages!
     def get_bp_pdf_urls(self):
-
+        print(f'building links for BP website')
         ## setting url canvas
         url_pre = 'https://clientebancario.bportugal.pt/sites/default/files/precario/'
         url_suff = '_PRE.pdf'
@@ -75,13 +75,16 @@ class PdfSourcing:
         return self.bank_dict
 
     def get_banks_pdf_urls(self):
-   
+        print(f'building list of pdfs on price pages')
         for bank_id, vals in self.bank_dict.items():
             price_page = vals.get('price_page')
             # creating empty list for pdf urls
             vals['list_pdfs'] = []
             # some banks direclty link to a pdf address
-            if '.pdf' in price_page:
+            if 'error'in price_page:
+                print(f'could not use {vals.get("url")}')
+                break
+            elif '.pdf' in price_page:
                 print(f'url is already pdf for: {price_page}')
                 vals['list_pdfs'].append(f'{price_page}')
             # for other landing pages look for every pdf on page
@@ -113,6 +116,35 @@ class PdfSourcing:
         return self.bank_dict
 
 
+    def last_updated(self):
+        for bank_id, vals in self.bank_dict.items():
+            vals["last_updated"] = str(date.today())
+        return self.bank_dict
+
+
+    def sum_sizes(self):
+        for bank_id, vals in self.bank_dict.items():
+            print(f"checking filesizes of pdfs for {vals.get('price_page')}")
+            pdfs = vals.get('list_pdfs')
+            if pdfs == []:
+                print(f"no pdfs provided for {vals.get('price_page')}")
+                break
+            else:
+                filesizes = []
+                for pdf in pdfs:
+                    try:
+                        remote = urlopen(Request(pdf)).read()
+                        memory = BytesIO(remote)
+                        # file = PdfFileReader(memory)
+                        filesizes.append(sys.getsizeof(memory))
+                    except Exception as e:
+                        print(f'cannot reach: {pdf}, error: {e}')
+
+                vals['sum_sizes'] = sum(filesizes)
+
+        return self.bank_dict
+
+
     ## todo: date of last_updated
     ## todo: size of sum_sizes
 
@@ -123,5 +155,7 @@ class PdfSourcing:
         banks = self.find_price_pages()
         banks = self.get_banks_pdf_urls()
         banks = self.get_num_pdfs()
+        banks = self.last_updated()
+        banks = self.sum_sizes()
 
         return banks
