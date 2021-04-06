@@ -92,4 +92,23 @@ class Scraping:
                 finals.append(account)
         return finals
 
+    def names(self):
+        words = []
+        for account in self.n_account():
+            for element in account:
+                words.append(element.split())
+        names = []
+        for word in words:
+            if word[0] == 'Conta' and len(word)>1 and word[1]!='nan':
+                names.append(word)
+        finals = []
+        for name in names:
+            finals.append(' '.join(name[:14]))
+        regular = []
+        for final in finals:
+            start = final[:3]
+            if start not in regular:
+                regular.append(final)
+        return regular
+
 
