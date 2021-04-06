@@ -1,0 +1,541 @@
+id;fees_id;subproduct_id;document_id;name;amount;category;tax_type;tax;tax_amount;status
+;"Manutenção de conta
+Account Management Fees";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_ManutencaoConta_ContaDOParticulares<1000;5;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_ManutencaoConta_ContaDOParticulares(1000<>2500);3,333333333;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_ManutencaoConta_ContaDOParticulares>2500;0;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_ManutencaoConta_ContaOrdenado;0;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_ManutencaoConta_ContaStandard;0;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_ManutencaoConta_ContaFuture;0;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_ManutencaoConta_ContaKids;0;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_ManutencaoConta_ContaGlobal;6,88;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_ManutencaoConta_ContaBase;10;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_ManutencaoConta_ContaPrivate;8;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_ManutencaoConta_ContaValue;5;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_ManutencaoConta_ContaSmart;5;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_ManutencaoConta_ContaFuturo;0;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_ManutencaoConta_ContaServicosMinimos;1;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_ManutencaoConta_ContaMoedaEstrangeira;5;fixed commission;"""""";"""""";"""""";Active
+;"Manutenção de conta
+Account Management Fees";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_ManutencaoConta_ContaInternacional;0;fixed commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_ExtratoMensal_ContaDOParticulares<1000;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_ExtratoMensal_ContaDOParticulares(1000<>2500);0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_ExtratoMensal_ContaDOParticulares>2500;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_ExtratoMensal_ContaOrdenado;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_ExtratoMensal_ContaStandard;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_ExtratoMensal_ContaFuture;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_ExtratoMensal_ContaKids;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_ExtratoMensal_ContaGlobal;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_ExtratoMensal_ContaBase;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_ExtratoMensal_ContaPrivate;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_ExtratoMensal_ContaValue;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_ExtratoMensal_ContaSmart;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_ExtratoMensal_ContaFuturo;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_ExtratoMensal_ContaServicosMinimos;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_ExtratoMensal_ContaMoedaEstrangeira;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_ExtratoMensal_ContaInternacional;0;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_OutrosExtratos_ContaDOParticulares<1000;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_OutrosExtratos_ContaDOParticulares(1000<>2500);2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_OutrosExtratos_ContaDOParticulares>2500;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_OutrosExtratos_ContaOrdenado;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_OutrosExtratos_ContaStandard;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_OutrosExtratos_ContaFuture;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_OutrosExtratos_ContaKids;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_OutrosExtratos_ContaGlobal;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_OutrosExtratos_ContaBase;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_OutrosExtratos_ContaPrivate;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_OutrosExtratos_ContaValue;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_OutrosExtratos_ContaSmart;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_OutrosExtratos_ContaFuturo;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_OutrosExtratos_ContaServicosMinimos;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_OutrosExtratos_ContaMoedaEstrangeira;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_OutrosExtratos_ContaInternacional;2;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_2ªVia_ContaDOParticulares<1000;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_2ªVia_ContaDOParticulares(1000<>2500);7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_2ªVia_ContaDOParticulares>2500;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_2ªVia_ContaOrdenado;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_2ªVia_ContaStandard;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_2ªVia_ContaFuture;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_2ªVia_ContaKids;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_2ªVia_ContaGlobal;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_2ªVia_ContaBase;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_2ªVia_ContaPrivate;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_2ªVia_ContaValue;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_2ªVia_ContaSmart;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_2ªVia_ContaFuturo;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_2ªVia_ContaServicosMinimos;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_2ªVia_ContaMoedaEstrangeira;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Emissão de 2ª via extrato
+Account Statement Replacement";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_2ªVia_ContaInternacional;7,50 ;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_Fotocopias_ContaDOParticulares<1000;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_Fotocopias_ContaDOParticulares(1000<>2500);5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_Fotocopias_ContaDOParticulares>2500;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_Fotocopias_ContaOrdenado;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_Fotocopias_ContaStandard;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_Fotocopias_ContaFuture;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_Fotocopias_ContaKids;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_Fotocopias_ContaGlobal;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_Fotocopias_ContaBase;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_Fotocopias_ContaPrivate;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_Fotocopias_ContaValue;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_Fotocopias_ContaSmart;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_Fotocopias_ContaFuturo;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_Fotocopias_ContaServicosMinimos;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_Fotocopias_ContaMoedaEstrangeira;5;optional commission;"""""";"""""";"""""";Active
+;"Fotocópias de documentos
+Documental copies";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_Fotocopias_ContaInternacional;5;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_LevantamentoCheque_ContaDOParticulares<1000;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_LevantamentoCheque_ContaDOParticulares(1000<>2500);0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_LevantamentoCheque_ContaDOParticulares>2500;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_LevantamentoCheque_ContaOrdenado;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_LevantamentoCheque_ContaStandard;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_LevantamentoCheque_ContaFuture;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_LevantamentoCheque_ContaKids;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_LevantamentoCheque_ContaGlobal;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_LevantamentoCheque_ContaBase;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_LevantamentoCheque_ContaPrivate;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_LevantamentoCheque_ContaValue;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_LevantamentoCheque_ContaSmart;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_LevantamentoCheque_ContaFuturo;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_LevantamentoCheque_ContaServicosMinimos;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_LevantamentoCheque_ContaMoedaEstrangeira;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_LevantamentoCheque_ContaInternacional;0;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_LevantamentoSemCheque_ContaDOParticulares<1000;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_LevantamentoSemCheque_ContaDOParticulares(1000<>2500);3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_LevantamentoSemCheque_ContaDOParticulares>2500;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_LevantamentoSemCheque_ContaOrdenado;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_LevantamentoSemCheque_ContaStandard;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_LevantamentoSemCheque_ContaFuture;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_LevantamentoSemCheque_ContaKids;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_LevantamentoSemCheque_ContaGlobal;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_LevantamentoSemCheque_ContaBase;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_LevantamentoSemCheque_ContaPrivate;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_LevantamentoSemCheque_ContaValue;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_LevantamentoSemCheque_ContaSmart;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_LevantamentoSemCheque_ContaFuturo;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_LevantamentoSemCheque_ContaServicosMinimos;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_LevantamentoSemCheque_ContaMoedaEstrangeira;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_LevantamentoSemCheque_ContaInternacional;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_AdesaoServicoOnline_ContaDOParticulares<1000;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_AdesaoServicoOnline_ContaDOParticulares(1000<>2500);0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_AdesaoServicoOnline_ContaDOParticulares>2500;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_AdesaoServicoOnline_ContaOrdenado;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_AdesaoServicoOnline_ContaStandard;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_AdesaoServicoOnline_ContaFuture;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_AdesaoServicoOnline_ContaKids;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_AdesaoServicoOnline_ContaGlobal;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_AdesaoServicoOnline_ContaBase;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_AdesaoServicoOnline_ContaPrivate;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_AdesaoServicoOnline_ContaValue;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_AdesaoServicoOnline_ContaSmart;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_AdesaoServicoOnline_ContaFuturo;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_AdesaoServicoOnline_ContaServicosMinimos;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_AdesaoServicoOnline_ContaMoedaEstrangeira;0;optional commission;"""""";"""""";"""""";Active
+;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_AdesaoServicoOnline_ContaInternacional;0;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_DepositoMoedas_ContaDOParticulares<1000;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_DepositoMoedas_ContaDOParticulares(1000<>2500);3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_DepositoMoedas_ContaDOParticulares>2500;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_DepositoMoedas_ContaOrdenado;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_DepositoMoedas_ContaStandard;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_DepositoMoedas_ContaFuture;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_DepositoMoedas_ContaKids;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_DepositoMoedas_ContaGlobal;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_DepositoMoedas_ContaBase;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_DepositoMoedas_ContaPrivate;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_DepositoMoedas_ContaValue;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_DepositoMoedas_ContaSmart;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_DepositoMoedas_ContaFuturo;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_DepositoMoedas_ContaServicosMinimos;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_DepositoMoedas_ContaMoedaEstrangeira;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_DepositoMoedas_ContaInternacional;3,50 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio até 1.000€ 
+       Average balance < 1000€";;Abanca_AlteracaoTitulares_ContaDOParticulares<1000;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio entre 1.001€ e 2.500€ 
+       Average balance between 1001€-2500€";;Abanca_AlteracaoTitulares_ContaDOParticulares(1000<>2500);5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"    3.1 Conta D.O. Particulares (Nota 2) 
+          Private Demand Deposit Account (Note 2)
+     - Saldo médio superior a 2.500€ 
+       Average balance > 2500€";;Abanca_AlteracaoTitulares_ContaDOParticulares>2500;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.2 Conta Ordenado (Nota 1 e Nota 16) 
+           Bank Account With Direct Deposit Enabled (Note 1 and Note 16)";;Abanca_AlteracaoTitulares_ContaOrdenado;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.3 Conta Standard (não admite novas contratações)
+           Standard account (doesn't admit new hirings)";;Abanca_AlteracaoTitulares_ContaStandard;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.4 Conta Future (clientes entre 18 e 28 anos) 
+           Future Account (clients between 18 and 28 years old)";;Abanca_AlteracaoTitulares_ContaFuture;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.5 Conta Kids (Nota 4) 
+           Kids Account";;Abanca_AlteracaoTitulares_ContaKids;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.6 Conta Global (Nota 5) 
+           Global Account";;Abanca_AlteracaoTitulares_ContaGlobal;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.7 Conta Base (Nota 6) 
+           Basic Account";;Abanca_AlteracaoTitulares_ContaBase;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.8 Conta Private (Nota 7) 
+           Private Account";;Abanca_AlteracaoTitulares_ContaPrivate;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.9 Conta Value (Nota 8) 
+           Value Accout";;Abanca_AlteracaoTitulares_ContaValue;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.10 Conta Smart (Nota 9) 
+             Smart Account";;Abanca_AlteracaoTitulares_ContaSmart;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.11 Conta Futuro (clientes entre 0 e 28 anos) 
+             Future Account (clients between 0 and 28 years old)";;Abanca_AlteracaoTitulares_ContaFuturo;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.12 Conta Serviços Mínimos Bancários (Nota 11) 
+             Minimal Bank Services Account";;Abanca_AlteracaoTitulares_ContaServicosMinimos;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.13 Conta Moeda Estrangeira (Nota 12) 
+             Foreign Currency Account";;Abanca_AlteracaoTitulares_ContaMoedaEstrangeira;5,00 ;optional commission;"""""";"""""";"""""";Active
+;"Alteração de titulares
+Account Owners Change";"     3.14 Conta ABANCA Internacional (Nota 17)  
+             ABANCA International Account";;Abanca_AlteracaoTitulares_ContaInternacional;5,00 ;optional commission;"""""";"""""";"""""";Active
