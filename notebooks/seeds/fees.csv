@@ -1,0 +1,29 @@
+id;product_id;name;search_name;category
+;;"Manutenção de conta
+Account Management Fees";Manutenção de conta;fixed commission
+;;"Emissão de extrato Mensal (enviado ao domicílio) 
+Monthly Statement Inssuance (sent to home)";Extrato Mensal;optional commission
+;;"Emissão de outros extratos (para além do mensal)
+Others Account Statements (besides monthly)";Outros extratos;optional commission
+;;"Emissão de 2ª via extrato
+Account Statement Replacement";2ª via;optional commission
+;;"Fotocópias de documentos
+Documental copies";Fotocóipias;optional commission
+;;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+Cash Withdrawal (Depositing a check to receive cash)";Levamento com cheque;optional commission
+;;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+Cash Withdrawal (At the counter without check presentation)";Levamento sem cheque;optional commission
+;;"Adesão ao serviço de banca à distância
+Remote Bank Service Adherence/Online-Mobile Banking";Adesão serviço distância;optional commission
+;;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
+Deposit of metal coins (at least 100 coins per day per account)";Depósito moedas;optional commission
+;;"Alteração de titulares
+Account Owners Change";Alteração titulares;optional commission
+;;"Consulta de Saldo de conta DO com comprovativo
+Balance Inquiry at the counter";Consulta de saldo;optional commission
+;;"Consulta de Movimentos de conta DO com comprovativo
+Consulting the transations on the account";Consulta de movimentos;optional commission
+;;"Descoberto bancário
+Bank overdraft";Descoberto Bancário;optional commission
+;;"Levantamento USD em contas USD
+USD withdrawal in USD accounts";Levantamento USD;optional commission
