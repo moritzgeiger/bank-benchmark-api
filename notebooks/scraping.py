@@ -13,8 +13,12 @@ commission = {'abanca': {'1':'Emissão de extrato','2':'Fotocópias de segundas 
                      '5':'Comissões por descoberto bancário','6':'Consulta de Movimentos de conta DO com', '7': 'Consulta de Saldo de conta DO com comprovativo',\
                      '8':'Alteração de titularidade'},
               'bai':{'1':'Manutenção de conta','2':'Levantamento de numerário','3':'Levantamento usd em contas usd',\
-                    '4': 'Extracto integrado','5':'Extracto avulso'}}
-
+                    '4': 'Extracto integrado','5':'Extracto avulso'},
+             'bankinter':{'1':'Comissão de Manutenção de Conta', '2': 'Comissão de Alteração de Titularidade',
+                          '3':'Comissão de Levantamento'},
+             'bic': {'1':'Comissão de manutenção de conta','2':'Segundas vias (pedido na agência)','3':'Levantamento de numerário',
+                    '4': 'Pedido de saldo ao balcão', '5':'Descoberto bancário', '6':'Depósito de moeda metálica',
+                    '7':'Alteração de titularidade'}}
 
 
 
