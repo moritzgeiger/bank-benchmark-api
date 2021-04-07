@@ -1,74 +1,32 @@
-# Data analysis
-- Document here the project: bank-benchmark-api
-- Description: Project Description
-- Data Source:
-- Type of analysis:
-
-Please document the project the better you can.
-
-# Startup the project
-
-The initial setup.
-
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
-```
-
-Unittest test:
-```bash
-make clean install test
-```
-
-Check for bank-benchmark-api in gitlab.com/{group}.
-If your project is not set please add it:
-
-- Create a new project on `gitlab.com/{group}/bank-benchmark-api`
-- Then populate it:
-
-```bash
-##   e.g. if group is "{group}" and project_name is "bank-benchmark-api"
-git remote add origin git@github.com:{group}/bank-benchmark-api.git
-git push -u origin master
-git push -u origin --tags
-```
-
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-bank-benchmark-api-run
-```
-
-# Install
-
-Go to `https://github.com/{group}/bank-benchmark-api` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/bank-benchmark-api.git
-cd bank-benchmark-api
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-bank-benchmark-api-run
-```
+# Endpoints
+This is how your request should look like - you can request as many banks as you wish:
+{'4': {'bp_bank_id': '0008',
+      'bp_pdf_url': 'https://clientebancario.bportugal.pt/sites/default/files/precario/0008_/0008_PRE.pdf',
+      'last_updated': '2021-04-06',
+      'list_pdfs': ['https://www.bancobai.ao/media/2988/bai_pre_clientes-particulares_31-03-2021.pdf',
+       'https://www.bancobai.ao/media/2989/bai_pre_outros-clientes_31-03-2021.pdf',
+       'https://www.bancobai.ao/media/2823/bai_resumo-das-alteracoes-do-precario-bna-8-02-2021-cleaned.pdf',
+       'https://www.bancobai.ao/media/2278/termos-e-condições.pdf'],
+      'name': 'BAI - Banco Angolano de Investimentos.',
+      'num_pdfs': 4,
+      'price_page': 'https://www.bancobai.ao/pt/preçário',
+      'cloud_url': "https://storage.googleapis.com/bank_price_pdfs/4_all_products.pdf",
+      'cloud_url_size': "1975488",
+      'url': 'https://www.bancobai.ao',
+      'products': {'1.1': {'url':'https://clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf',
+                          'pages': ['5']},
+                  }
+                  {'17.1': {'url':'https://clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf',
+                          'pages': ['5']}
+                  },
+      'commissions': {'1': 'Emissão de extrato',
+                     '2': 'Fotocópias de segundas vias de talões de depósito',
+                     '3': 'Manutenção de conta',
+                     '4': 'Levantamento de numerário',
+                     '5': 'Adesão ao serviço de banca à distância',
+                     '6': 'Depósito de moedas metálicas',
+                     '7': 'Alteração de titulares'
+                    },
+      }
+ }
+If you initially don't have values for the shown keys, fill them with 'None', otherwise the API will return an error.
