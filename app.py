@@ -8,7 +8,7 @@ from threading import Thread
 
 
 ### importing classes
-from bank_benchmark_api.add_bank import AddBank
+from bank_benchmark_api.uploader import PdfUploader
 # from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.sourcing import PdfSourcing
 
@@ -105,7 +105,8 @@ def upload_pdfs():
     r = request.json
     for vals in r.values():
         print(f'checking if requirements are in {vals.keys()}')
-        validator.append(all([x in vals.keys() for x in requirements]))
+        val_bank = all([x in vals.keys() for x in requirements])
+        validator.append(val_bank)
     # validator = [j for i in validator for j in i]
     print(f'matched these positions in keys: {validator}')
     

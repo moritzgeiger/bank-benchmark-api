@@ -32,7 +32,7 @@ class PdfUploader:
             temp.write(response.content)
             ## important: have to close again
             temp.close()
-            command="cp "+filename+" temp.pdf; qpdf --password='' --decrypt temp.pdf "+filename
+            command="cp "+filename+" temp.pdf; qpdf --password='' --decrypt temp.pdf "+filename+ "; rm temp.pdf"
             os.system(command)
             print('File decrypted (qpdf)')
             #re-open the decrypted file
@@ -44,9 +44,12 @@ class PdfUploader:
             return None
         return pdfFile
 
-    def upload_file(self, source_file_bytes, file_name_uploaded, bucket_name=self.bucket_name):
+    def upload_file(self, source_file_bytes, file_name_uploaded, bucket_name=None):
         """Uploads a bytes pdf file to the bucket and returns the cloud link."""
         print("upload_file was called")
+        # defining bucket name
+        if bucket_name is None:
+            bucket_name = self.bucket_name
 
         # Building connection with gcs
         storage_client = storage.Client()
