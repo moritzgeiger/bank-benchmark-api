@@ -29,8 +29,8 @@ def home():
                 <p>A prototype API to get banking prices.</p>
                 <p>endpoint: /dopdfs (post) accepts dictionary of dictionaries</p>
                 <p>endpoint: /retrievepdfs (returns the newly created banks file)</p>
-                
-                
+                <p>endpoint: /uploadpdfs (returns the newly created banks file)</p>
+
                 <p>endpoint: /meme (returns a meme)</p>
                 <p>endpoint: /ping (returns "pong")</p>
                 <p>endpoint: /double (returns number x 2)</p>
@@ -80,8 +80,8 @@ def do_pdfs():
         validator.append([x in vals.keys() for x in requirements])
     validator = [j for i in validator for j in i]
     print(f'matched these positions in keys: {validator}')
-    
-    if all(validator):  
+
+    if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick reaponse
 
         def start_task_sourcing(r):
@@ -109,8 +109,8 @@ def upload_pdfs():
         validator.append(val_bank)
     # validator = [j for i in validator for j in i]
     print(f'matched these positions in keys: {validator}')
-    
-    if all(validator):  
+
+    if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick reaponse
 
         def start_task_uploading(r):
@@ -118,6 +118,7 @@ def upload_pdfs():
             uploader = PdfUploader(r)
             uploader.pdf_uploader()
 
+        ## use rq library
         thread = Thread(target=start_task_uploading, kwargs={'r':r})
         thread.start()
         return {'message': 'uploading initialized. Go to /retrievepdfs to pick up requested data'}
