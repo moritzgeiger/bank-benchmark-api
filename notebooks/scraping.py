@@ -103,7 +103,7 @@ class Scraping:
                 names.append(word)
         finals = []
         for name in names:
-            finals.append(' '.join(name[:14]))
+            finals.append(' '.join(name[:14]).replace(';',''))
         regular = []
         for final in finals:
             start = final[:3]
