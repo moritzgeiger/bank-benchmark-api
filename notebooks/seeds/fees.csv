@@ -1,29 +1,29 @@
-id;product_id;name;search_name;category
-;;"Manutenção de conta
-Account Management Fees";Manutenção de conta;fixed commission
-;;"Emissão de extrato Mensal (enviado ao domicílio) 
+Ôªøid;product_id;name;search_name;category
+;Demand Deposits;"Manuten√ß√£o de conta
+Account Management Fees";Manuten√ß√£o de conta;fixed commission
+;Demand Deposits;"Emiss√£o de extrato Mensal (enviado ao domic√≠lio) 
 Monthly Statement Inssuance (sent to home)";Extrato Mensal;optional commission
-;;"Emissão de outros extratos (para além do mensal)
+;Demand Deposits;"Emiss√£o de outros extratos (para al√©m do mensal)
 Others Account Statements (besides monthly)";Outros extratos;optional commission
-;;"Emissão de 2ª via extrato
-Account Statement Replacement";2ª via;optional commission
-;;"Fotocópias de documentos
-Documental copies";Fotocóipias;optional commission
-;;"Levantamento de numerário (ao balcão, com apresentação de cheque)
+;Demand Deposits;"Emiss√£o de 2¬™ via extrato
+Account Statement Replacement";2¬™ via;optional commission
+;Demand Deposits;"Fotoc√≥pias de documentos
+Documental copies";Fotoc√≥ipias;optional commission
+;Demand Deposits;"Levantamento de numer√°rio (ao balc√£o, com apresenta√ß√£o de cheque)
 Cash Withdrawal (Depositing a check to receive cash)";Levamento com cheque;optional commission
-;;"Levantamento de numerário (Ao balcão, sem apresentação de cheque)
+;Demand Deposits;"Levantamento de numer√°rio (Ao balc√£o, sem apresenta√ß√£o de cheque)
 Cash Withdrawal (At the counter without check presentation)";Levamento sem cheque;optional commission
-;;"Adesão ao serviço de banca à distância
-Remote Bank Service Adherence/Online-Mobile Banking";Adesão serviço distância;optional commission
-;;"Depósito de moedas metálicas (igual ou superior a 100 moedas por dia e por conta) 
-Deposit of metal coins (at least 100 coins per day per account)";Depósito moedas;optional commission
-;;"Alteração de titulares
-Account Owners Change";Alteração titulares;optional commission
-;;"Consulta de Saldo de conta DO com comprovativo
+;Demand Deposits;"Ades√£o ao servi√ßo de banca √† dist√¢ncia
+Remote Bank Service Adherence/Online-Mobile Banking";Ades√£o servi√ßo dist√¢ncia;optional commission
+;Demand Deposits;"Dep√≥sito de moedas met√°licas (igual ou superior a 100 moedas por dia e por conta)¬†
+Deposit of metal coins (at least 100 coins per day per account)";Dep√≥sito moedas;optional commission
+;Demand Deposits;"Altera√ß√£o de titulares
+Account Owners Change";Altera√ß√£o titulares;optional commission
+;Demand Deposits;"Consulta de Saldo de conta DO com comprovativo
 Balance Inquiry at the counter";Consulta de saldo;optional commission
-;;"Consulta de Movimentos de conta DO com comprovativo
+;Demand Deposits;"Consulta de Movimentos de conta DO com comprovativo
 Consulting the transations on the account";Consulta de movimentos;optional commission
-;;"Descoberto bancário
-Bank overdraft";Descoberto Bancário;optional commission
-;;"Levantamento USD em contas USD
+;Demand Deposits;"Descoberto banc√°rio
+Bank overdraft";Descoberto Banc√°rio;optional commission
+;Demand Deposits;"Levantamento USD em contas USD
 USD withdrawal in USD accounts";Levantamento USD;optional commission

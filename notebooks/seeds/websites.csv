@@ -1,6 +1,6 @@
-id;bank_id;url;description
-;;"""https://www.bancoctt.pt""";banco ctt
-;;https://www.abanca.pt/pt/;abanca
-;;"""https://www.bancobaieuropa.pt""";banco bai europa
-;;"""https://www.eurobic.pt""";banco euro bic
-;;"""https://www.bankinter.pt""";bankinter
+﻿id;bank_id;url;description
+;banco ctt;"""https://www.bancoctt.pt""";banco ctt
+;abanca;https://www.abanca.pt/pt/;abanca
+;banco bai europa;"""https://www.bancobaieuropa.pt""";banco bai europa
+;banco bic;"""https://www.eurobic.pt""";banco euro bic
+;bankinter;"""https://www.bankinter.pt""";bankinter
