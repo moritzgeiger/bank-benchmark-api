@@ -36,7 +36,7 @@ class Scraping:
 
     def getting_text(self):
         file = pdfplumber.open(self.pdf)
-        if len([self.page]) > 1 :
+        if len(self.page) > 1 :
             joined_text = []
             for el in self.page:
                 page = file.pages[el]
@@ -48,7 +48,7 @@ class Scraping:
             text = re.sub('--', str(np.nan), text)
             return text
         else:
-            page = file.pages[[self.page][0]]
+            page = file.pages[self.page[0]]
             text = page.extract_text()
             text = text.replace('Isento', '0,00')
             text = text.replace('n/a', str(np.nan))
