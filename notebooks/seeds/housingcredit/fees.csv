@@ -1,0 +1,38 @@
+﻿id;product_id;name;search_name;category
+;Housing Credit;Reanálise ;;Inicial commissions
+;Housing Credit;Comissão de formalização ;;Inicial commissions
+;Housing Credit;Avaliação  3.1 Imóvel residencial ;;Inicial commissions
+;Housing Credit;Avaliação  3.2 Garagens e arrecadações não anexas ao imóvel residencial ;;Inicial commissions
+;Housing Credit;Comissões associadas a atos administrativos 4.1 Não realização da escritura ;;Inicial commissions
+;Housing Credit;Comissões associadas a atos administrativos 4.2 Alteração do local da escritura ;;Inicial commissions
+;Housing Credit;Comissão de reembolso antecipado parcial 5.1 Taxa fixa ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de reembolso antecipado parcial 5.2 Taxa variável ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de recuperação de valores em dívida 6.1 Prestação até 50.000 € ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de recuperação de valores em dívida 6.2 Prestação > 50.000 € ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos 7.1 Declarações de dívida ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos 7.2 Mudança de regime de crédito ;;Comissões durante a vigência do contrato 
+;Housing Credit;Vistorias (em caso de construção ou realização de obras ou ver nota 14).;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de reembolso antecipado total 9.1 Taxa fixa ;;Comissões no termo do contrato 
+;Housing Credit;Comissão de reembolso antecipado total 9.2 Taxa variável ;;Comissões no termo do contrato 
+;Housing Credit;Emissão de extratos de conta de empréstimos liquidados ;;Comissões no termo do contrato 
+;Housing Credit;Comissões associadas a atos administrativos 11.1 Declarações de dívida ;;Comissões no termo do contrato 
+;Housing Credit;Comissão de deslocação 12.1 Até 100 Kms ;;Comissões no termo do contrato 
+;Housing Credit;Comissão de deslocação 12.2 101 a 250 Kms ;;Comissões no termo do contrato 
+;Housing Credit;Comissão de deslocação 12.3 > 250 Kms ;;Comissões no termo do contrato 
+;Housing Credit;Imposto do Selo sobre concessão de crédito (verba 17.1 da TGIS) ;;Outras despesas associadas 
+;Housing Credit;Emolumentos do registo predial ;;Outras despesas associadas 
+;Housing Credit;Emolumentos notariais ;;Outras despesas associadas 
+;Housing Credit;Emolumentos “Casa Pronta” (vide Nota 9)  - Formalização (vide Nota 8) ;;Outras despesas associadas 
+;Housing Credit;Emolumentos “Casa Pronta” (vide Nota 9)  - Certidão permanente on-line ;;Outras despesas associadas 
+;Housing Credit;Emolumentos “Casa Pronta” (vide Nota 9)  - Desistência ou não conclusão do processo por motivos imputáveis ao cliente ;;Outras despesas associadas 
+;Housing Credit;Comissão de antecipação (pré.aviso 7 dias)  Taxa Fixa ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de antecipação (pré.aviso 7 dias)  Taxa Variável ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de recuperação de valores em dívida ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos  - Pedido de 2ª via de Caderneta Predial ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos  - Emissão de declarações não obrigatórias por lei ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos  - Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos  - Emissão de 2º vias de Declaração para efeitos de IRS ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissões associadas a atos administrativos  - Emissão de 2ª vias de faturas ;;Comissões durante a vigência do contrato 
+;Housing Credit;Cessação da posição contratual ;;Comissões durante a vigência do contrato 
+;Housing Credit;Comissão de compra antecipada (pré-aviso 10 dias)  Taxa Fixa ;;Comissões no termo do contrato 
+;Housing Credit;Comissão de compra antecipada (pré-aviso 10 dias)  Taxa Variável ;;Comissões no termo do contrato 
