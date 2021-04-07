@@ -1,4 +1,5 @@
 # Endpoints
+**/dopdfs and /uploadpdfs -> POST requests**
 This is how your request should look like - you can request as many banks as you wish:
 ```
 {'4': {'bp_bank_id': '0008',

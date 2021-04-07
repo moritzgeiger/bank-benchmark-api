@@ -40,6 +40,12 @@ def home():
 def meme():
     return '<img src="https://wyncode.co/uploads/2014/08/121.jpg">'
 
+
+@app.route('/ping', methods=['GET'])
+def pong():
+    return 'pong'
+
+
 @app.route('/double', methods=['GET'])
 def double():
     # Check if an ID was provided as part of the URL.
