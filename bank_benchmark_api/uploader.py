@@ -11,8 +11,14 @@ from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 import json
 from google.cloud import storage
+from dotenv import load_dotenv, find_dotenv
+
 
 # setting global gcloud specs
+load_dotenv(find_dotenv())
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+
 cloud = 'https://storage.cloud.google.com/'
 bucket_name = "bank_price_pdfs"
 
@@ -39,7 +45,7 @@ class PdfUploader:
             pdfFile = PdfFileReader(filename)
             # removing temp file
             os.remove(filename)
-        else: 
+        else:
             print(f'{url} could not be reached with file_decrypt. Response: {response}')
             return None
         return pdfFile
@@ -89,17 +95,17 @@ class PdfUploader:
                         print(f"file {pdf_url} is not encrypted. \nadding file to merger...")
                         merger.append(pdf_file)
                         print(f'added file to pdf merger: {pdf_url}')
-                        
+
                 except Exception as e:
                     print(f"url not found. Error: {e}, url: {pdf_url}\nfile not added to merger.")
-                    
+
             # creating a bytes file to be uploaded
             temp = BytesIO()
             merger.write(temp)
             print(f'wrote merger file to BytesIO for: {values.get("name")}')
             print(f'size of BytesIO: {temp.getbuffer().nbytes}')
             values['cloud_url_size'] = f'{temp.getbuffer().nbytes}'
-            
+
             # using gcs uploader function to upload bytes file
             file_name_uploaded = f'{id}_all_products.pdf'
             cloud_url = self.upload_file(temp.getvalue(), file_name_uploaded=file_name_uploaded)
@@ -114,3 +120,5 @@ class PdfUploader:
         with open(path, 'w') as fp:
             json.dump(self.bank_dict, fp)
         print(f'pdf_uploader done. File ready for pickup in {path}')
+        ## do a post request to the rails guys. ask for an endpoint and send the file there. add headers and the data
+        ##
