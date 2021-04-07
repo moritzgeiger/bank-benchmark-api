@@ -32,20 +32,42 @@ class Scraping:
 
     def extract_clean(self):
         file = pdfplumber.open(self.pdf)
-        page = file.pages[self.page]
-        text = page.extract_text()
-        text = text.replace('Isento', '0,00')
-        text = text.replace('n/a', str(np.nan))
-        text = re.sub('--', str(np.nan), text)
-        if self.splitting_right == True:
-            text = text.replace('\n','. ')
-            # text = len_sentences(text)
-            text = nltk.sent_tokenize(text)
+        if len(self.page) > 1 :
+            joined_text = []
+            for el in self.page:
+                page = file.pages[el]
+                text = page.extract_text()
+                joined_text.append(text)
+            text ='             NEXT          '.join(joined_text)
+            text = text.replace('Isento', '0,00')
+            text = text.replace('n/a', str(np.nan))
+            text = re.sub('--', str(np.nan), text)
+            if nltk.sent_tokenize(text):
+                if self.splitting_right == True:
+                    text = text.replace('\n','. ')
+                    # text = len_sentences(text)
+                    text = nltk.sent_tokenize(text)
+                    return text
+                text = text.replace('\n',' ')
+                # text = len_sentences(text)
+                text = nltk.sent_tokenize(text)
             return text
-        text = text.replace('\n',' ')
-        # text = len_sentences(text)
-        text = nltk.sent_tokenize(text)
-        return text
+        else:
+            page = file.pages[self.page[0]]
+            text = page.extract_text()
+            text = text.replace('Isento', '0,00')
+            text = text.replace('n/a', str(np.nan))
+            text = re.sub('--', str(np.nan), text)
+            if nltk.sent_tokenize(text):
+                if self.splitting_right == True:
+                    text = text.replace('\n','. ')
+                    # text = len_sentences(text)
+                    text = nltk.sent_tokenize(text)
+                    return text
+                text = text.replace('\n',' ')
+                # text = len_sentences(text)
+                text = nltk.sent_tokenize(text)
+            return text
 
     def search_com(self):
         decod = {}
