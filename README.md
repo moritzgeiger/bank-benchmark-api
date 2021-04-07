@@ -1,5 +1,6 @@
 # Endpoints
 This is how your request should look like - you can request as many banks as you wish:
+```
 {'4': {'bp_bank_id': '0008',
       'bp_pdf_url': 'https://clientebancario.bportugal.pt/sites/default/files/precario/0008_/0008_PRE.pdf',
       'last_updated': '2021-04-06',
@@ -29,4 +30,6 @@ This is how your request should look like - you can request as many banks as you
                     },
       }
  }
+```
+
 If you initially don't have values for the shown keys, fill them with 'None', otherwise the API will return an error.
