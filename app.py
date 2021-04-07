@@ -84,14 +84,42 @@ def do_pdfs():
     if all(validator):  
         # moving sourcing tasks to the background so that rails app has a quick reaponse
 
-        def start_task(r):
+        def start_task_sourcing(r):
             # runs all the sourcing jobs and then dumps jsonfile to 'bank_benchmark_api/data/banks.json
             sourcing = PdfSourcing(r)
             sourcing.rerun_sourcing()
 
-        thread = Thread(target=start_task, kwargs={'r':r})
+        thread = Thread(target=start_task_sourcing, kwargs={'r':r})
         thread.start()
         return {'message': 'sourcing initialized. Go to /retrievepdfs to pick up requested data'}
+
+    else:
+        return {'error': f'one of these required keys were not passed {requirements}'}
+
+# only runs with the list of pdfs provided from /dopdfs!
+@app.route('/uploadpdfs', methods=['POST'])
+def upload_pdfs():
+    print('upload_pdfs was called')
+    requirements = ['url', 'name', 'num_pdfs', 'list_pdfs', 'cloud_url_size', 'cloud_url', 'last_updated', 'bp_bank_id']
+    validator = []
+    r = request.json
+    for vals in r.values():
+        print(f'checking if requirements are in {vals.keys()}')
+        validator.append(all([x in vals.keys() for x in requirements]))
+    # validator = [j for i in validator for j in i]
+    print(f'matched these positions in keys: {validator}')
+    
+    if all(validator):  
+        # moving sourcing tasks to the background so that rails app has a quick reaponse
+
+        def start_task_uploading(r):
+            # runs all the sourcing jobs and then dumps jsonfile to 'bank_benchmark_api/data/banks.json
+            uploader = PdfUploader(r)
+            uploader.pdf_uploader()
+
+        thread = Thread(target=start_task_uploading, kwargs={'r':r})
+        thread.start()
+        return {'message': 'uploading initialized. Go to /retrievepdfs to pick up requested data'}
 
     else:
         return {'error': f'one of these required keys were not passed {requirements}'}
