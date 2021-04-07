@@ -9,12 +9,9 @@ import shutil
 from urllib.parse import urljoin, urlencode, quote_plus
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
-import cloudinary.uploader
 import json
 from datetime import date
 import sys
-
-from bank_benchmark_api.data.bank_details import bp_bank_id
 
 ## set the global search terms to look for on a banks website. don't choose to many words as it might catch other / irelevant links.
 search_terms = ['preçário', 'pricelist', 'precario']
