@@ -9,6 +9,8 @@ requests
 bs4
 nltk
 pdfplumber
+redis
+rq
 
 # pdf handling
 PyPDF2
