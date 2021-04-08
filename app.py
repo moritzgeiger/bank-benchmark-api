@@ -28,10 +28,17 @@ def home():
     return markdown.markdown(readme_file.read(), extensions=["fenced_code"])
 
 
-
 #########################
 ##### BANK DETAILS ######
 #########################
+# @app.route('/merge', methods=['POST'])
+# def merge():
+
+#     r = request.json
+#     sourcing = PdfSourcing(r)
+#     print(f'pdf sourcing job was called.')
+#     banks = sourcing.rerun_sourcing()
+#     return banks
 
 
 @app.route('/merge_pdfs', methods=['POST'])
@@ -41,68 +48,52 @@ def merge_pdfs():
     validator = []
     r = request.json
     for vals in r.values():
-        print(f'checking if requirements are in {vals.keys()}')
-        validator.append([x in vals.keys() for x in requirements])
-    validator = [j for i in validator for j in i]
+        print(f'checking if requirements for each bank are in {vals.keys()}')
+        val_bank = all([x in vals.keys() for x in requirements])
+        validator.append(val_bank)
     print(f'matched these positions in keys: {validator}')
 
     if all(validator):
-        # moving sourcing tasks to the background so that rails app has a quick reaponse
-
-        def start_task_sourcing(r):
-            # runs all the sourcing jobs and then dumps jsonfile to 'bank_benchmark_api/data/banks.json
+        # moving sourcing tasks to the background so that rails app has a quick response
+        def start_sourcing_and_merging(r):
+            # runs all the sourcing jobs and prepares for the merging job
             sourcing = PdfSourcing(r)
-            sourcing.rerun_sourcing()
-        thread = Thread(target=start_task_sourcing, kwargs={'r': r})
+            print(f'pdf sourcing job was called.')
+            banks = sourcing.rerun_sourcing()
+
+            # forwarding banks to the merging job
+            merging = PdfUploader(banks)
+            # print(f'pdf merging and uploading job was called.')
+            banks = merging.pdf_uploader()
+            ### TODO send banks to rails endpont via POST
+            with open('bank_benchmark_api/data/banks.json', 'w') as file:
+                json.dump(banks, file)
+
+            print(f'updated bank.json was sent to rails app endpoint <???>')
+
+
+        thread = Thread(target=start_sourcing_and_merging, kwargs={'r': r})
+        print(f'starting thread for job: {thread.name}')
         thread.start()
 
         return jsonify({'status':'ok', 'thread_name': str(thread.name), 'started': True})
-    else:
-        return {'error': f'one of these required keys were not passed {requirements}'}
-
-# only runs with the list of pdfs provided from /dopdfs!
-@app.route('/uploadpdfs', methods=['POST'])
-def upload_pdfs():
-    print('upload_pdfs was called')
-    requirements = ['url', 'name', 'num_pdfs', 'list_pdfs', 'cloud_url_size', 'cloud_url', 'last_updated', 'bp_bank_id']
-    validator = []
-    r = request.json
-    for vals in r.values():
-        print(f'checking if requirements are in {vals.keys()}')
-        val_bank = all([x in vals.keys() for x in requirements])
-        validator.append(val_bank)
-    # validator = [j for i in validator for j in i]
-    print(f'matched these positions in keys: {validator}')
-
-    if all(validator):
-        # moving sourcing tasks to the background so that rails app has a quick reaponse
-
-        def start_task_uploading(r):
-            # runs all the sourcing jobs and then dumps jsonfile to 'bank_benchmark_api/data/banks.json
-            uploader = PdfUploader(r)
-            uploader.pdf_uploader()
-
-        ## use rq library
-        thread = Thread(target=start_task_uploading, kwargs={'r':r})
-        thread.start()
-        return {'message': 'uploading initialized. Go to /retrievepdfs to pick up requested data'}
 
     else:
         return {'error': f'one of these required keys were not passed {requirements}'}
 
-@app.route('/retrievepdfs', methods=['GET'])
-def retrieve_pdfs():
-    print('retrieve_pdfs was called')
-    try:
-        time.sleep(5)
-        with open('bank_benchmark_api/data/banks.json') as json_file:
-            banks = json.load(json_file)
-        os.remove('bank_benchmark_api/data/banks.json')
-        print(f'bank json loaded, supplied and removed from server')
-        return banks
+# @app.route('/retrievepdfs', methods=['GET'])
+# def retrieve_pdfs():
+#     print('retrieve_pdfs was called')
+#     try:
+#         time.sleep(5)
+#         with open('bank_benchmark_api/data/banks.json') as json_file:
+#             banks = json.load(json_file)
+#         os.remove('bank_benchmark_api/data/banks.json')
+#         print(f'bank json loaded, supplied and removed from server')
+#         return banks
 
-    except Exception as e:
-        return f'{{error: sourcing job not finished or initialized. first call /dopdfs and wait for backgroundjob to finish. Error msg: {e}}}'
+#     except Exception as e:
+#         return f'{{error: sourcing job not finished or initialized. first call /dopdfs and wait for backgroundjob to finish. Error msg: {e}}}'
 
 #############################
 ###### TESTING ENDPOINTS ####
