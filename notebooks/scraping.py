@@ -28,10 +28,9 @@ com_dict = {'Emissão de Extrato':['Emissão de extrato', 'Extrato Integrado', '
 
 
 class Scraping:
-    def __init__(self, pdf, page, x):
+    def __init__(self, pdf, page):
         self.pdf = pdf
         self.page = [page]
-        self.x = x
 
 
     def getting_text(self):
@@ -93,6 +92,8 @@ class Scraping:
                                 lista[value]= [sentence]
                             else:
                                 lista[value]= [' '.join([sentence,file[ind+1]])]
+        if lista == {}:
+            return 'name of commisions not in database'
         return lista
 
     def n_account(self):
