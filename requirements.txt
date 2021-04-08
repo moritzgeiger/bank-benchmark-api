@@ -9,7 +9,7 @@ requests
 bs4
 nltk
 pdfplumber
-
+Corpora
 # pdf handling
 PyPDF2
 google-cloud-storage

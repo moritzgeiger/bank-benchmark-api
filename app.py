@@ -35,15 +35,6 @@ def home():
 #########################
 ##### BANK DETAILS ######
 #########################
-# @app.route('/merge', methods=['POST'])
-# def merge():
-
-#     r = request.json
-#     sourcing = PdfSourcing(r)
-#     print(f'pdf sourcing job was called.')
-#     banks = sourcing.rerun_sourcing()
-#     return banks
-
 
 @app.route('/merge_pdfs', methods=['POST'])
 def merge_pdfs():
