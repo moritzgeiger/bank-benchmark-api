@@ -74,8 +74,8 @@ class PdfUploader:
         '''loops through all requested banks, sends files to decryptor, merges them and uploadts them to cloud storage'''
         for id, values in self.bank_dict.items():
             print(f'handling pdfs from {values.get("name")}')
-            # defining the URLs in a list
-            web_pdfs = values.get("list_pdfs")
+            # acessing the URLs inside the pdf list
+            web_pdfs = values.get("list_pdfs").get('urls')
             # start the merger for each bank
             merger = PdfFileMerger()
             # trying to remotely parse the pdfs all pdf pages
@@ -104,7 +104,7 @@ class PdfUploader:
             merger.write(temp)
             print(f'wrote merger file to BytesIO for: {values.get("name")}')
             print(f'size of BytesIO: {temp.getbuffer().nbytes}')
-            values['cloud_url_size'] = f'{temp.getbuffer().nbytes}'
+            values['list_pdfs']['cloud_url_size'] = f'{temp.getbuffer().nbytes}'
 
             # using gcs uploader function to upload bytes file
             file_name_uploaded = f'{id}_all_products.pdf'
@@ -113,12 +113,9 @@ class PdfUploader:
             temp.close()
             merger.close()
             print(f'uploaded merged file to cloud and cleared all memory: {file_name_uploaded}')
-            values['cloud_url'] = cloud_url
+            values['list_pdfs']['cloud_merged_url'] = cloud_url
             print(f'updated banks dict with cloud link: {cloud_url}')
 
-        path = 'bank_benchmark_api/data/banks.json'
-        with open(path, 'w') as fp:
-            json.dump(self.bank_dict, fp)
-        print(f'pdf_uploader done. File ready for pickup in {path}')
-        ## do a post request to the rails guys. ask for an endpoint and send the file there. add headers and the data
-        ##
+        print(f'pdf_uploader done. File ready to be sent to rails endpoint')
+
+        return self.bank_dict
