@@ -115,10 +115,13 @@ class Scraping:
         return finals
 
     def names(self):
+        if len(self.n_account()[0]) > 20:
+            return self.n_account()
         words = []
         for account in self.n_account():
             for element in account:
                 words.append(element.split())
+
         names = []
         for word in words:
             if word[0] == 'Conta' and len(word)>1 and word[1]!='nan':
@@ -131,4 +134,12 @@ class Scraping:
             start = final[:3]
             if start not in regular:
                 regular.append(final)
-        return regular
+        lista =[]
+        for name in regular:
+            single = ' '.join(name.split(" ")[:2])
+            if single not in lista:
+                lista.append(name)
+        return lista
+
+    def accounts_offer(self):
+        return len(self.names())
