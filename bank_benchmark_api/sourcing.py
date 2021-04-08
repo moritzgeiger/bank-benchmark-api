@@ -6,7 +6,7 @@ import PyPDF2
 from bs4 import BeautifulSoup
 import os
 import shutil
-from urllib.parse import urljoin, urlencode, quote_plus
+from urllib.parse import urljoin, urlencode, quote
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 import json
@@ -20,7 +20,7 @@ class PdfSourcing:
     def __init__(self, bank_dict):
         self.bank_dict = bank_dict
 
-    def find_price_pages(self, search=search_terms):    
+    def find_price_pages(self, search=search_terms):
         search = [x.lower() for x in search]
 
         for bank_id, vals in self.bank_dict.items():
@@ -45,11 +45,16 @@ class PdfSourcing:
                         print(f'found terms of {search} in string {searchstring}')
                         # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
                         # adding findings to bank dictionary
-                        vals["price_page"] = urljoin(url,url_prices)
-                        print(f'added link to id {bank_id}: {urljoin(url,url_prices)}')
+                        vals["price_page"] = quote(urljoin(url, url_prices),
+                                                   safe=(":/"))
+                        print(
+                            f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/"))}'
+                        )
             else:
                 print(f'could not reach page: {url}, status code: {r.status_code}')
-                vals["price_page"] = {'error':'page not reachable'}
+                vals["price_page"] = {
+                    'error': f'provided url not reachable: {url}'
+                }
 
         return self.bank_dict
 
@@ -59,13 +64,14 @@ class PdfSourcing:
         ## setting url canvas
         url_pre = 'https://clientebancario.bportugal.pt/sites/default/files/precario/'
         url_suff = '_PRE.pdf'
+        ### TODO: ping the page and see if it is available, then change the suffix to _PRE_0.pdf or _PRE_1
         for bank_id, vals in self.bank_dict.items():
-            try:    
+            try:
                 bp_bank_id = vals.get('bp_bank_id')
                 vals['bp_pdf_url'] = f'{url_pre}{bp_bank_id}_/{bp_bank_id}{url_suff}'
             except:
                 print(f'The id {bank_id} does not have a bp_bank_id. Please update the variable.')
-        
+
         return self.bank_dict
 
     def get_banks_pdf_urls(self):
@@ -73,14 +79,14 @@ class PdfSourcing:
         for bank_id, vals in self.bank_dict.items():
             price_page = vals.get('price_page')
             # creating empty list for pdf urls
-            vals['list_pdfs'] = []
+            vals['list_pdfs'] = {'urls':[]}
             # some banks direclty link to a pdf address
-            if 'error'in price_page:
+            if 'error' in price_page:
                 print(f'could not use {vals.get("url")}')
                 break
             elif '.pdf' in price_page:
                 print(f'url is already pdf for: {price_page}')
-                vals['list_pdfs'].append(f'{price_page}')
+                vals['list_pdfs']['urls'].append(f'{price_page}')
             # for other landing pages look for every pdf on page
             else:
                 r = requests.get(price_page)
@@ -91,8 +97,8 @@ class PdfSourcing:
                         href = link.get('href')
                         if '.pdf' in href:
                             # some pdf links are absolute links, some relative
-                            pdf = urljoin(vals.get('url'),href)
-                            vals['list_pdfs'].append(f'{pdf}')
+                            pdf = quote(urljoin(vals.get('url'), href), safe = (":/"))
+                            vals['list_pdfs']['urls'].append(f'{pdf}')
                             print(f'found and added pdf: {pdf}')
                     print(f'final list of pdfs added: {vals.get("list_pdfs")}')
                 else:
@@ -102,15 +108,16 @@ class PdfSourcing:
 
     def get_num_pdfs(self):
         for bank_id, vals in self.bank_dict.items():
-            len_list = len(vals.get('list_pdfs'))
+            len_list = len(vals.get("list_pdfs").get('urls'))
             vals["num_pdfs"] = len_list
-        
+
         return self.bank_dict
 
 
     def last_updated(self):
         for bank_id, vals in self.bank_dict.items():
             vals["last_updated"] = str(date.today())
+            vals["status"] = "ok"
         return self.bank_dict
 
 
@@ -138,14 +145,12 @@ class PdfSourcing:
         return self.bank_dict
 
     def rerun_sourcing(self):
-        path = 'bank_benchmark_api/data/banks.json'
+
         banks = self.get_bp_pdf_urls()
         banks = self.find_price_pages()
         banks = self.get_banks_pdf_urls()
         banks = self.get_num_pdfs()
         banks = self.last_updated()
-        banks = self.sum_sizes()
+        # banks = self.sum_sizes()
 
-        with open(path, 'w') as fp:
-            json.dump(banks, fp)
-        print(f'rerun_sourcing done. File ready for pickup in {path}')
+        return banks

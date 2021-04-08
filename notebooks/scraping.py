@@ -5,21 +5,21 @@ import re
 import nltk
 
 
-com_dict = {'Emissão de Extrato':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal'],
-           'Fotocópias e 2ªvias':['Fotocópias de segundas vias de talões de depósito',
+com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal'],
+           'documents_copy':['Fotocópias de segundas vias de talões de depósito',
                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
                                  'Segundas vias (pedido na agência)'],
-           'Manutenção de Conta':['Manutenção de conta', 'Comissão de manutenção de conta'],
-           'Levantamento de Numerário':['Levantamento de numerário', 'Levantamento de numerário ao balcão'],
-           'Adesão ao Serviço Online':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
-            'Depósitos de Moedas':['Depósito de moedas metálicas', 'Depósito de moedas',
+           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta'],
+           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão'],
+           'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
+            'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas',
                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
                                   'Depósito de moeda metálica (≥ a 100 moedas)'],
-            'Ateração de Titulares':['Alteração de titulares', 'Alteração de titularidade',
+            'change_holder':['Alteração de titulares', 'Alteração de titularidade',
                                      'Alteração de titularidade / intervenientes'],
-            'Descoberto Bancário':['Comissões por descoberto bancário', 'Descoberto bancário'],
-            'Consulta de Movimentos':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
-            'Consulta de Saldo':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
+            'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário'],
+            'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
+            'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
            }
 
 
@@ -28,10 +28,9 @@ com_dict = {'Emissão de Extrato':['Emissão de extrato', 'Extrato Integrado', '
 
 
 class Scraping:
-    def __init__(self, pdf, page, x):
+    def __init__(self, pdf, page):
         self.pdf = pdf
         self.page = [page]
-        self.x = x
 
 
     def getting_text(self):
@@ -93,6 +92,8 @@ class Scraping:
                                 lista[value]= [sentence]
                             else:
                                 lista[value]= [' '.join([sentence,file[ind+1]])]
+        if lista == {}:
+            return 'name of commisions not in database'
         return lista
 
     def n_account(self):
@@ -114,10 +115,13 @@ class Scraping:
         return finals
 
     def names(self):
+        if len(self.n_account()[0]) > 20:
+            return self.n_account()
         words = []
         for account in self.n_account():
             for element in account:
                 words.append(element.split())
+
         names = []
         for word in words:
             if word[0] == 'Conta' and len(word)>1 and word[1]!='nan':
@@ -130,4 +134,12 @@ class Scraping:
             start = final[:3]
             if start not in regular:
                 regular.append(final)
-        return regular
+        lista =[]
+        for name in regular:
+            single = ' '.join(name.split(" ")[:2])
+            if single not in lista:
+                lista.append(name)
+        return lista
+
+    def accounts_offer(self):
+        return len(self.names())
