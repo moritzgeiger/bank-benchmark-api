@@ -45,10 +45,11 @@ class PdfUploader:
             pdfFile = PdfFileReader(filename)
             # removing temp file
             os.remove(filename)
+            return pdfFile
         else:
             print(f'{url} could not be reached with file_decrypt. Response: {response}')
             return None
-        return pdfFile
+
 
     def upload_file(self, source_file_bytes, file_name_uploaded, bucket_name=None):
         """Uploads a bytes pdf file to the bucket and returns the cloud link."""
