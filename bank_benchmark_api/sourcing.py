@@ -6,7 +6,7 @@ import PyPDF2
 from bs4 import BeautifulSoup
 import os
 import shutil
-from urllib.parse import urljoin, urlencode, quote_plus
+from urllib.parse import urljoin, urlencode, quote
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 import json
@@ -45,8 +45,11 @@ class PdfSourcing:
                         print(f'found terms of {search} in string {searchstring}')
                         # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
                         # adding findings to bank dictionary
-                        vals["price_page"] = urljoin(url,url_prices)
-                        print(f'added link to id {bank_id}: {urljoin(url,url_prices)}')
+                        vals["price_page"] = quote(urljoin(url, url_prices),
+                                                   safe=(":/"))
+                        print(
+                            f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/"))}'
+                        )
             else:
                 print(f'could not reach page: {url}, status code: {r.status_code}')
                 vals["price_page"] = {
@@ -94,7 +97,7 @@ class PdfSourcing:
                         href = link.get('href')
                         if '.pdf' in href:
                             # some pdf links are absolute links, some relative
-                            pdf = urljoin(vals.get('url'),href)
+                            pdf = quote(urljoin(vals.get('url'), href), safe = (":/"))
                             vals['list_pdfs']['urls'].append(f'{pdf}')
                             print(f'found and added pdf: {pdf}')
                     print(f'final list of pdfs added: {vals.get("list_pdfs")}')
@@ -105,7 +108,7 @@ class PdfSourcing:
 
     def get_num_pdfs(self):
         for bank_id, vals in self.bank_dict.items():
-            len_list = len(vals.get('list_pdfs'))
+            len_list = len(vals.get("list_pdfs").get('urls'))
             vals["num_pdfs"] = len_list
 
         return self.bank_dict

@@ -73,7 +73,7 @@ class PdfUploader:
     def pdf_uploader(self):
         '''loops through all requested banks, sends files to decryptor, merges them and uploadts them to cloud storage'''
         for id, values in self.bank_dict.items():
-            print(f'handling pdfs from {values.get("name")}')
+            print(f'handling pdfs from {values.get("price_page")}')
             # acessing the URLs inside the pdf list
             web_pdfs = values.get("list_pdfs").get('urls')
             # start the merger for each bank
@@ -102,7 +102,7 @@ class PdfUploader:
             # creating a bytes file to be uploaded
             temp = BytesIO()
             merger.write(temp)
-            print(f'wrote merger file to BytesIO for: {values.get("name")}')
+            print(f'wrote merger file to BytesIO for: {values.get("url")}')
             print(f'size of BytesIO: {temp.getbuffer().nbytes}')
             values['list_pdfs']['cloud_url_size'] = f'{temp.getbuffer().nbytes}'
 
