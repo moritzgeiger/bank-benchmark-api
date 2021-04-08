@@ -31,7 +31,6 @@ def home():
     readme_file = open("README.md", "r")
     return markdown.markdown(readme_file.read(), extensions=["fenced_code"])
 
-
 #########################
 ##### BANK DETAILS ######
 #########################
