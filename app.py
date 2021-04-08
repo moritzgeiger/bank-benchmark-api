@@ -16,6 +16,8 @@ from bank_benchmark_api.uploader import PdfUploader
 # from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.sourcing import PdfSourcing
 
+## where to send the results
+app_base = 'https://matrix-pwc.herokuapp.com/'
 
 ## init app
 app = flask.Flask(__name__)
@@ -79,7 +81,7 @@ def merge_pdfs():
         return jsonify({'status':'ok', 'thread_name': str(thread.name), 'started': True})
 
     else:
-        return {'error': f'one of these required keys were not passed {requirements}'}
+        return jsonify({ 'status': 'error', 'message': f'one of these required keys were not passed {requirements}'})
 
 # @app.route('/retrievepdfs', methods=['GET'])
 # def retrieve_pdfs():
