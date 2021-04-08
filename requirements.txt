@@ -9,8 +9,6 @@ requests
 bs4
 nltk
 pdfplumber
-redis
-rq
 
 # pdf handling
 PyPDF2
@@ -36,6 +34,7 @@ itsdangerous
 Jinja2
 MarkupSafe
 Werkzeug
+markdown
 
 # utilities
 six>=1.14

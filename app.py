@@ -5,10 +5,11 @@ import os
 import time
 import json
 from threading import Thread
-from rq import Connection, Queue, Worker
-from redis import Redis
+# from rq import Connection, Queue, Worker
+# from redis import Redis
 import markdown.extensions.fenced_code
 import markdown
+from urllib.parse import urljoin
 
 
 ### importing classes
@@ -18,6 +19,7 @@ from bank_benchmark_api.sourcing import PdfSourcing
 
 ## where to send the results
 app_base = 'https://matrix-pwc.herokuapp.com/'
+app_endpoint = 'hub'
 
 ## init app
 app = flask.Flask(__name__)
@@ -71,6 +73,7 @@ def merge_pdfs():
             with open('bank_benchmark_api/data/banks.json', 'w') as file:
                 json.dump(banks, file)
 
+            # r = requests.post(url=urljoin(app_base, app_endpoint), )
             print(f'updated bank.json was sent to rails app endpoint <???>')
 
 
