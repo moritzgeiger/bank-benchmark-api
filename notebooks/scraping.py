@@ -3,6 +3,9 @@ import numpy as np
 import pdfplumber
 import re
 import nltk
+from urllib.parse import urljoin, quote_plus, quote, urlencode
+from urllib.request import Request, urlopen
+from io import StringIO, BytesIO
 
 
 com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal'],
@@ -22,19 +25,33 @@ com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Me
             'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
            }
 
+subproduct_dict = {'statement' : None,
+                    'documents_copy' : None,
+                    'acc_manteinance' : None,
+                    'withdraw': None,
+                    'online_service' : None,
+                    'cash_deposit': None,
+                    'change_holder' : None,
+                    'bank_overdraft': None,
+                    'movement_consultation': None,
+                    'balance_inquiry': None}
 
 
 
 
+class DemandDeposit:
+    def __init__(self, link, page):
+        self.link = link
+        self.page = page
 
-class Scraping:
-    def __init__(self, pdf, page):
-        self.pdf = pdf
-        self.page = [page]
+    def get_pdf(self):
+        remote = urlopen(Request(self.link)).read()
+        memory = BytesIO(remote)
+        return memory
 
 
     def getting_text(self):
-        file = pdfplumber.open(self.pdf)
+        file = pdfplumber.open(self.get_pdf())
         if len(self.page) > 1 :
             joined_text = []
             for el in self.page:
@@ -143,3 +160,17 @@ class Scraping:
 
     def accounts_offer(self):
         return len(self.names())
+
+    def demand_depos(self):
+        demand_depos = {}
+        for each in self.names():
+            demand_depos[each] = subproduct_dict
+        return demand_depos
+
+
+    def output(self):
+        output = {}
+        output['demand_depos'] = self.demand_depos()
+        output['house_credit'] = {}
+        output['term_depos'] = {}
+        return output
