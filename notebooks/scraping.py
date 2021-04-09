@@ -159,7 +159,9 @@ class DemandDeposit:
         return lista
 
     def accounts_offer(self):
+
         return len(self.names())
+
 
     def demand_depos(self):
         demand_depos = {}
@@ -169,8 +171,9 @@ class DemandDeposit:
 
 
     def output(self):
-        output = {}
-        output['demand_depos'] = self.demand_depos()
+        output = {'demand_depos':{}}
+        output['demand_depos']['subroducts'] = self.demand_depos()
+        output['demand_depos']['n_subproducts']= self.accounts_offer()
         output['house_credit'] = {}
         output['term_depos'] = {}
         return output
