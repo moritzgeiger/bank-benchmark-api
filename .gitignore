@@ -6,3 +6,4 @@ raw_data/
 **/__pycache__/
 .env
 *.pdf
+pwc-credentials-google.json

@@ -11,11 +11,14 @@ import markdown.extensions.fenced_code
 import markdown
 from urllib.parse import urljoin
 
-
 ### importing classes
 from bank_benchmark_api.uploader import PdfUploader
 # from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.sourcing import PdfSourcing
+
+# # google creds
+# credential_path = "/Users/moritzgeiger/code/.gcp/WAGON_KEY_MG.json"
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 ## where to send the results
 app_base = 'https://matrix-pwc.herokuapp.com/'
