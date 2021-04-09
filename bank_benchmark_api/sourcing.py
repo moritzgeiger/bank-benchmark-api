@@ -46,9 +46,9 @@ class PdfSourcing:
                         # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
                         # adding findings to bank dictionary
                         vals["price_page"] = quote(urljoin(url, url_prices),
-                                                   safe=(":/"))
+                                                   safe=(":/?"))
                         print(
-                            f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/"))}'
+                            f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/?"))}'
                         )
             else:
                 print(f'could not reach page: {url}, status code: {r.status_code}')
@@ -61,16 +61,30 @@ class PdfSourcing:
     ### will only run after find_price_pages!
     def get_bp_pdf_urls(self):
         print(f'building links for BP website')
-        ## setting url canvas
+        ## setting url canvas -> the bp files follow a strict structure -- see bp_url
         url_pre = 'https://clientebancario.bportugal.pt/sites/default/files/precario/'
-        url_suff = '_PRE.pdf'
-        ### TODO: ping the page and see if it is available, then change the suffix to _PRE_0.pdf or _PRE_1
+        url_suff = '_PRE'
+        url_file_ext = '.pdf'
         for bank_id, vals in self.bank_dict.items():
-            try:
-                bp_bank_id = vals.get('bp_bank_id')
-                vals['bp_pdf_url'] = f'{url_pre}{bp_bank_id}_/{bp_bank_id}{url_suff}'
-            except:
-                print(f'The id {bank_id} does not have a bp_bank_id. Please update the variable.')
+            bp_bank_id = vals.get('bp_bank_id')
+            bp_url = f'{url_pre}{bp_bank_id}_/{bp_bank_id}{url_suff}{url_file_ext}'
+            r = requests.get(bp_url)
+            if r.status_code == 200:
+                vals['bp_pdf_url'] = bp_url
+            else:
+                # some files of bp follow a slightly different structure with _PRE_0.pdf or _PRE_1.pdf as suffixes
+                print(f'Could not find file on {bp_url}. \ntrying other links.')
+                for i in range(10):
+                    bp_url = f'{url_pre}{bp_bank_id}_/{bp_bank_id}{url_suff}_{i}{url_file_ext}'
+                    print(f'trying {bp_url}')
+                    r = requests.get(bp_url)
+                    if r.status_code == 200:
+                        print(f'found correct link: {bp_url}')
+                        vals['bp_pdf_url'] = bp_url
+                        break
+                else:
+                    print(f'Could not find file on {bp_url}. \nno bp_pdf_url provided for id: {bank_id}.')
+                    vals['bp_pdf_url'] = None
 
         return self.bank_dict
 
@@ -97,7 +111,7 @@ class PdfSourcing:
                         href = link.get('href')
                         if '.pdf' in href:
                             # some pdf links are absolute links, some relative
-                            pdf = quote(urljoin(vals.get('url'), href), safe = (":/"))
+                            pdf = quote(urljoin(vals.get('url'), href), safe = (":/?"))
                             vals['list_pdfs']['urls'].append(f'{pdf}')
                             print(f'found and added pdf: {pdf}')
                     print(f'final list of pdfs added: {vals.get("list_pdfs")}')

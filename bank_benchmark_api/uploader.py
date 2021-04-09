@@ -12,6 +12,7 @@ from io import StringIO, BytesIO
 import json
 from google.cloud import storage
 from dotenv import load_dotenv, find_dotenv
+from datetime import datetime
 
 
 # setting global gcloud specs
@@ -38,12 +39,13 @@ class PdfUploader:
             temp.write(response.content)
             ## important: have to close again
             temp.close()
+            # copies the file in temp.pdf / decrypts it and replaces the old file
             command="cp "+filename+" temp.pdf; qpdf --password='' --decrypt temp.pdf "+filename+ "; rm temp.pdf"
             os.system(command)
-            print('File decrypted (qpdf)')
+            print('file decrypted (with qpdf)')
             #re-open the decrypted file
             pdfFile = PdfFileReader(filename)
-            # removing temp file
+            # removing tempe file
             os.remove(filename)
             return pdfFile
         else:
@@ -93,7 +95,9 @@ class PdfUploader:
                         merger.append(pdf_file)
                         print(f'added file to pdf merger: {pdf_url}')
                     else:
-                        print(f"file {pdf_url} is not encrypted. \nadding file to merger...")
+                        print(
+                            f"file is not encrypted: {pdf_url}  \nadding file to merger..."
+                        )
                         merger.append(pdf_file)
                         print(f'added file to pdf merger: {pdf_url}')
 
@@ -108,7 +112,7 @@ class PdfUploader:
             values['list_pdfs']['cloud_url_size'] = f'{temp.getbuffer().nbytes}'
 
             # using gcs uploader function to upload bytes file
-            file_name_uploaded = f'{id}_all_products.pdf'
+            file_name_uploaded = f'{id}_all_products_{datetime.now().strftime("%y%m%d%H%M%S")}.pdf'
             cloud_url = self.upload_file(temp.getvalue(), file_name_uploaded=file_name_uploaded)
             # closing everything for safe next loop
             temp.close()
@@ -117,6 +121,6 @@ class PdfUploader:
             values['list_pdfs']['cloud_merged_url'] = cloud_url
             print(f'updated banks dict with cloud link: {cloud_url}')
 
-        print(f'pdf_uploader done. File ready to be sent to rails endpoint')
+        print(f'pdf_uploader done. Json ready to be sent to rails endpoint')
 
         return self.bank_dict
