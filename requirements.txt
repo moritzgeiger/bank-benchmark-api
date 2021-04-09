@@ -7,9 +7,10 @@ wheel>=0.29
 # scraping
 requests
 bs4
+Corpora
 nltk
 pdfplumber
-Corpora
+
 # pdf handling
 PyPDF2
 google-cloud-storage
