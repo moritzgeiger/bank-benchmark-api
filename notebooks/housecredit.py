@@ -40,7 +40,7 @@ house_credit_com = {'admin':['Comissões associadas a atos administrativos 4.1 N
                     'settlement':['Comissão de Liquidação de Prestação', 'Liquidação de Prestação'],
                     'solicitors_notary':['Emolumentos notariais', 'Solicitadoria', 'Notiário'],
                     'statements':['Emissão de extratos de conta de empréstimos liquidados', 'extrato', 'extratos',
-                                  'extrato de conta', 'extrato mensal']
+                                  'extrato de conta', 'extrato mensal'],
                     'taxes':['Imposto do Selo sobre concessão de crédito', 'imposto', 'imposto de selo', 'impostos'],
                     'termination':['Cessação da posição contratual', 'cessação', 'rescisão', 'encerramento']
                     }
