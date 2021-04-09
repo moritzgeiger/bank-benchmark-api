@@ -83,7 +83,7 @@ class PdfSourcing:
                         vals['bp_pdf_url'] = bp_url
                         break
                 else:
-                    ## what happens if the loop goes all the way through
+                    ### what happens if the loop goes all the way through
                     print(f'Could not find file on {bp_url}. \nno bp_pdf_url provided for id: {bank_id}.')
                     vals['bp_pdf_url'] = None
 
