@@ -1,1 +1,116 @@
-{"1": {"bp_bank_id": "0170", "last_updated": "2021-04-09", "url": "https://www.abanca.pt", "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf", "price_page": "https://www.abanca.pt/pt/precario/", "list_pdfs": {"urls": ["https://www.abanca.pt/files/documents/precario-folheto-comissoes-823a7663.pdf", "https://www.abanca.pt/files/documents/folheto-taxa-juro-precario-5890906f.pdf", "https://www.abanca.pt/files/documents/precariodevaloresmobiliarios-23c714a2.pdf", "https://www.abanca.pt/files/documents/glossario-6479e89f.pdf", "https://www.abanca.pt/files/docs/leaflet-your-rights-payments-eu.pdf"], "cloud_url_size": "2129289", "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/1_all_products_210409141521.pdf"}, "num_pdfs": 5, "status": "ok"}}
+{
+  "1": {
+    "bp_bank_id": "0170",
+    "last_updated": "2021-04-09",
+    "url": "https://www.abanca.pt",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf",
+    "price_page": "https://www.abanca.pt/pt/precario/",
+    "list_pdfs": {
+      "urls": [
+        "https://www.abanca.pt/files/documents/precario-folheto-comissoes-823a7663.pdf",
+        "https://www.abanca.pt/files/documents/folheto-taxa-juro-precario-5890906f.pdf",
+        "https://www.abanca.pt/files/documents/precariodevaloresmobiliarios-23c714a2.pdf",
+        "https://www.abanca.pt/files/documents/glossario-6479e89f.pdf",
+        "https://www.abanca.pt/files/docs/leaflet-your-rights-payments-eu.pdf"
+      ],
+      "cloud_url_size": "2129289",
+      "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/1_all_products_210409142326.pdf"
+    },
+    "num_pdfs": 5,
+    "status": "ok"
+  },
+  "2": {
+    "bp_bank_id": "0269",
+    "last_updated": "2021-04-09",
+    "url": "https://www.bankinter.pt",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0269_/0269_PRE.pdf",
+    "price_page": "https://www.bankinter.pt/precario1",
+    "list_pdfs": {
+      "urls": [
+        "https://www.bankinter.pt/documents/20182/115991/Pre%25C3%25A7%25C3%25A1rio%2BCompleto%2BTFSI%2B%2B20210401.pdf/c489f0cd-3831-4441-812e-f351741d2b22",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/folha_rosto.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/informacao_geral.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/informacao_complementar.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_contas_deposito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_operacoes_credito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_cartoes_credito_debito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_cheques.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_transferencias.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_cobrancas.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_fcd_prestacao_servicos.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_contas_deposito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_operacoes_credito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_cartoes_credito_debito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_cheques.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_transferencias.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_cobrancas.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_prestacao_servicos.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_fcd_operacoes_estrangeiro.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_ftj_contas_deposito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/p_ftj_operacoes_credito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_ftj_contas_deposito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/o_ftj_operacoes_credito.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/ptfs_a.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/ptfs_b.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/ptfs_c.pdf",
+        "https://banco.bankinter.pt/particulares/pdfs/precario/ptfs_d.pdf"
+      ],
+      "cloud_url_size": "89399717",
+      "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/2_all_products_210409142529.pdf"
+    },
+    "num_pdfs": 27,
+    "status": "ok"
+  },
+  "3": {
+    "bp_bank_id": "0079",
+    "last_updated": "2021-04-09",
+    "url": "https://www.bancobic.ao",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0079_/0079_PRE_0.pdf",
+    "price_page": "https://www.bancobic.ao/inicio/precario",
+    "list_pdfs": {
+      "urls": [
+        "https://www.bancobic.ao/dotAsset/0f07d8a4-4ec3-4111-a453-c4ee14d5c66c.pdf",
+        "https://www.bancobic.ao/dotAsset/7e1e6dd2-9d56-43ef-b398-ac3bac3cc70e.pdf"
+      ],
+      "cloud_url_size": "2865533",
+      "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/3_all_products_210409142723.pdf"
+    },
+    "num_pdfs": 2,
+    "status": "ok"
+  },
+  "4": {
+    "bp_bank_id": "0008",
+    "last_updated": "2021-04-09",
+    "url": "https://www.bancobai.ao",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0008_/0008_PRE.pdf",
+    "price_page": "https://www.bancobai.ao/pt/pre%C3%A7%C3%A1rio",
+    "list_pdfs": {
+      "urls": [
+        "https://www.bancobai.ao/media/2988/bai_pre_clientes-particulares_31-03-2021.pdf",
+        "https://www.bancobai.ao/media/2989/bai_pre_outros-clientes_31-03-2021.pdf",
+        "https://www.bancobai.ao/media/2823/bai_resumo-das-alteracoes-do-precario-bna-8-02-2021-cleaned.pdf",
+        "https://www.bancobai.ao/media/2278/termos-e-condi%C3%A7%C3%B5es.pdf"
+      ],
+      "cloud_url_size": "6081979",
+      "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/4_all_products_210409143432.pdf"
+    },
+    "num_pdfs": 4,
+    "status": "ok"
+  },
+  "5": {
+    "bp_bank_id": "0193",
+    "last_updated": "2021-04-09",
+    "url": "https://www.bancoctt.pt/",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0193_/0193_PRE.pdf",
+    "price_page": "https://www.bancoctt.pt/application/themes/pdfs/precario.pdf?language_id%3D1555597541833",
+    "list_pdfs": {
+      "urls": [
+        "https://www.bancoctt.pt/application/themes/pdfs/precario.pdf?language_id%3D1555597541833"
+      ],
+      "cloud_url_size": "2216262",
+      "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/5_all_products_210409143446.pdf"
+    },
+    "num_pdfs": 1,
+    "status": "ok"
+  }
+}
