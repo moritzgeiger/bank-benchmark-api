@@ -12,18 +12,20 @@ com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Me
            'documents_copy':['Fotocópias de segundas vias de talões de depósito',
                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
                                  'Segundas vias (pedido na agência)'],
-           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta'],
-           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão'],
+           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta'],
+           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento'],
            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas',
                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
                                   'Depósito de moeda metálica (≥ a 100 moedas)'],
-            'change_holder':['Alteração de titulares', 'Alteração de titularidade',
+            'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
                                      'Alteração de titularidade / intervenientes'],
-            'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário'],
+            'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
+                             'Comissões por Descoberto Bancário'],
             'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
             'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
            }
+
 
 subproduct_dict = {'statement' : None,
                     'documents_copy' : None,
