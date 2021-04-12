@@ -13,11 +13,12 @@ com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Me
                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
                                  'Segundas vias (pedido na agência)'],
            'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta'],
-           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento'],
+           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
+                      'Levantamento de Numerário ao Balcão'],
            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas',
                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
-                                  'Depósito de moeda metálica (≥ a 100 moedas)'],
+                                  'Depósito em moeda metálica (>= 100 moedas)' ],
             'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
                                      'Alteração de titularidade / intervenientes'],
             'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
@@ -101,14 +102,14 @@ class DemandDeposit:
             for value in commission:
                 for ind,sentence in enumerate(file):
                     if value in sentence:
-                        if value in lista:
-                            if '[0-9]{1-2},[0-9]{2}' in sentence:
-                                lista[value]= lista[value].append(sentence)
+                        if '[0-9]{1-2},[0-9]{2}' in sentence:
+                            if value in lista:
+                                lista[value].append(sentence)
                             else:
-                                lista[value]= lista[value].append(' '.join([sentence,file[ind+1]]))
-                        else:
-                            if '[0-9]{1-2},[0-9]{2}' in sentence:
                                 lista[value]= [sentence]
+                        else:
+                            if value in lista:
+                                lista[value].append(' '.join([sentence,file[ind+1]]))
                             else:
                                 lista[value]= [' '.join([sentence,file[ind+1]])]
         if lista == {}:
