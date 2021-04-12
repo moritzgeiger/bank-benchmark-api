@@ -99,12 +99,12 @@ def retrieve_pdfs():
         time.sleep(5)
         with open('bank_benchmark_api/data/banks.json') as json_file:
             banks = json.load(json_file)
-        os.remove('bank_benchmark_api/data/banks.json')
+        # os.remove('bank_benchmark_api/data/banks.json')
         print(f'bank json loaded, supplied and removed from server')
         return banks
 
     except Exception as e:
-        return f'{{error: sourcing job not finished or initialized. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}}}'
+        return jsonify(f'{{error: sourcing job not finished or initialized. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}}}')
 
 #############################
 ###### TESTING ENDPOINTS ####
