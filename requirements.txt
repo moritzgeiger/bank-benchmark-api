@@ -36,6 +36,7 @@ Jinja2
 MarkupSafe
 Werkzeug
 markdown
+pygments
 
 # utilities
 six>=1.14
