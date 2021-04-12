@@ -7,3 +7,4 @@ raw_data/
 .env
 *.pdf
 pwc-credentials-google.json
+data/banks.json
