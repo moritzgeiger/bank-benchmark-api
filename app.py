@@ -19,7 +19,7 @@ from bank_benchmark_api.uploader import PdfUploader
 from bank_benchmark_api.sourcing import PdfSourcing
 
 
-# # google creds
+# # google creds ## lala
 # credential_path = "/Users/moritzgeiger/code/.gcp/WAGON_KEY_MG.json"
 # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
