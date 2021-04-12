@@ -8,6 +8,8 @@ from threading import Thread
 # from rq import Connection, Queue, Worker
 # from redis import Redis
 import markdown.extensions.fenced_code
+import markdown.extensions.codehilite
+from pygments.formatters import HtmlFormatter
 import markdown
 from urllib.parse import urljoin
 
@@ -16,7 +18,8 @@ from bank_benchmark_api.uploader import PdfUploader
 # from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.sourcing import PdfSourcing
 
-# # google creds
+
+# # google creds ## lala
 # credential_path = "/Users/moritzgeiger/code/.gcp/WAGON_KEY_MG.json"
 # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
@@ -32,7 +35,17 @@ app.config["DEBUG"] = True
 @app.route('/', methods=['GET'])
 def home():
     readme_file = open("README.md", "r")
-    return markdown.markdown(readme_file.read(), extensions=["fenced_code"])
+    md_template_string = markdown.markdown(
+    readme_file.read(), extensions=["fenced_code", "codehilite"]
+    )
+
+    # Generate Css for syntax highlighting
+    formatter = HtmlFormatter(style="emacs",full=True,cssclass="codehilite")
+    css_string = formatter.get_style_defs()
+    md_css_string = "<style>" + css_string + "</style>"
+
+    md_template = md_css_string + md_template_string
+    return md_template
 
 #########################
 ##### BANK DETAILS ######
