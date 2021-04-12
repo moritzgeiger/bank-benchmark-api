@@ -92,19 +92,19 @@ def merge_pdfs():
     else:
         return jsonify({ 'status': 'error', 'message': f'one of these required keys were not passed {requirements}'})
 
-# @app.route('/retrievepdfs', methods=['GET'])
-# def retrieve_pdfs():
-#     print('retrieve_pdfs was called')
-#     try:
-#         time.sleep(5)
-#         with open('bank_benchmark_api/data/banks.json') as json_file:
-#             banks = json.load(json_file)
-#         os.remove('bank_benchmark_api/data/banks.json')
-#         print(f'bank json loaded, supplied and removed from server')
-#         return banks
+@app.route('/retrievepdfs', methods=['GET'])
+def retrieve_pdfs():
+    print('retrieve_pdfs was called')
+    try:
+        time.sleep(5)
+        with open('bank_benchmark_api/data/banks.json') as json_file:
+            banks = json.load(json_file)
+        os.remove('bank_benchmark_api/data/banks.json')
+        print(f'bank json loaded, supplied and removed from server')
+        return banks
 
-#     except Exception as e:
-#         return f'{{error: sourcing job not finished or initialized. first call /dopdfs and wait for backgroundjob to finish. Error msg: {e}}}'
+    except Exception as e:
+        return f'{{error: sourcing job not finished or initialized. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}}}'
 
 #############################
 ###### TESTING ENDPOINTS ####

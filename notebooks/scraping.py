@@ -110,7 +110,7 @@ class DemandDeposit:
                             else:
                                 lista[value]= [' '.join([sentence,file[ind+1]])]
         if lista == {}:
-            return 'name of commisions not in database'
+            return 'not the right page'
         return lista
 
     def n_account(self):
