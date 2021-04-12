@@ -71,6 +71,7 @@ class PdfSourcing:
             r = requests.get(bp_url)
             if r.status_code == 200:
                 vals['bp_pdf_url'] = bp_url
+                print(f'found correct link: {bp_url}')
             else:
                 # some files of bp follow a slightly different structure with _PRE_0.pdf or _PRE_1.pdf as suffixes
                 print(f'Could not find file on {bp_url}. \ntrying other links.')

@@ -7,4 +7,4 @@ raw_data/
 .env
 *.pdf
 pwc-credentials-google.json
-data/banks.json
+bank_benchmark_api/data/banks.json
