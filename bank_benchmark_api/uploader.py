@@ -17,8 +17,7 @@ from datetime import datetime
 
 # setting global gcloud specs
 load_dotenv(find_dotenv())
-SECRET_KEY = os.environ.get("SECRET_KEY")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+GOOGLE_APPLICATION_CREDENTIALS = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
 cloud = 'https://storage.cloud.google.com/'
 bucket_name = "bank_price_pdfs"
