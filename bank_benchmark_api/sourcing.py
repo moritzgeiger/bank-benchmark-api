@@ -86,7 +86,9 @@ class PdfSourcing:
                 else:
                     ### what happens if the loop goes all the way through
                     print(f'Could not find file on {bp_url}. \nno bp_pdf_url provided for id: {bank_id}.')
-                    vals['bp_pdf_url'] = None
+                    vals['bp_pdf_url'] = {
+                        'error': f'no bp_pdf_url provided for id: {bank_id}.'
+                    }
 
         return self.bank_dict
 
