@@ -16,7 +16,7 @@ from urllib.parse import urljoin
 ### importing classes
 from bank_benchmark_api.uploader import PdfUploader
 from bank_benchmark_api.sourcing import PdfSourcing
-# from bank_benchmark_api.pagefinder import PageFinder
+from bank_benchmark_api.pagefinder import PageFinder
 
 
 # # google creds ## lalala
@@ -91,6 +91,64 @@ def merge_pdfs():
 
     else:
         return jsonify({ 'status': 'error', 'message': f'one of these required keys were not passed {requirements}'})
+
+
+@app.route('/get_stats', methods=['POST'])
+def get_stats():
+    print('get_stats was called')
+    requirements = [
+        'bp_pdf_url',
+        'cloud_merged_url',
+        'products',
+        'url',
+    ]
+    validator = []
+    r = request.json
+    for vals in r.values():
+        print(f'checking if requirements for each bank are in {vals.keys()}')
+        val_bank = all([x in vals.keys() for x in requirements])
+        validator.append(val_bank)
+    print(f'matched these positions in keys: {validator}')
+
+    if all(validator):
+        # moving sourcing tasks to the background so that rails app has a quick response
+        def start_pagefinder_pricescraping(r):
+            # runs all the page finding jobs and scraping prices for each requested bank
+            banks = {}
+            for i, val in r.items():
+                pagefinder = PageFinder(val)
+                bank = pagefinder.find_page()
+                # forwarding the bank to the scraping job
+                # scraping = DemandDeposit(bank)
+                # bank = scraping.scrape()]
+                banks[i] = bank
+
+            with open('bank_benchmark_api/data/banks.json', 'w') as file:
+                json.dump(banks, file)
+
+                # r = requests.post(url=urljoin(app_base, app_endpoint), )
+                print(f'price infos banks.json was sent to rails app endpoint <???>')
+
+        thread = Thread(target=start_pagefinder_pricescraping, kwargs={'r': r})
+        print(f'starting thread for job: {thread.name}')
+        thread.start()
+
+        return jsonify({
+            'status': 'ok',
+            'thread_name': str(thread.name),
+            'started': True
+        })
+
+    else:
+        return jsonify({
+            'status':
+            'error',
+            'message':
+            f'one of these required keys were not passed {requirements}'
+        })
+
+
+
 
 @app.route('/retrievepdfs', methods=['GET'])
 def retrieve_pdfs():
