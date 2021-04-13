@@ -79,25 +79,51 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
   params:
     data:
 ```
-          { <bank.id>: {
+          { <bank.id1>: {
               'url': 'www.abanca.pt',
-              'bp_bank_id': <bank.bp_id>
+              'bp_bank_id': <bank.bp_id>,
+              'bp_pdf_url': <bp_pdf_url>,
               'num_pdfs': 2,
               'last_updated': < bank.documents.sort('created_at').last >,
               'cloud_merged_url': 'https://www.cloudinary.ao/mega_mega_file_merged_bp0038.pdf',
-              'products': [
-                    {
-                      'demand_deposit': comm_hash_1,
-                      'pages': [3,4] (from merged pdf)
-                    },
-                    {
-                      'housing_credit': comm_hash_2,
-                      'pages': [9] (from merged pdf)
-                    }
-                ]
-            }
+              'products':
+                            {
+                              'demand_deposit': {'withdrawal':{'<conta base>:<price of conta base>}['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal'],
+                                                'documents_copy':['Fotocópias de segundas vias de talões de depósito',
+                                                'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
+                                                'Segundas vias (pedido na agência)'],
+                                                },
+                              'pages': [3,4] (from merged pdf)
+                            },
+                            {
+                              'housing_credit': comm_hash_2,
+                              'pages': [9] (from merged pdf)
+                            }
+                      },
+            <bank.id2>: {
+              'url': 'www.abanca.pt',
+              'bp_bank_id': <bank.bp_id>,
+              'bp_pdf_url': <bp_pdf_url>,
+              'num_pdfs': 2,
+              'last_updated': < bank.documents.sort('created_at').last >,
+              'cloud_merged_url': 'https://www.cloudinary.ao/mega_mega_file_merged_bp0038.pdf',
+              'products':
+                            {
+                              'demand_deposit': {<statement>:['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal'],
+                                                'documents_copy':['Fotocópias de segundas vias de talões de depósito',
+                                                'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
+                                                'Segundas vias (pedido na agência)'],
+                                                },
+                              'pages': [3,4] (from merged pdf)
+                            },
+                            {
+                              'housing_credit': comm_hash_2,
+                              'pages': [9] (from merged pdf)
+                            }
+                      }
           }
 ```
+
   response:
 
         Status code 200 OK
