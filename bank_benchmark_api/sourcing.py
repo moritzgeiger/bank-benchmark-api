@@ -30,31 +30,31 @@ class PdfSourcing:
             headers = {'Accept-Language': 'pt-PT'}
             try:
                 r = requests.get(url, headers=headers)
+
+                soup = BeautifulSoup(r.content, 'html.parser')
+                if r.status_code == 200:
+                    # going through every link on the page to see if 'precarios' is in the link
+                    for link in soup.find_all('a', href=True):
+                        url_prices = str(link.get('href').lower().strip())
+                        lower = str(link.string).lower().strip()
+                        title = str(link.get('title')).strip().lower()
+                        searchstring = ' '.join([url_prices, lower, title])
+                        if any([x in searchstring for x in search]):
+                            print(f'found terms of {search} in string {searchstring}')
+                            # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
+                            # adding findings to bank dictionary
+                            vals["price_page"] = quote(urljoin(url, url_prices),
+                                                      safe=(":/?"))
+                            print(
+                                f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/?"))}'
+                            )
+                else:
+                    print(f'could not reach page: {url}, status code: {r.status_code}')
+                    vals["price_page"] = {
+                        'error': f'provided url not reachable: {url}'
+                    }
             except Exception as e:
                 print(f'coud not reach url: {url}, error: {e}')
-
-            soup = BeautifulSoup(r.content, 'html.parser')
-            if r.status_code == 200:
-                # going through every link on the page to see if 'precarios' is in the link
-                for link in soup.find_all('a', href=True):
-                    url_prices = str(link.get('href').lower().strip())
-                    lower = str(link.string).lower().strip()
-                    title = str(link.get('title')).strip().lower()
-                    searchstring = ' '.join([url_prices, lower, title])
-                    if any([x in searchstring for x in search]):
-                        print(f'found terms of {search} in string {searchstring}')
-                        # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
-                        # adding findings to bank dictionary
-                        vals["price_page"] = quote(urljoin(url, url_prices),
-                                                   safe=(":/?"))
-                        print(
-                            f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/?"))}'
-                        )
-            else:
-                print(f'could not reach page: {url}, status code: {r.status_code}')
-                vals["price_page"] = {
-                    'error': f'provided url not reachable: {url}'
-                }
 
         return self.bank_dict
 
