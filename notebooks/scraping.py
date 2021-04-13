@@ -44,9 +44,13 @@ subproduct_dict = {'statement' : None,
 
 
 class DemandDeposit:
-    def __init__(self, link, page):
+    def __init__(self, link,page):
         self.link = link
         self.page = page
+# class DemandDeposit:
+#     self.dict_demand = dictionary['products']['demand_deposit']
+#     self.page_demand = dictionary['products']['pages']
+#     self.link = dictionary['bp_pdf_url']
 
     def get_pdf(self):
         remote = urlopen(Request(self.link)).read()
