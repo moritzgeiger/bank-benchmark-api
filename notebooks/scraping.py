@@ -44,9 +44,13 @@ subproduct_dict = {'statement' : None,
 
 
 class DemandDeposit:
-    def __init__(self, link, page):
+    def __init__(self, link,page):
         self.link = link
         self.page = page
+# class DemandDeposit:
+#     self.dict_demand = dictionary['products']['demand_deposit']
+#     self.page_demand = dictionary['products']['pages']
+#     self.link = dictionary['bp_pdf_url']
 
     def get_pdf(self):
         remote = urlopen(Request(self.link)).read()
@@ -138,6 +142,7 @@ class DemandDeposit:
     def names(self):
         if len(self.n_account()[0]) > 20:
             return self.n_account()
+
         words = []
         for account in self.n_account():
             for element in account:
@@ -147,19 +152,28 @@ class DemandDeposit:
         for word in words:
             if word[0] == 'Conta' and len(word)>1 and word[1]!='nan':
                 names.append(word)
+
         finals = []
         for name in names:
             finals.append(' '.join(name[:14]).replace(';','').replace('/d./d',''))
+
         regular = []
         for final in finals:
             start = final[:3]
             if start not in regular:
                 regular.append(final)
+
         lista =[]
         for name in regular:
             single = ' '.join(name.split(" ")[:2])
             if single not in lista:
                 lista.append(name)
+
+        for name in lista:
+            if name.endswith('Pág.1/2') == True:
+                lista = lista.remove(name)
+            return lista
+
         return lista
 
     def accounts_offer(self):

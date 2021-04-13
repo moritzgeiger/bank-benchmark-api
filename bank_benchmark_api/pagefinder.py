@@ -10,17 +10,12 @@ from pdfminer.layout import LTTextContainer, LTChar, LTTextBox
 from pdfminer.pdfpage import PDFPage
 import json
 import re
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlencode, quote
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 
 
 ## defining global regex match patterns for page finder
-searchterms = {
-    'Demand Deposits': r'[cC]ontas\sde\s[dD]ep[oó]sito.+articulares.+P[áa]g',
-    'Housing Credit':
-    r"[Oo]pera[çc][õo]es.{,4}[Cc]r[ée]dito.+articulares.+P[áa]g"
-}
 
 ## Examples of strings to find on pages
 # Operações de crédito / Particulares – Pág. 1 /15
@@ -29,25 +24,39 @@ searchterms = {
 # Operações Crédito-Particulares - Pág.1/2
 
 class PageFinder:
-'''Requires the global bank dict to parse through. THere it will access the bp_pdf_url and look for relevant pages.'''
+    """
+    Requires ONE single bank dict to parse through. There it will access the bp_pdf_url and look for relevant pages via regex.
+    returns the enriched dict of the single bank"""
 
-    def __init__(self, bank_dict):
-        self.bank_dict = bank_dict
+    def __init__(self, single_bank):
+        self.single_bank = single_bank
 
-    def page_finder(self, searchterms):
-        products = {}
-        for k, val in self.bank_dict.items():
-            url = val.get('bp_pdf_url')
-            remote = urlopen(Request(url)).read()
-            memory = BytesIO(remote)
+    def find_page(self):
+        ## opening the bp file
+        print('find_page was called')
+        url = self.single_bank.get('bp_pdf_url')
+        print(f'opening {url}')
+        remote = urlopen(Request(url)).read()
+        memory = BytesIO(remote)
+        pdf = pdfplumber.open(memory)
+        # looking for the products
+        products = self.single_bank.get('products')
+        # initializing 'pages' list inside products
+        for product, val in products.items():
+            val['pages'] = []
+        # avoiding loading time => looking for all product terms on each page instead of one product per loop
+        pt_terms = {key:val.get('portuguese').lower() for (key, val) in products.items()}
+        pt_terms_re = {key:re.sub('[^a-zA-Z0-9 \n\.]|\sde\s', '.{,5}', val)+'.{,5}particulares.{,5}p[áa]g' for (key,val) in pt_terms.items()}
 
-            pdf = pdfplumber.open(memory)
-            products[k] = {'Demand Deposits':[],
-                          'Housing Credit':[]}
-            for page in pdf.pages:
-                if re.search(searchterms.get('Demand Deposits'), page.extract_text()):
-                    products[k]['Demand Deposits'].append(page.page_number)
-                if re.search(searchterms.get('Housing Credit'), page.extract_text()):
-                    products[k]['Housing Credit'].append(page.page_number)
+        for page in pdf.pages:
+            text = page.extract_text().lower()
+            for product, term in pt_terms_re.items():
+                if re.search(term, text):
+                    pagenr = page.page_number
+                    print(f'found related terms on page {pagenr} for {product}')
+                    products[product]['pages'].append(pagenr)
 
-        return products
+        # injecting the updated/enriched products dict in the products
+        self.single_bank['products'] = products
+
+        return self.single_bank
