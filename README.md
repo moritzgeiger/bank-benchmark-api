@@ -143,6 +143,12 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
 ```
         {'4': { 'status': 'error', 'message': 'Ups! hello there'} }
 ```
+
+# GET /retrievepdfs
+
+retrieve the sourcing job you have requested from /merge_pdfs.
+mandatory argument: 'ident' => pass the number you were given from the /merge_pdfs immediate response.
+
 -------------
 
 
