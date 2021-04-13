@@ -56,7 +56,7 @@ class DemandDeposit:
         self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
-        print(f'opening link: {self.link}')
+        print(f'open link: {self.link}')
         remote = urlopen(Request(self.link)).read()
         memory = BytesIO(remote)
         return memory
@@ -64,7 +64,7 @@ class DemandDeposit:
 
     def getting_text(self):
         file = pdfplumber.open(self.get_pdf())
-        print('extracting pdf content to text...')
+        print('extract pdf content to text...')
         # compiling pages of pdf if more are available, separating them by a NEXT identifier
         # replacing 'idento' / 'free' fees with 0,00
         if len(self.page_demand) > 1 :
@@ -134,7 +134,7 @@ class DemandDeposit:
         accounts = []
         finals = []
         text = self.getting_text()
-        print('assigning account names to sentences...')
+        print('assign account names to sentences...')
         if len(nltk.sent_tokenize(text)) < 15 :
             for sentence in self.tokenize():
                 if 'Conta' in sentence:
