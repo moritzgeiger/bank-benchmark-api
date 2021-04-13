@@ -16,7 +16,7 @@ from urllib.parse import urljoin
 ### importing classes
 from bank_benchmark_api.uploader import PdfUploader
 from bank_benchmark_api.sourcing import PdfSourcing
-from bank_benchmark_api.pagefinder import PageFinder
+# from bank_benchmark_api.pagefinder import PageFinder
 
 
 # # google creds ## lalala

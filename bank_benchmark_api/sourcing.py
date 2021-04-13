@@ -113,7 +113,7 @@ class PdfSourcing:
                     print(f'looking for pdfs in: {price_page}')
                     for link in soup.find_all('a', href=True):
                         href = link.get('href')
-                        if '.pdf' in href:
+                        if any([x in href for x in ['.pdf', '.ashx']]):
                             # some pdf links are absolute links, some relative
                             pdf = quote(urljoin(vals.get('url'), href), safe = (":/?"))
                             vals['list_pdfs']['urls'].append(f'{pdf}')
