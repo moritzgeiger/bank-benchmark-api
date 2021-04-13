@@ -68,7 +68,7 @@ class PdfUploader:
         blob = bucket.blob(file_name_uploaded)
 
         # init upload => timeout needs to be high for big files
-        blob.upload_from_string(source_file_bytes, content_type='application/pdf', timeout = 300.0)
+        blob.upload_from_string(source_file_bytes, content_type='application/pdf', timeout = 500.0)
 
         print(f"file uploaded as {file_name_uploaded}.")
         return blob.public_url
