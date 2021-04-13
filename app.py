@@ -12,6 +12,7 @@ import markdown.extensions.codehilite
 from pygments.formatters import HtmlFormatter
 import markdown
 from urllib.parse import urljoin
+import random
 
 ### importing classes
 from bank_benchmark_api.uploader import PdfUploader
@@ -65,6 +66,8 @@ def merge_pdfs():
 
     if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick response
+        import random
+        ident = random.randint(100,999)
         def start_sourcing_and_merging(r):
             # runs all the sourcing jobs and prepares for the merging job
             sourcing = PdfSourcing(r)
@@ -76,7 +79,7 @@ def merge_pdfs():
             # print(f'pdf merging and uploading job was called.')
             banks = merging.pdf_uploader()
             ### TODO send banks to rails endpont via POST
-            with open('bank_benchmark_api/data/banks.json', 'w') as file:
+            with open(f'bank_benchmark_api/data/banks_{ident}.json', 'w') as file:
                 json.dump(banks, file)
 
             # r = requests.post(url=urljoin(app_base, app_endpoint), )
@@ -87,7 +90,7 @@ def merge_pdfs():
         print(f'starting thread for job: {thread.name}')
         thread.start()
 
-        return jsonify({'status':'ok', 'thread_name': str(thread.name), 'started': True})
+        return jsonify({'status':'ok', 'thread_name': str(thread.name), 'started': True, 'ident':ident})
 
     else:
         return jsonify({ 'status': 'error', 'message': f'one of these required keys were not passed {requirements}'})
@@ -149,20 +152,26 @@ def get_stats():
 
 
 
-
 @app.route('/retrievepdfs', methods=['GET'])
 def retrieve_pdfs():
     print('retrieve_pdfs was called')
-    try:
-        time.sleep(5)
-        with open('bank_benchmark_api/data/banks.json') as json_file:
-            banks = json.load(json_file)
-        # os.remove('bank_benchmark_api/data/banks.json')
-        print(f'bank json loaded, supplied and removed from server')
-        return banks
+    if 'ident' in request.args:
+        ident = int(request.args['ident'])
+        try:
+            time.sleep(5)
+            path = f'bank_benchmark_api/data/banks_{ident}.json'
+            with open(path) as json_file:
+                banks = json.load(json_file)
+            os.remove(path)
+            print(f'bank json {ident} loaded, supplied and removed from server')
+            return banks
 
-    except Exception as e:
-        return jsonify(f'{{error: sourcing job not finished or initialized. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}}}')
+        except Exception as e:
+            return jsonify(f'{{error: sourcing job not finished or initialized or ident is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}}}')
+
+    else:
+        return jsonify(f'{{error: please provide identifier "ident" as argument')
+
 
 #############################
 ###### TESTING ENDPOINTS ####
