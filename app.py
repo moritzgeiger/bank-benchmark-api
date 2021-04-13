@@ -78,7 +78,7 @@ def merge_pdfs():
             merging = PdfUploader(banks)
             # print(f'pdf merging and uploading job was called.')
             banks = merging.pdf_uploader()
-            ### TODO send banks to rails endpont via POST
+            #
             with open(f'bank_benchmark_api/data/banks_{ident}.json', 'w') as file:
                 json.dump(banks, file)
 
@@ -87,7 +87,7 @@ def merge_pdfs():
 
 
         thread = Thread(target=start_sourcing_and_merging, kwargs={'r': r})
-        print(f'starting thread for job: {thread.name}')
+        print(f'starting thread for job: {thread.name}, ident: {ident}')
         thread.start()
 
         return jsonify({'status':'ok', 'thread_name': str(thread.name), 'started': True, 'ident':ident})
