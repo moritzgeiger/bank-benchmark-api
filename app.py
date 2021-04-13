@@ -18,6 +18,7 @@ import random
 from bank_benchmark_api.uploader import PdfUploader
 from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.pagefinder import PageFinder
+from bank_benchmark_api.scraping import DemandDeposit
 
 
 # # google creds ## lalala
@@ -115,6 +116,8 @@ def get_stats():
 
     if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick response
+        ident = random.randint(1000, 9999)
+
         def start_pagefinder_pricescraping(r):
             # runs all the page finding jobs and scraping prices for each requested bank
             banks = {}
@@ -122,15 +125,19 @@ def get_stats():
                 pagefinder = PageFinder(val)
                 bank = pagefinder.find_page()
                 # forwarding the bank to the scraping job
-                # scraping = DemandDeposit(bank)
-                # bank = scraping.scrape()]
-                banks[i] = bank
+                demand_deposit = DemandDeposit(bank).output()
+                banks[i]['products']['demand_deposit'] = demand_deposit
+                # TODO pedro housing appending
+                # housing = Housing(val).get
+                # banks[i]['products']['housing'] = housing
 
-            with open('bank_benchmark_api/data/banks.json', 'w') as file:
+
+            path = f'bank_benchmark_api/data/banks_{ident}.json'
+            with open(path, 'w') as file:
                 json.dump(banks, file)
 
                 # r = requests.post(url=urljoin(app_base, app_endpoint), )
-                print(f'price infos banks.json was sent to rails app endpoint <???>')
+                print(f'price infos banks_{ident}.json ready to be picked up. at /retrievestats')
 
         thread = Thread(target=start_pagefinder_pricescraping, kwargs={'r': r})
         print(f'starting thread for job: {thread.name}')
@@ -139,7 +146,8 @@ def get_stats():
         return jsonify({
             'status': 'ok',
             'thread_name': str(thread.name),
-            'started': True
+            'started': True,
+            'ident':ident
         })
 
     else:
@@ -172,6 +180,37 @@ def retrieve_pdfs():
     else:
         return jsonify({'status':'error', 'message': 'please provide identifier "ident" as argument'})
 
+
+@app.route('/retrievestats', methods=['GET'])
+def retrieve_stats():
+    print('retrieve_stats was called')
+    if 'ident' in request.args:
+        ident = int(request.args['ident'])
+        try:
+            time.sleep(5)
+            path = f'bank_benchmark_api/data/banks_{ident}.json'
+            with open(path) as json_file:
+                banks = json.load(json_file)
+            os.remove(path)
+            print(
+                f'bank price json with {ident} loaded, supplied and removed from server')
+            return banks
+
+        except Exception as e:
+            return jsonify({
+                'status':
+                'error',
+                'message':
+                f'sourcing job not finished or initialized or ident: {ident} is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}'
+            })
+
+    else:
+        return jsonify({
+            'status':
+            'error',
+            'message':
+            'please provide identifier "ident" as argument'
+        })
 
 #############################
 ###### TESTING ENDPOINTS ####

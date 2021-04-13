@@ -51,7 +51,7 @@ from io import StringIO, BytesIO
 class DemandDeposit:
     def __init__(self,dictionary):
         self.dict_demand = dictionary['products']['demand_deposit']
-        self.page_demand = dictionary['products']['pages']
+        self.page_demand = self.dict_demand['pages']
         self.link = dictionary['bp_pdf_url']
         self.id_bank = dictionary['bp_bank_id']
 
@@ -256,7 +256,7 @@ class DemandDeposit:
             for name in abanca_last:
                 inx = accounting.find(name) - len(accounting)-1
                 new_text = accounting[inx:]
-            #     print(new_text, 'AAAAAAAAAAAAAAA')
+                #     print(new_text, 'AAAAAAAAAAAAAAA')
                 value = re.search(r'(\d{1,2},\d{2})',new_text)
                 if value:
                     found = value.group()
@@ -306,9 +306,9 @@ class DemandDeposit:
 
 
     def output(self):
-        output = {'demand_depos':{}}
-        output['demand_depos']['subproducts'] = self.demand_depos()
-        output['demand_depos']['n_subproducts']= self.accounts_offer()
+        output = {}
+        output['subproducts'] = self.demand_depos()
+        output['n_subproducts'] = self.accounts_offer()
         # output['house_credit'] = {}
         # output['term_depos'] = {}
         return output
