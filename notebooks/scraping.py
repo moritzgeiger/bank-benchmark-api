@@ -8,19 +8,20 @@ from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 
 
-com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal'],
+com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal', 'Extrato integrado', 'Extrato avulso'],
            'documents_copy':['Fotocópias de segundas vias de talões de depósito',
                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
                                  'Segundas vias (pedido na agência)'],
-           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta'],
+           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta',
+                                'Manutenção de Conta Pacote', 'Manutenção de Conta Base', 'Manutenção de Conta Serviços Mínimos Bancários'],
            'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
-                      'Levantamento de Numerário ao Balcão'],
+                      'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
-            'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas',
+            'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)'
                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
                                   'Depósito em moeda metálica (>= 100 moedas)' ],
             'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
-                                     'Alteração de titularidade / intervenientes'],
+                                     'Alteração de titularidade / intervenientes', 'Alteração de titularidade (titular/ representante)'],
             'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
                              'Comissões por Descoberto Bancário'],
             'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
@@ -63,14 +64,14 @@ class DemandDeposit:
                 joined_text.append(text)
             text ='             NEXT          '.join(joined_text)
             text = text.replace('Isento', '0,00')
-            text = text.replace('n/a', str(np.nan))
+            text = text.replace('n/a', '0,00')
             text = re.sub('--', str(np.nan), text)
             return text
         else:
             page = file.pages[self.page[0]]
             text = page.extract_text()
             text = text.replace('Isento', '0,00')
-            text = text.replace('n/a', str(np.nan))
+            text = text.replace('n/a', '0,00')
             text = re.sub('--', str(np.nan), text)
             return text
 
@@ -166,11 +167,80 @@ class DemandDeposit:
         return len(self.names())
 
 
+    def indexes(self):
+        complete_text = self.tokenize()
+        indexes_name = {}
+        indexes_value = {}
+        for name in self.names():
+            for inx,sentence in enumerate(complete_text):
+                if name in sentence:
+                    if name in indexes_name:
+                        indexes_name[name].append(inx)
+                    else:
+                        indexes_name[name] = [inx]
+        for lista in com_dict.values():
+            for value in lista:
+                for inx,sentence in enumerate(complete_text):
+                    if value in sentence:
+                        if value in indexes_value:
+                            indexes_value[value].append(inx)
+                        else:
+                            indexes_value[value] = [inx]
+        return indexes_name, indexes_value
+
+    def values_sentence(self):
+        sentence_account = {}
+        values = self.indexes()[1]
+        names = self.indexes()[0]
+        text = self.tokenize()
+        for conta,idx in names.items():
+            idx = idx[0]
+            closer = 0
+            types ={}
+            for commission,number_comm in values.items():
+                for element in number_comm:
+                    if element >= idx and (element<closer or closer == 0):
+                        closer = element
+                        if r'(\d+,\d{2})' not in text[element]:
+                            sentence = text[element]
+                            sentence = ' '.join([sentence, text[element+1]])
+                            price = re.search(r'(\d+,\d{2})',sentence)
+                            if price:
+                                found = price.group()
+                                types[commission] = found
+                        else:
+                            price = re.search(r'(\d+,\d{2})',sentence)
+                            if price:
+                                found = price.group()
+                                types[commission]= text[found]
+                sentence_account[conta] = types
+        return sentence_account
+
+    def complete_info(self):
+        sentence_account = self.values_sentence()
+        sentence_account['General']={}
+        values_bank = self.values()
+        commissions = [objects.keys() for k,objects in sentence_account.items()]
+        for k,sentences in values_bank.items():
+            if k not in commissions:
+                sentence = sentences[0]
+                price = re.search(r'(\d+,\d{2})',sentence)
+                if price:
+                    found = price.group()
+                    sentence_account['General'][k]=found
+        return sentence_account
+
+
     def demand_depos(self):
-        demand_depos = {}
-        for each in self.names():
-            demand_depos[each] = subproduct_dict
-        return demand_depos
+        finals = {}
+        for account, dictionary in self.complete_info().items():
+            demand_depos = {}
+            for k in dictionary:
+                for eng, value in com_dict.items():
+                    if k in value:
+                        demand_depos[eng] = dictionary[k]
+            finals[account]=demand_depos
+        return finals
 
 
     def output(self):
