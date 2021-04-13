@@ -66,7 +66,7 @@ def merge_pdfs():
 
     if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick response
-        import random
+        # setting unique identifier for the requested job. will be needed later for file pickup
         ident = random.randint(100,999)
         def start_sourcing_and_merging(r):
             # runs all the sourcing jobs and prepares for the merging job
@@ -83,7 +83,7 @@ def merge_pdfs():
                 json.dump(banks, file)
 
             # r = requests.post(url=urljoin(app_base, app_endpoint), )
-            print(f'updated bank.json was sent to rails app endpoint <???>')
+            print(f'updated bank.json ready for pickup with ident: {ident}')
 
 
         thread = Thread(target=start_sourcing_and_merging, kwargs={'r': r})
@@ -167,10 +167,10 @@ def retrieve_pdfs():
             return banks
 
         except Exception as e:
-            return jsonify(f'{{error: sourcing job not finished or initialized or ident is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}}}')
+            return jsonify({'status':'error', 'message': f'sourcing job not finished or initialized or ident: {ident} is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}'})
 
     else:
-        return jsonify(f'{{error: please provide identifier "ident" as argument')
+        return jsonify({'status':'error', 'message': 'please provide identifier "ident" as argument'})
 
 
 #############################
