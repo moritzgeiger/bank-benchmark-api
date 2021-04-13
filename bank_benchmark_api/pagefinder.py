@@ -42,6 +42,7 @@ class PageFinder:
         # looking for the products
         products = self.single_bank.get('products')
         # initializing 'pages' list inside products
+        print(f'dealing with: {products}')
         for product, val in products.items():
             val['pages'] = []
         # avoiding loading time => looking for all product terms on each page instead of one product per loop
