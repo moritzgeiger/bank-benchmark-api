@@ -8,37 +8,37 @@ from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 
 
-com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal', 'Extrato integrado', 'Extrato avulso'],
-           'documents_copy':['Fotocópias de segundas vias de talões de depósito',
-                                  'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
-                                 'Segundas vias (pedido na agência)'],
-           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta',
-                                'Manutenção de Conta Pacote', 'Manutenção de Conta Base', 'Manutenção de Conta Serviços Mínimos Bancários'],
-           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
-                      'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
-           'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
-            'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)'
-                                   'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
-                                  'Depósito em moeda metálica (>= 100 moedas)' ],
-            'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
-                                     'Alteração de titularidade / intervenientes', 'Alteração de titularidade (titular/ representante)'],
-            'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
-                             'Comissões por Descoberto Bancário'],
-            'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
-            'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
-           }
+# com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal', 'Extrato integrado', 'Extrato avulso'],
+#            'documents_copy':['Fotocópias de segundas vias de talões de depósito',
+#                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
+#                                  'Segundas vias (pedido na agência)'],
+#            'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta',
+#                                 'Manutenção de Conta Pacote', 'Manutenção de Conta Base', 'Manutenção de Conta Serviços Mínimos Bancários'],
+#            'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
+#                       'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
+#            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
+#             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)'
+#                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
+#                                   'Depósito em moeda metálica (>= 100 moedas)' ],
+#             'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
+#                                      'Alteração de titularidade / intervenientes', 'Alteração de titularidade (titular/ representante)'],
+#             'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
+#                              'Comissões por Descoberto Bancário'],
+#             'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
+#             'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
+#            }
 
 
-subproduct_dict = {'statement' : None,
-                    'documents_copy' : None,
-                    'acc_manteinance' : None,
-                    'withdraw': None,
-                    'online_service' : None,
-                    'cash_deposit': None,
-                    'change_holder' : None,
-                    'bank_overdraft': None,
-                    'movement_consultation': None,
-                    'balance_inquiry': None}
+# subproduct_dict = {'statement' : None,
+#                     'documents_copy' : None,
+#                     'acc_manteinance' : None,
+#                     'withdraw': None,
+#                     'online_service' : None,
+#                     'cash_deposit': None,
+#                     'change_holder' : None,
+#                     'bank_overdraft': None,
+#                     'movement_consultation': None,
+#                     'balance_inquiry': None}
 
 
 
@@ -63,9 +63,9 @@ class DemandDeposit:
 
     def getting_text(self):
         file = pdfplumber.open(self.get_pdf())
-        if len(self.page) > 1 :
+        if len(self.page_demand) > 1 :
             joined_text = []
-            for el in self.page:
+            for el in self.page_demand:
                 page = file.pages[el]
                 text = page.extract_text()
                 joined_text.append(text)
@@ -75,7 +75,7 @@ class DemandDeposit:
             text = re.sub('--', str(np.nan), text)
             return text
         else:
-            page = file.pages[self.page[0]]
+            page = file.pages[self.page_demand[0]]
             text = page.extract_text()
             text = text.replace('Isento', '0,00')
             text = text.replace('n/a', '0,00')
@@ -104,7 +104,7 @@ class DemandDeposit:
 
     def values(self):
         file = self.tokenize()
-        values = [x for x in com_dict.values()]
+        values = [x for x in self.dict_demand.values()]
         lista ={}
         for commission in values:
             for value in commission:
@@ -185,7 +185,7 @@ class DemandDeposit:
                         indexes_name[name].append(inx)
                     else:
                         indexes_name[name] = [inx]
-        for lista in com_dict.values():
+        for lista in self.dict_demand.values():
             for value in lista:
                 for inx,sentence in enumerate(complete_text):
                     if value in sentence:
@@ -298,7 +298,7 @@ class DemandDeposit:
         for account, dictionary in self.specific_bank().items():
             demand_depos = {}
             for k in dictionary:
-                for eng, value in com_dict.items():
+                for eng, value in self.dict_demand.items():
                     if k in value:
                         demand_depos[eng] = dictionary[k]
             finals[account]=demand_depos
