@@ -43,14 +43,17 @@ subproduct_dict = {'statement' : None,
 
 
 
-class DemandDeposit:
-    def __init__(self, link,page):
-        self.link = link
-        self.page = page
 # class DemandDeposit:
-#     self.dict_demand = dictionary['products']['demand_deposit']
-#     self.page_demand = dictionary['products']['pages']
-#     self.link = dictionary['bp_pdf_url']
+#     def __init__(self, link,page, id_bank):
+#         self.link = link
+#         self.page = page
+#         self.id_bank = id_bank
+class DemandDeposit:
+    def __init__(self,dictionary):
+        self.dict_demand = dictionary['products']['demand_deposit']
+        self.page_demand = dictionary['products']['pages']
+        self.link = dictionary['bp_pdf_url']
+        self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
         remote = urlopen(Request(self.link)).read()
@@ -142,7 +145,6 @@ class DemandDeposit:
     def names(self):
         if len(self.n_account()[0]) > 20:
             return self.n_account()
-
         words = []
         for account in self.n_account():
             for element in account:
@@ -152,33 +154,24 @@ class DemandDeposit:
         for word in words:
             if word[0] == 'Conta' and len(word)>1 and word[1]!='nan':
                 names.append(word)
-
         finals = []
         for name in names:
             finals.append(' '.join(name[:14]).replace(';','').replace('/d./d',''))
-
         regular = []
         for final in finals:
             start = final[:3]
             if start not in regular:
                 regular.append(final)
-
         lista =[]
         for name in regular:
             single = ' '.join(name.split(" ")[:2])
             if single not in lista:
                 lista.append(name)
-
-        for name in lista:
-            if name.endswith('Pág.1/2') == True:
-                lista = lista.remove(name)
-            return lista
-
         return lista
 
     def accounts_offer(self):
 
-        return len(self.names())
+        return len(self.specific_bank().keys())-1
 
 
     def indexes(self):
@@ -215,15 +208,15 @@ class DemandDeposit:
                 for element in number_comm:
                     if element >= idx and (element<closer or closer == 0):
                         closer = element
-                        if r'(\d+,\d{2})' not in text[element]:
+                        if r'(\d{1,2},\d{2})' not in text[element]:
                             sentence = text[element]
                             sentence = ' '.join([sentence, text[element+1]])
-                            price = re.search(r'(\d+,\d{2})',sentence)
+                            price = re.search(r'(\d{1,2},\d{2})',sentence)
                             if price:
                                 found = price.group()
                                 types[commission] = found
                         else:
-                            price = re.search(r'(\d+,\d{2})',sentence)
+                            price = re.search(r'(\d{1,2},\d{2})',sentence)
                             if price:
                                 found = price.group()
                                 types[commission]= text[found]
@@ -238,16 +231,71 @@ class DemandDeposit:
         for k,sentences in values_bank.items():
             if k not in commissions:
                 sentence = sentences[0]
-                price = re.search(r'(\d+,\d{2})',sentence)
+                price = re.search(r'(\d{1,2},\d{2})',sentence)
                 if price:
                     found = price.group()
                     sentence_account['General'][k]=found
         return sentence_account
 
+    def specific_bank(self):
+        complete_info = self.complete_info()
+
+        if self.id_bank == '0269':
+            # """bankinter"""
+            for v in complete_info.values():
+                if v['Comissão de Manutenção de Conta'] == '0,00':
+                    v['Comissão de Manutenção de Conta'] = '80,00'
+            return complete_info
+
+        elif self.id_bank == '0170':
+            # abanca
+            complete_text = self.getting_text()
+            accounting_idx = complete_text.find('Manutenção de conta') - len(complete_text)-1
+            accounting = complete_text[accounting_idx:]
+            abanca_last = self.complete_info()
+            for name in abanca_last:
+                inx = accounting.find(name) - len(accounting)-1
+                new_text = accounting[inx:]
+            #     print(new_text, 'AAAAAAAAAAAAAAA')
+                value = re.search(r'(\d{1,2},\d{2})',new_text)
+                if value:
+                    found = value.group()
+                    abanca_last[name]['Manutenção de conta'] = found
+            return abanca_last
+
+        elif self.id_bank == '0008':
+            # bai
+            complete_info['Conta de Serviços Mínimos Bancários Comissões vigência contrato ']={}
+            complete_info['Conta de Serviços Mínimos Bancários Comissões vigência contrato ']['Manutenção de conta']= '5,00'
+            complete_info['General']['Extrato integrado'] = '0,00'
+            complete_info.pop('Conta de Serviços Minímos Bancários: Condições de acesso: Particulares residentes num Estado Membro da')
+            complete_info.pop('Conta de Serviços Mínimos Bancários não depende da aquisição de outros produtos ou serviços.')
+            return complete_info
+
+        elif self.id_bank == '0079':
+            # bic
+            for name,v in complete_info.items():
+                for k in v:
+                    if v[k] == '00,00':
+                        v[k]= '9,30'
+            complete_info['Conta à Ordem com Futuro 0,00 nan Nota 4']['Comissão de manutenção de conta']='0,00'
+            complete_info['Conta Cool (contratações a partir de 13 de novembro 2014) 0,00 nan Notas 4,']['Comissão de manutenção de conta'] = '0,00'
+            complete_info['Conta à Ordem Massa Insolvente 0,00 nan Nota 14']['Comissão de manutenção de conta'] = '0,00'
+            return complete_info
+
+        elif self.id_bank == '0193':
+            # ctt
+            complete_info.pop('Banco CTT, S.A. Contas de Depósito-Particulares - Pág.1/2')
+            return complete_info
+        else:
+            return complete_info
+
+
+
 
     def demand_depos(self):
         finals = {}
-        for account, dictionary in self.complete_info().items():
+        for account, dictionary in self.specific_bank().items():
             demand_depos = {}
             for k in dictionary:
                 for eng, value in com_dict.items():
@@ -259,8 +307,8 @@ class DemandDeposit:
 
     def output(self):
         output = {'demand_depos':{}}
-        output['demand_depos']['subroducts'] = self.demand_depos()
+        output['demand_depos']['subproducts'] = self.demand_depos()
         output['demand_depos']['n_subproducts']= self.accounts_offer()
-        output['house_credit'] = {}
-        output['term_depos'] = {}
+        # output['house_credit'] = {}
+        # output['term_depos'] = {}
         return output
