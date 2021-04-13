@@ -56,6 +56,7 @@ class DemandDeposit:
         self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
+        print(f'opening link: {self.link}')
         remote = urlopen(Request(self.link)).read()
         memory = BytesIO(remote)
         return memory
@@ -63,6 +64,9 @@ class DemandDeposit:
 
     def getting_text(self):
         file = pdfplumber.open(self.get_pdf())
+        print('extracting pdf content to text...')
+        # compiling pages of pdf if more are available, separating them by a NEXT identifier
+        # replacing 'idento' / 'free' fees with 0,00
         if len(self.page_demand) > 1 :
             joined_text = []
             for el in self.page_demand:
@@ -84,6 +88,7 @@ class DemandDeposit:
 
     def tokenize(self):
         text = self.getting_text()
+        print('tokenize text...')
         if len(nltk.sent_tokenize(text)) < 15:
             text = text.replace('\n','. ')
             # text = len_sentences(text)
@@ -104,6 +109,7 @@ class DemandDeposit:
 
     def values(self):
         file = self.tokenize()
+        print('find and compile all sentences with money values in them...')
         values = [x for x in self.dict_demand.values()]
         lista ={}
         for commission in values:
@@ -121,13 +127,14 @@ class DemandDeposit:
                             else:
                                 lista[value]= [' '.join([sentence,file[ind+1]])]
         if lista == {}:
-            return 'not the right page'
+            return {'error':'wrong page/s provided'}
         return lista
 
     def n_account(self):
         accounts = []
         finals = []
         text = self.getting_text()
+        print('assigning account names to sentences...')
         if len(nltk.sent_tokenize(text)) < 15 :
             for sentence in self.tokenize():
                 if 'Conta' in sentence:
@@ -200,6 +207,7 @@ class DemandDeposit:
         values = self.indexes()[1]
         names = self.indexes()[0]
         text = self.tokenize()
+        print('building sentence-value pairs')
         for conta,idx in names.items():
             idx = idx[0]
             closer = 0
@@ -311,4 +319,5 @@ class DemandDeposit:
         output['n_subproducts'] = self.accounts_offer()
         # output['house_credit'] = {}
         # output['term_depos'] = {}
+
         return output
