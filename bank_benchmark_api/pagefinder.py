@@ -56,6 +56,7 @@ class PageFinder:
                     pagenr = int(page.page_number) -1
                     print(f'found related terms on page {pagenr} for {product}')
                     products[product]['pages'].append(pagenr)
+            print(f'continue search in page: {page.page_number}')
 
         # injecting the updated/enriched products dict in the products
         self.single_bank['products'] = products
