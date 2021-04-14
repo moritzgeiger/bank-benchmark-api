@@ -178,6 +178,7 @@ def retrieve_pdfs():
             return banks
 
         except Exception as e:
+            print(f'{ident} is not available on server. Error: {e}')
             return jsonify({'status':'error', 'message': f'sourcing job not finished or initialized or ident: {ident} is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}'})
 
     else:
