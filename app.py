@@ -102,7 +102,7 @@ def get_stats():
     print('get_stats was called')
     requirements = [
         'bp_pdf_url',
-        'bp_bank_id'
+        'bp_bank_id',
         'cloud_merged_url',
         'products',
         'url',
