@@ -105,3 +105,4 @@ class HouseCredit:
         prices_df['Commissions']=self.get_pdf()[index_col]
         prices_df['Prices']=self.get_pdf()[prices_col]
         return clean_df(prices_df)
+x
