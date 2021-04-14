@@ -59,7 +59,7 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
         "bp_pdf_url": bp_pdf_url,
         "bp_bank_id": bp_bank_id,
         "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/1_all_products_210412130040.pdf",
-        "products": {"demand_deposit":{"commissions":
+        "products": {"demand_deposit": {"commissions":
                 {
                     "statement": [
                     "Emissão de extrato",
@@ -123,7 +123,8 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
                 ]
                 },
                 "portuguese": "Contas de Depósito"
-            }
+            },
+            "housing_credit": "portuguese": "Crédito à habitação e outros créditos hipotecários"
         }
     }
 }
@@ -215,7 +216,19 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
         },
         "n_subproducts": 18
       }
-    }
+    },
+    "housing_credit": {
+                      "commissions": {
+                                      "subproduct1": {
+                                                      "commission1": "123",
+                                                      "commission2": "345"
+                                                      },
+                                      "subproduct2": {
+                                                      "commission1": "123",
+                                                      "commission2": "345"
+                                                      }
+                                        }
+                      }
   }
 }
 ```
