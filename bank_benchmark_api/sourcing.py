@@ -62,7 +62,7 @@ class PdfSourcing:
             except requests.exceptions.SSLError:
                 ## banco bai is too fine to let me on their page, therefore I need selenium
                 print(f'coud not reach url with requests: {url}\n trying Selenium now...')
-                driver = webdriver.Firefox('/app/vendor/firefox/firefox')
+                driver = webdriver.Firefox()
                 driver.implicitly_wait(20)
                 driver.get(url)
                 time.sleep(15)
@@ -163,7 +163,7 @@ class PdfSourcing:
                     print(
                         f'coud not reach url with requests: {price_page}\n trying Selenium now...'
                     )
-                    driver = webdriver.Firefox('/app/vendor/firefox/firefox')
+                    driver = webdriver.Firefox()
                     driver.implicitly_wait(20)
                     driver.get(price_page)
                     time.sleep(15)
