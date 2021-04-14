@@ -49,8 +49,6 @@ class DemandDeposit:
         self.page_demand = page
         self.id_bank = id_bank
         self.dict_demand = com_dict
-        self.text = self.getting_text()
-        self.tokenized = self.tokenize()
 # class DemandDeposit:
 #     def __init__(self,dictionary):
 #         self.dict_demand = dictionary['products']['demand_deposit']
@@ -85,17 +83,19 @@ class DemandDeposit:
             text = re.sub('--', str(np.nan), text)
             return text
 
+
     def tokenize(self):
-        # self.text = self.getting_text()
-        if len(nltk.sent_tokenize(self.text)) < 15:
-            self.text = self.text.replace('\n','. ')
+        text = self.getting_text()
+        if len(nltk.sent_tokenize(text)) < 15:
+            text = text.replace('\n','. ')
             # text = len_sentences(text)
-            self.text = nltk.sent_tokenize(self.text)
-            return self.text
-        self.text = self.text.replace('\n',' ')
+            text = nltk.sent_tokenize(text)
+            return text
+        text = text.replace('\n',' ')
         # text = len_sentences(text)
-        self.text = nltk.sent_tokenize(self.text)
-        return self.text
+        text = nltk.sent_tokenize(text)
+        return text
+
 
     # def search_com(self):
     #     decod = {}
@@ -106,12 +106,12 @@ class DemandDeposit:
     #     return decod, file
 
     def values(self):
-        # self.tokenized = self.tokenize()
+        tokenized = self.tokenize()
         values = [x for x in self.dict_demand.values()]
         lista ={}
         for commission in values:
             for value in commission:
-                for ind,sentence in enumerate(self.tokenized):
+                for ind,sentence in enumerate(tokenized):
                     if value in sentence:
                         if '[0-9]{1-2},[0-9]{2}' in sentence:
                             if value in lista:
@@ -120,9 +120,9 @@ class DemandDeposit:
                                 lista[value]= [sentence]
                         else:
                             if value in lista:
-                                lista[value].append(' '.join([sentence,self.tokenized[ind+1]]))
+                                lista[value].append(' '.join([sentence, tokenized[ind+1]]))
                             else:
-                                lista[value]= [' '.join([sentence,self.tokenized[ind+1]])]
+                                lista[value]= [' '.join([sentence,tokenized[ind+1]])]
         if lista == {}:
             return 'not the right page'
         return lista
@@ -130,13 +130,14 @@ class DemandDeposit:
     def n_account(self):
         accounts = []
         finals = []
-        # self.text = self.getting_text()
-        if len(nltk.sent_tokenize(self.text)) < 15 :
-            for sentence in self.tokenized:
+        tokenized = self.tokenize()
+        text = self.getting_text()
+        if len(nltk.sent_tokenize(text)) < 15 :
+            for sentence in tokenized:
                 if 'Conta' in sentence:
                     finals.append(sentence)
             return finals
-        for sentence in self.tokenized:
+        for sentence in tokenized:
             contas = re.split('Conta',sentence)
             accounts.append(contas)
         for account in accounts:
@@ -178,7 +179,7 @@ class DemandDeposit:
 
 
     def indexes(self):
-        complete_text = self.tokenized
+        complete_text = self.tokenize()
         indexes_name = {}
         indexes_value = {}
         for name in self.names():
@@ -192,7 +193,7 @@ class DemandDeposit:
             for value in lista:
                 for inx,sentence in enumerate(complete_text):
                     if value in sentence:
-                        print(value)
+
                         if value in indexes_value:
                             indexes_value[value].append(inx)
                         else:
@@ -203,7 +204,7 @@ class DemandDeposit:
         sentence_account = {}
         values = self.indexes()[1]
         names = self.indexes()[0]
-        text = self.tokenized
+        text = self.tokenize()
         for conta,idx in names.items():
             idx = idx[0]
             closer = 0
@@ -253,7 +254,7 @@ class DemandDeposit:
 
         elif self.id_bank == '0170':
             # abanca
-            complete_text = self.text
+            complete_text = self.getting_text()
             accounting_idx = complete_text.find('Manutenção de conta') - len(complete_text)-1
             accounting = complete_text[accounting_idx:]
             abanca_last = self.complete_info()
