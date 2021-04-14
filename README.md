@@ -223,10 +223,7 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
                                                       "commission1": "123",
                                                       "commission2": "345"
                                                       },
-                                      "subproduct2": {
-                                                      "commission1": "123",
-                                                      "commission2": "345"
-                                                      }
+                                      "subproduct2": "123"
                                         }
                       }
   }
