@@ -211,12 +211,13 @@ class DemandDeposit:
 
     def specific_bank(self, tokenized, text):
         complete_info = self.complete_info(tokenized, text)
+        print(f'dealing with bank specifics for this content: {complete_info}')
 
         if self.id_bank == '0269':
             # """bankinter"""
-            for v in complete_info.values():
-                if v['Comissão de Manutenção de Conta'] == '0,00':
-                    v['Comissão de Manutenção de Conta'] = '80,00'
+            if complete_info['General']['Comissão de Manutenção de Conta'] == '0,00':
+                complete_info['General'][
+                    'Comissão de Manutenção de Conta'] = '80,00'
             return complete_info
 
         elif self.id_bank == '0170':
@@ -265,7 +266,10 @@ class DemandDeposit:
 
         elif self.id_bank == '0193':
             # ctt
-            complete_info.pop('Banco CTT, S.A. Contas de Depósito-Particulares - Pág.1/2')
+            if complete_info.get('Banco CTT, S.A. Contas de Depósito-Particulares - Pág.1/2'):
+                complete_info.pop(
+                    'Banco CTT, S.A. Contas de Depósito-Particulares - Pág.1/2'
+                )
             return complete_info
         else:
             return complete_info
