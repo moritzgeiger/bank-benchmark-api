@@ -1,0 +1,66 @@
+1618428963148	geckodriver	INFO	Listening on 127.0.0.1:50980
+1618428963861	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofileGMX70N"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618428965176	Marionette	INFO	Listening on port 50988
+1618428965247	Marionette	WARN	TLS certificate errors will be ignored for this session
+1618429268302	geckodriver	INFO	Listening on 127.0.0.1:51291
+1618429269318	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofileqSWnD3"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618429270871	Marionette	INFO	Listening on port 51298
+1618429270890	Marionette	WARN	TLS certificate errors will be ignored for this session
+1618429348395	geckodriver	INFO	Listening on 127.0.0.1:51386
+1618429349411	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofilezgbtCS"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618429350939	Marionette	INFO	Listening on port 51393
+1618429350986	Marionette	WARN	TLS certificate errors will be ignored for this session
+1618429367142	geckodriver	INFO	Listening on 127.0.0.1:51447
+1618429368161	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofile7r4erT"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618429369638	Marionette	INFO	Listening on port 51454
+1618429369742	Marionette	WARN	TLS certificate errors will be ignored for this session
+1618429459760	geckodriver	INFO	Listening on 127.0.0.1:51535
+1618429460779	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofileZxXUry"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618429462410	Marionette	INFO	Listening on port 51542
+1618429462445	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1618429529519	Marionette	INFO	Stopped listening on port 50988
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1618429531175	Marionette	INFO	Stopped listening on port 51298
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1618429532869	Marionette	INFO	Stopped listening on port 51393
+1618429534517	Marionette	INFO	Stopped listening on port 51454
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1618430583713	Marionette	INFO	Stopped listening on port 51542
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1618431736049	geckodriver	INFO	Listening on 127.0.0.1:53232
+1618431737068	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofile4hQKic"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618431738311	Marionette	INFO	Listening on port 53239
+1618431738325	Marionette	WARN	TLS certificate errors will be ignored for this session
+1618431975964	geckodriver	INFO	Listening on 127.0.0.1:53844
+1618431976975	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/fg/10s82l0s4xq7b9ld1yn3k2j80000gn/T/rust_mozprofile1ZJbDh"
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1618431978253	Marionette	INFO	Listening on port 53851
+1618431978334	Marionette	WARN	TLS certificate errors will be ignored for this session
+1618431990323	Marionette	INFO	Stopped listening on port 53239
+1618431992562	Marionette	INFO	Stopped listening on port 53851
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

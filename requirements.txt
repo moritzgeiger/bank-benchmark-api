@@ -10,6 +10,8 @@ bs4
 Corpora
 nltk
 pdfplumber
+selenium-requests
+selenium
 
 # pdf handling
 PyPDF2
