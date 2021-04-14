@@ -102,6 +102,7 @@ def get_stats():
     print('get_stats was called')
     requirements = [
         'bp_pdf_url',
+        'bp_bank_id'
         'cloud_merged_url',
         'products',
         'url',
@@ -129,7 +130,7 @@ def get_stats():
                 banks[i] = {'products':{}}
                 banks[i]['products']['demand_deposit'] = demand_deposit
                 print(
-                    f'finished job for demand deposits and injecting results in response {demand_deposit}'
+                    f'finished job for demand deposits and injecting results in response: {demand_deposit}'
                 )  # TODO pedro housing appending
                 # housing = Housing(val).get
                 # banks[i]['products']['housing'] = housing
@@ -158,7 +159,7 @@ def get_stats():
             'status':
             'error',
             'message':
-            f'one of these required keys were not passed {requirements}'
+            f'one of these required keys were not passed: {requirements}'
         })
 
 
