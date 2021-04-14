@@ -18,7 +18,7 @@ import random
 from bank_benchmark_api.uploader import PdfUploader
 from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.pagefinder import PageFinder
-from bank_benchmark_api.scraping import DemandDeposit
+from bank_benchmark_api.demand_deposit_scrap import DemandDeposit
 
 
 # # google creds ## lalala
