@@ -126,12 +126,11 @@ def get_stats():
                 bank = pagefinder.find_page()
                 # forwarding the bank to the scraping job
                 demand_deposit = DemandDeposit(bank).output()
-                print('finished job for demand deposits and injecting results in dict')
-                banks[i]= {}
-                banks[i]['products']= {}
+                banks[i] = {'products':{}}
                 banks[i]['products']['demand_deposit'] = demand_deposit
-                print(f'demand deposit dictionary {demand_deposit}')
-                # TODO pedro housing appending
+                print(
+                    f'finished job for demand deposits and injecting results in response {demand_deposit}'
+                )  # TODO pedro housing appending
                 # housing = Housing(val).get
                 # banks[i]['products']['housing'] = housing
 

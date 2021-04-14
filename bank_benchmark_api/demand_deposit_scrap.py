@@ -7,48 +7,6 @@ from urllib.parse import urljoin, quote_plus, quote, urlencode
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 
-
-# com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal', 'Extrato integrado', 'Extrato avulso'],
-#            'documents_copy':['Fotocópias de segundas vias de talões de depósito',
-#                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
-#                                  'Segundas vias (pedido na agência)'],
-#            'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta',
-#                                 'Manutenção de Conta Pacote', 'Manutenção de Conta Base', 'Manutenção de Conta Serviços Mínimos Bancários'],
-#            'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
-#                       'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
-#            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
-#             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)',
-#                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
-#                                   'Depósito em moeda metálica (>= 100 moedas)' ],
-#             'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
-#                                      'Alteração de titularidade / intervenientes', 'Alteração de titularidade (titular/ representante)'],
-#             'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
-#                              'Comissões por Descoberto Bancário'],
-#             'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
-#             'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
-#            }
-
-
-# subproduct_dict = {'statement' : None,
-#                     'documents_copy' : None,
-#                     'acc_manteinance' : None,
-#                     'withdraw': None,
-#                     'online_service' : None,
-#                     'cash_deposit': None,
-#                     'change_holder' : None,
-#                     'bank_overdraft': None,
-#                     'movement_consultation': None,
-#                     'balance_inquiry': None}
-
-
-
-
-# class DemandDeposit:
-#     def __init__(self, link,page, id_bank):
-#         self.link = link
-#         self.page_demand = page
-#         self.id_bank = id_bank
-#         self.dict_demand = com_dict
 class DemandDeposit:
     def __init__(self,dictionary):
         self.dict_demand = dictionary['products']['demand_deposit']['commissions']
@@ -57,6 +15,7 @@ class DemandDeposit:
         self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
+        print(f'opening url: {self.link}...')
         remote = urlopen(Request(self.link)).read()
         memory = BytesIO(remote)
         return memory
@@ -64,6 +23,8 @@ class DemandDeposit:
 
     def getting_text(self):
         file = pdfplumber.open(self.get_pdf())
+        print('extract pdf content to text...')
+        print()
         if len(self.page_demand) > 1 :
             joined_text = []
             for el in self.page_demand:
@@ -86,6 +47,7 @@ class DemandDeposit:
 
     def tokenize(self):
         text = self.getting_text()
+        print('tokenize text...')
         if len(nltk.sent_tokenize(text)) < 15:
             text = text.replace('\n','. ')
             # text = len_sentences(text)
@@ -108,7 +70,7 @@ class DemandDeposit:
     def values(self):
         tokenized = self.tokenize()
         values = [x for x in self.dict_demand.values()]
-        print(values)
+        print('find and compile all sentences with money values in them...')
         lista ={}
         for commission in values:
             for value in commission:
@@ -126,7 +88,7 @@ class DemandDeposit:
                                 lista[value]= [' '.join([sentence,tokenized[ind+1]])]
 
         if lista == {}:
-            return 'not the right page'
+            return {'error': f'wrong page/s provided {self.page_demand}'}
         # print(lista)
         return lista
 
@@ -135,6 +97,7 @@ class DemandDeposit:
         finals = []
         tokenized = self.tokenize()
         text = self.getting_text()
+        print('assign account names to sentences...')
         if len(nltk.sent_tokenize(text)) < 15 :
             for sentence in tokenized:
                 if 'Conta' in sentence:
@@ -208,6 +171,7 @@ class DemandDeposit:
         values = self.indexes()[1]
         names = self.indexes()[0]
         text = self.tokenize()
+        print('building sentence-value pairs')
         for conta,idx in names.items():
             idx = idx[0]
             closer = 0
@@ -264,7 +228,7 @@ class DemandDeposit:
             for name in abanca_last:
                 inx = accounting.find(name) - len(accounting)-1
                 new_text = accounting[inx:]
-            #     print(new_text, 'AAAAAAAAAAAAAAA')
+                #     print(new_text, 'AAAAAAAAAAAAAAA')
                 value = re.search(r'(\d{1,2},\d{2})',new_text)
                 if value:
                     found = value.group()
@@ -314,6 +278,7 @@ class DemandDeposit:
 
 
     def output(self):
+        print('output was called')
         output = {}
         output['subproducts'] = self.demand_depos()
         output['n_subproducts']= self.accounts_offer()
