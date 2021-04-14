@@ -21,8 +21,8 @@ class DemandDeposit:
         return memory
 
 
-    def getting_text(self):
-        file = pdfplumber.open(self.get_pdf())
+    def getting_text(self, file): ####################
+        file = pdfplumber.open(file)
         print('extract pdf content to text...')
         print()
         if len(self.page_demand) > 1 :
@@ -45,8 +45,8 @@ class DemandDeposit:
             return text
 
 
-    def tokenize(self):
-        text = self.getting_text()
+    def tokenize(self, file):
+        text = self.getting_text(file)
         print('tokenize text...')
         if len(nltk.sent_tokenize(text)) < 15:
             text = text.replace('\n','. ')
@@ -67,8 +67,8 @@ class DemandDeposit:
     #     file = self.tokenize()
     #     return decod, file
 
-    def values(self):
-        tokenized = self.tokenize()
+    def values(self, file):
+        tokenized = self.tokenize(file)
         values = [x for x in self.dict_demand.values()]
         print('find and compile all sentences with money values in them...')
         lista ={}
@@ -92,11 +92,11 @@ class DemandDeposit:
         # print(lista)
         return lista
 
-    def n_account(self):
+    def n_account(self, file):
         accounts = []
         finals = []
-        tokenized = self.tokenize()
-        text = self.getting_text()
+        tokenized = self.tokenize(file)
+        text = self.getting_text(file)
         print('assign account names to sentences...')
         if len(nltk.sent_tokenize(text)) < 15 :
             for sentence in tokenized:
@@ -112,11 +112,11 @@ class DemandDeposit:
                 finals.append(account)
         return finals
 
-    def names(self):
-        if len(self.n_account()[0]) > 20:
-            return self.n_account()
+    def names(self, file):
+        if len(self.n_account(file)[0]) > 20:
+            return self.n_account(file)
         words = []
-        for account in self.n_account():
+        for account in self.n_account(file):
             for element in account:
                 words.append(element.split())
 
@@ -139,16 +139,16 @@ class DemandDeposit:
                 lista.append(name)
         return lista
 
-    def accounts_offer(self):
+    def accounts_offer(self, specific_bank):
 
-        return len(self.specific_bank().keys())-1
+        return len(specific_bank.keys())-1
 
 
-    def indexes(self):
-        complete_text = self.tokenize()
+    def indexes(self, file):
+        complete_text = self.tokenize(file)
         indexes_name = {}
         indexes_value = {}
-        for name in self.names():
+        for name in self.names(file):
             for inx,sentence in enumerate(complete_text):
                 if name in sentence:
                     if name in indexes_name:
@@ -166,11 +166,11 @@ class DemandDeposit:
                             indexes_value[value] = [inx]
         return indexes_name, indexes_value
 
-    def values_sentence(self):
+    def values_sentence(self, file):
         sentence_account = {}
-        values = self.indexes()[1]
-        names = self.indexes()[0]
-        text = self.tokenize()
+        values = self.indexes(file)[1]
+        names = self.indexes(file)[0]
+        text = self.tokenize(file)
         print('building sentence-value pairs')
         for conta,idx in names.items():
             idx = idx[0]
@@ -195,10 +195,10 @@ class DemandDeposit:
                 sentence_account[conta] = types
         return sentence_account
 
-    def complete_info(self):
-        sentence_account = self.values_sentence()
+    def complete_info(self, file):
+        sentence_account = self.values_sentence(file)
         sentence_account['General']={}
-        values_bank = self.values()
+        values_bank = self.values(file)
         commissions = [objects.keys() for k,objects in sentence_account.items()]
         for k,sentences in values_bank.items():
             if k not in commissions:
@@ -209,8 +209,8 @@ class DemandDeposit:
                     sentence_account['General'][k]=found
         return sentence_account
 
-    def specific_bank(self):
-        complete_info = self.complete_info()
+    def specific_bank(self, file):
+        complete_info = self.complete_info(file)
 
         if self.id_bank == '0269':
             # """bankinter"""
@@ -221,10 +221,10 @@ class DemandDeposit:
 
         elif self.id_bank == '0170':
             # abanca
-            complete_text = self.getting_text()
+            complete_text = self.getting_text(file)
             accounting_idx = complete_text.find('Manutenção de conta') - len(complete_text)-1
             accounting = complete_text[accounting_idx:]
-            abanca_last = self.complete_info()
+            abanca_last = self.complete_info(file)
             for name in abanca_last:
                 inx = accounting.find(name) - len(accounting)-1
                 new_text = accounting[inx:]
@@ -265,11 +265,12 @@ class DemandDeposit:
 
 
 
-    def demand_depos(self):
+    def demand_depos(self, file):
         finals = {}
-        for account, dictionary in self.specific_bank().items():
+        for account, dictionary in self.specific_bank(file).items():
             demand_depos = {}
             for k in dictionary:
+                print(f'parse product: {account}, fee {k}')
                 for eng, value in self.dict_demand.items():
                     if k in value:
                         demand_depos[eng] = dictionary[k]
@@ -279,9 +280,11 @@ class DemandDeposit:
 
     def output(self):
         print('output was called')
+        file = self.get_pdf()
         output = {}
-        output['subproducts'] = self.demand_depos()
-        output['n_subproducts']= self.accounts_offer()
+        output['subproducts'] = self.demand_depos(file)
+        specific_bank = self.specific_bank(file)
+        output['n_subproducts']= self.accounts_offer(specific_bank)
         # output['house_credit'] = {}
         # output['term_depos'] = {}
         return output
