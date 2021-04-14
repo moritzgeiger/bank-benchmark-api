@@ -126,7 +126,7 @@ def get_stats():
                 bank = pagefinder.find_page()
                 # forwarding the bank to the scraping job
                 demand_deposit = DemandDeposit(bank).output()
-                print('finished job for demant deposits and injecting results in dict')
+                print('finished job for demand deposits and injecting results in dict')
                 banks[i]= {}
                 banks[i]['products']= {}
                 banks[i]['products']['demand_deposit'] = demand_deposit
@@ -205,7 +205,7 @@ def retrieve_stats():
                 'status':
                 'error',
                 'message':
-                f'sourcing job not finished or initialized or ident: {ident} is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}'
+                f'sourcing job not finished or initialized or ident: {ident} is not available. first call /get_stats and wait for backgroundjob to finish. Error msg: {e}'
             })
 
     else:
