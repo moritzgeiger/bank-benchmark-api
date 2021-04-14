@@ -8,25 +8,25 @@ from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 
 
-# com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal', 'Extrato integrado', 'Extrato avulso'],
-#            'documents_copy':['Fotocópias de segundas vias de talões de depósito',
-#                                   'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
-#                                  'Segundas vias (pedido na agência)'],
-#            'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta',
-#                                 'Manutenção de Conta Pacote', 'Manutenção de Conta Base', 'Manutenção de Conta Serviços Mínimos Bancários'],
-#            'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
-#                       'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
-#            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
-#             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)',
-#                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
-#                                   'Depósito em moeda metálica (>= 100 moedas)' ],
-#             'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
-#                                      'Alteração de titularidade / intervenientes', 'Alteração de titularidade (titular/ representante)'],
-#             'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
-#                              'Comissões por Descoberto Bancário'],
-#             'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
-#             'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
-#            }
+com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Mensal', 'Extrato integrado', 'Extrato avulso'],
+           'documents_copy':['Fotocópias de segundas vias de talões de depósito',
+                                  'Emissão 2ªs Vias de Avisos e Outros Documentos', 'Extracto avulso',
+                                 'Segundas vias (pedido na agência)'],
+           'acc_manteinance':['Manutenção de conta', 'Comissão de manutenção de conta', 'Comissão de Manutenção de Conta',
+                                'Manutenção de Conta Pacote', 'Manutenção de Conta Base', 'Manutenção de Conta Serviços Mínimos Bancários'],
+           'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
+                      'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
+           'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
+            'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)',
+                                   'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
+                                  'Depósito em moeda metálica (>= 100 moedas)' ],
+            'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
+                                     'Alteração de titularidade / intervenientes', 'Alteração de titularidade (titular/ representante)'],
+            'bank_overdraft':['Comissões por descoberto bancário', 'Descoberto bancário',
+                             'Comissões por Descoberto Bancário'],
+            'movement_consultation':['Consulta de Movimentos de conta DO com', 'Consulta de movimentos ao balcão'],
+            'balance_inquiry':['Pedido de saldo ao balcão', 'Consulta de Saldo de conta DO com comprovativo']
+           }
 
 
 # subproduct_dict = {'statement' : None,
@@ -43,17 +43,20 @@ from io import StringIO, BytesIO
 
 
 
-# class DemandDeposit:
-#     def __init__(self, link,page, id_bank):
-#         self.link = link
-#         self.page = page
-#         self.id_bank = id_bank
 class DemandDeposit:
-    def __init__(self,dictionary):
-        self.dict_demand = dictionary['products']['demand_deposit']
-        self.page_demand = dictionary['products']['pages']
-        self.link = dictionary['bp_pdf_url']
-        self.id_bank = dictionary['bp_bank_id']
+    def __init__(self, link,page, id_bank):
+        self.link = link
+        self.page_demand = page
+        self.id_bank = id_bank
+        self.dict_demand = com_dict
+        self.text = self.getting_text()
+        self.tokenized = self.tokenize()
+# class DemandDeposit:
+#     def __init__(self,dictionary):
+#         self.dict_demand = dictionary['products']['demand_deposit']
+#         self.page_demand = dictionary['products']['pages']
+#         self.link = dictionary['bp_pdf_url']
+#         self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
         remote = urlopen(Request(self.link)).read()
@@ -83,16 +86,16 @@ class DemandDeposit:
             return text
 
     def tokenize(self):
-        self.text = self.getting_text()
-        if len(nltk.sent_tokenize(text)) < 15:
-            text = text.replace('\n','. ')
+        # self.text = self.getting_text()
+        if len(nltk.sent_tokenize(self.text)) < 15:
+            self.text = self.text.replace('\n','. ')
             # text = len_sentences(text)
-            text = nltk.sent_tokenize(text)
-            return text
-        text = text.replace('\n',' ')
+            self.text = nltk.sent_tokenize(self.text)
+            return self.text
+        self.text = self.text.replace('\n',' ')
         # text = len_sentences(text)
-        text = nltk.sent_tokenize(text)
-        return text
+        self.text = nltk.sent_tokenize(self.text)
+        return self.text
 
     # def search_com(self):
     #     decod = {}
@@ -103,7 +106,7 @@ class DemandDeposit:
     #     return decod, file
 
     def values(self):
-        self.tokenized = self.tokenize()
+        # self.tokenized = self.tokenize()
         values = [x for x in self.dict_demand.values()]
         lista ={}
         for commission in values:
