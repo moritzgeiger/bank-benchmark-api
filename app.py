@@ -102,6 +102,7 @@ def get_stats():
     print('get_stats was called')
     requirements = [
         'bp_pdf_url',
+        'bp_bank_id',
         'cloud_merged_url',
         'products',
         'url',
@@ -126,12 +127,11 @@ def get_stats():
                 bank = pagefinder.find_page()
                 # forwarding the bank to the scraping job
                 demand_deposit = DemandDeposit(bank).output()
-                print('finished job for demand deposits and injecting results in dict')
-                banks[i]= {}
-                banks[i]['products']= {}
+                banks[i] = {'products':{}}
                 banks[i]['products']['demand_deposit'] = demand_deposit
-                print(f'demand deposit dictionary {demand_deposit}')
-                # TODO pedro housing appending
+                print(
+                    f'finished job for demand deposits and injecting results in response: {demand_deposit}'
+                )  # TODO pedro housing appending
                 # housing = Housing(val).get
                 # banks[i]['products']['housing'] = housing
 
@@ -159,7 +159,7 @@ def get_stats():
             'status':
             'error',
             'message':
-            f'one of these required keys were not passed {requirements}'
+            f'one of these required keys were not passed: {requirements}'
         })
 
 
@@ -179,6 +179,7 @@ def retrieve_pdfs():
             return banks
 
         except Exception as e:
+            print(f'{ident} is not available on server. Error: {e}')
             return jsonify({'status':'error', 'message': f'sourcing job not finished or initialized or ident: {ident} is not available. first call /merge_pdfs and wait for backgroundjob to finish. Error msg: {e}'})
 
     else:
