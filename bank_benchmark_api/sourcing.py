@@ -158,7 +158,7 @@ class PdfSourcing:
                         print(f'final list of pdfs added: {vals.get("list_pdfs")}')
                     else:
                         raise Exception(f'could not reach page: {price_page}, status code: {r.status_code}')
-
+#
                 except Exception as e:
                     print(
                         f'coud not reach url with requests: {price_page}\n trying Selenium now...'
