@@ -53,7 +53,7 @@ class PageFinder:
             text = page.extract_text().lower()
             for product, term in pt_terms_re.items():
                 if re.search(term, text):
-                    pagenr = page.page_number
+                    pagenr = int(page.page_number) -1
                     print(f'found related terms on page {pagenr} for {product}')
                     products[product]['pages'].append(pagenr)
 

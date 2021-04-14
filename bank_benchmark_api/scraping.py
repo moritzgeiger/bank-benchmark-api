@@ -17,7 +17,7 @@ from io import StringIO, BytesIO
 #            'withdraw':['Levantamento de numerário', 'Levantamento de numerário ao balcão', 'Comissão de Levantamento',
 #                       'Levantamento de Numerário ao Balcão', 'Levantamento de Numerário ao Balcão'],
 #            'online_service':['Adesão ao serviço de banca à distância', 'Adesão ao serviço online'],
-#             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)'
+#             'cash_deposit':['Depósito de moedas metálicas', 'Depósito de moedas', ' Depósito em moeda metálica (>= 100 moedas)',
 #                                    'Depósito de moedas ao balcão', 'Depósito de dinheiro ao balcão',
 #                                   'Depósito em moeda metálica (>= 100 moedas)' ],
 #             'change_holder':['Alteração de titulares', 'Alteração de titularidade', 'Comissão de Alteração de Titularidade',
@@ -46,17 +46,17 @@ from io import StringIO, BytesIO
 # class DemandDeposit:
 #     def __init__(self, link,page, id_bank):
 #         self.link = link
-#         self.page = page
+#         self.page_demand = page
 #         self.id_bank = id_bank
+#         self.dict_demand = com_dict
 class DemandDeposit:
     def __init__(self,dictionary):
-        self.dict_demand = dictionary['products']['demand_deposit']
-        self.page_demand = self.dict_demand['pages']
+        self.dict_demand = dictionary['products']['demand_deposit']['commissions']
+        self.page_demand = dictionary['products']['demand_deposit']['pages']
         self.link = dictionary['bp_pdf_url']
         self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
-        print(f'open link: {self.link}')
         remote = urlopen(Request(self.link)).read()
         memory = BytesIO(remote)
         return memory
@@ -64,9 +64,6 @@ class DemandDeposit:
 
     def getting_text(self):
         file = pdfplumber.open(self.get_pdf())
-        print('extract pdf content to text...')
-        # compiling pages of pdf if more are available, separating them by a NEXT identifier
-        # replacing 'idento' / 'free' fees with 0,00
         if len(self.page_demand) > 1 :
             joined_text = []
             for el in self.page_demand:
@@ -86,9 +83,9 @@ class DemandDeposit:
             text = re.sub('--', str(np.nan), text)
             return text
 
+
     def tokenize(self):
         text = self.getting_text()
-        print('tokenize text...')
         if len(nltk.sent_tokenize(text)) < 15:
             text = text.replace('\n','. ')
             # text = len_sentences(text)
@@ -99,6 +96,7 @@ class DemandDeposit:
         text = nltk.sent_tokenize(text)
         return text
 
+
     # def search_com(self):
     #     decod = {}
     #     if self.x not in commission:
@@ -108,13 +106,13 @@ class DemandDeposit:
     #     return decod, file
 
     def values(self):
-        file = self.tokenize()
-        print('find and compile all sentences with money values in them...')
+        tokenized = self.tokenize()
         values = [x for x in self.dict_demand.values()]
+        print(values)
         lista ={}
         for commission in values:
             for value in commission:
-                for ind,sentence in enumerate(file):
+                for ind,sentence in enumerate(tokenized):
                     if value in sentence:
                         if '[0-9]{1-2},[0-9]{2}' in sentence:
                             if value in lista:
@@ -123,24 +121,26 @@ class DemandDeposit:
                                 lista[value]= [sentence]
                         else:
                             if value in lista:
-                                lista[value].append(' '.join([sentence,file[ind+1]]))
+                                lista[value].append(' '.join([sentence, tokenized[ind+1]]))
                             else:
-                                lista[value]= [' '.join([sentence,file[ind+1]])]
+                                lista[value]= [' '.join([sentence,tokenized[ind+1]])]
+
         if lista == {}:
-            return {'error':'wrong page/s provided'}
+            return 'not the right page'
+        # print(lista)
         return lista
 
     def n_account(self):
         accounts = []
         finals = []
+        tokenized = self.tokenize()
         text = self.getting_text()
-        print('assign account names to sentences...')
         if len(nltk.sent_tokenize(text)) < 15 :
-            for sentence in self.tokenize():
+            for sentence in tokenized:
                 if 'Conta' in sentence:
                     finals.append(sentence)
             return finals
-        for sentence in self.tokenize():
+        for sentence in tokenized:
             contas = re.split('Conta',sentence)
             accounts.append(contas)
         for account in accounts:
@@ -196,6 +196,7 @@ class DemandDeposit:
             for value in lista:
                 for inx,sentence in enumerate(complete_text):
                     if value in sentence:
+
                         if value in indexes_value:
                             indexes_value[value].append(inx)
                         else:
@@ -207,7 +208,6 @@ class DemandDeposit:
         values = self.indexes()[1]
         names = self.indexes()[0]
         text = self.tokenize()
-        print('building sentence-value pairs')
         for conta,idx in names.items():
             idx = idx[0]
             closer = 0
@@ -264,7 +264,7 @@ class DemandDeposit:
             for name in abanca_last:
                 inx = accounting.find(name) - len(accounting)-1
                 new_text = accounting[inx:]
-                #     print(new_text, 'AAAAAAAAAAAAAAA')
+            #     print(new_text, 'AAAAAAAAAAAAAAA')
                 value = re.search(r'(\d{1,2},\d{2})',new_text)
                 if value:
                     found = value.group()
@@ -316,8 +316,7 @@ class DemandDeposit:
     def output(self):
         output = {}
         output['subproducts'] = self.demand_depos()
-        output['n_subproducts'] = self.accounts_offer()
+        output['n_subproducts']= self.accounts_offer()
         # output['house_credit'] = {}
         # output['term_depos'] = {}
-
         return output
