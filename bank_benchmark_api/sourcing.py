@@ -13,7 +13,7 @@ import json
 from datetime import date
 import sys
 from selenium import webdriver
-from seleniumrequests import Firefox, PhantomJS
+from seleniumrequests import Firefox
 import time
 import ssl
 
