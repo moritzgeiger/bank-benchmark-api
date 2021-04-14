@@ -44,17 +44,22 @@ com_dict = {'statement':['Emissão de extrato', 'Extrato Integrado', 'Extrato Me
 
 
 class DemandDeposit:
-    def __init__(self, link,page, id_bank):
+    def __init__(self, link, page):
         self.link = link
         self.page_demand = page
-        self.id_bank = id_bank
-        self.dict_demand = com_dict
+#         self.id_bank = id_bank
+#         self.dict_demand = com_dict
 # class DemandDeposit:
 #     def __init__(self,dictionary):
 #         self.dict_demand = dictionary['products']['demand_deposit']
 #         self.page_demand = dictionary['products']['pages']
 #         self.link = dictionary['bp_pdf_url']
 #         self.id_bank = dictionary['bp_bank_id']
+    def is_avaiable(self):
+        if self.page_demand == None:
+            print(f'This main product is not avaiable for the following bank: {self.link}')
+        else:
+            return self
 
     def get_pdf(self):
         remote = urlopen(Request(self.link)).read()
