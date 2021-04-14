@@ -17,8 +17,7 @@ from datetime import datetime
 
 # setting global gcloud specs
 load_dotenv(find_dotenv())
-SECRET_KEY = os.environ.get("SECRET_KEY")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+GOOGLE_APPLICATION_CREDENTIALS = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
 cloud = 'https://storage.cloud.google.com/'
 bucket_name = "bank_price_pdfs"
@@ -68,7 +67,7 @@ class PdfUploader:
         blob = bucket.blob(file_name_uploaded)
 
         # init upload => timeout needs to be high for big files
-        blob.upload_from_string(source_file_bytes, content_type='application/pdf', timeout = 300.0)
+        blob.upload_from_string(source_file_bytes, content_type='application/pdf', timeout = 500.0)
 
         print(f"file uploaded as {file_name_uploaded}.")
         return blob.public_url

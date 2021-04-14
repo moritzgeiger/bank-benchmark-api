@@ -30,31 +30,31 @@ class PdfSourcing:
             headers = {'Accept-Language': 'pt-PT'}
             try:
                 r = requests.get(url, headers=headers)
+
+                soup = BeautifulSoup(r.content, 'html.parser')
+                if r.status_code == 200:
+                    # going through every link on the page to see if 'precarios' is in the link
+                    for link in soup.find_all('a', href=True):
+                        url_prices = str(link.get('href').lower().strip())
+                        lower = str(link.string).lower().strip()
+                        title = str(link.get('title')).strip().lower()
+                        searchstring = ' '.join([url_prices, lower, title])
+                        if any([x in searchstring for x in search]):
+                            print(f'found terms of {search} in string {searchstring}')
+                            # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
+                            # adding findings to bank dictionary
+                            vals["price_page"] = quote(urljoin(url, url_prices),
+                                                      safe=(":/?"))
+                            print(
+                                f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/?"))}'
+                            )
+                else:
+                    print(f'could not reach page: {url}, status code: {r.status_code}')
+                    vals["price_page"] = {
+                        'error': f'provided url not reachable: {url}'
+                    }
             except Exception as e:
                 print(f'coud not reach url: {url}, error: {e}')
-
-            soup = BeautifulSoup(r.content, 'html.parser')
-            if r.status_code == 200:
-                # going through every link on the page to see if 'precarios' is in the link
-                for link in soup.find_all('a', href=True):
-                    url_prices = str(link.get('href').lower().strip())
-                    lower = str(link.string).lower().strip()
-                    title = str(link.get('title')).strip().lower()
-                    searchstring = ' '.join([url_prices, lower, title])
-                    if any([x in searchstring for x in search]):
-                        print(f'found terms of {search} in string {searchstring}')
-                        # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
-                        # adding findings to bank dictionary
-                        vals["price_page"] = quote(urljoin(url, url_prices),
-                                                   safe=(":/?"))
-                        print(
-                            f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/?"))}'
-                        )
-            else:
-                print(f'could not reach page: {url}, status code: {r.status_code}')
-                vals["price_page"] = {
-                    'error': f'provided url not reachable: {url}'
-                }
 
         return self.bank_dict
 
@@ -71,6 +71,7 @@ class PdfSourcing:
             r = requests.get(bp_url)
             if r.status_code == 200:
                 vals['bp_pdf_url'] = bp_url
+                print(f'found correct link: {bp_url}')
             else:
                 # some files of bp follow a slightly different structure with _PRE_0.pdf or _PRE_1.pdf as suffixes
                 print(f'Could not find file on {bp_url}. \ntrying other links.')
@@ -85,7 +86,9 @@ class PdfSourcing:
                 else:
                     ### what happens if the loop goes all the way through
                     print(f'Could not find file on {bp_url}. \nno bp_pdf_url provided for id: {bank_id}.')
-                    vals['bp_pdf_url'] = None
+                    vals['bp_pdf_url'] = {
+                        'error': f'no valid bp_pdf_url provided for id: {bank_id}.'
+                    }
 
         return self.bank_dict
 
@@ -110,7 +113,7 @@ class PdfSourcing:
                     print(f'looking for pdfs in: {price_page}')
                     for link in soup.find_all('a', href=True):
                         href = link.get('href')
-                        if '.pdf' in href:
+                        if any([x in href for x in ['.pdf', '.ashx']]):
                             # some pdf links are absolute links, some relative
                             pdf = quote(urljoin(vals.get('url'), href), safe = (":/?"))
                             vals['list_pdfs']['urls'].append(f'{pdf}')
