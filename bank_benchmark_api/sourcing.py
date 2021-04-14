@@ -15,6 +15,7 @@ import sys
 from selenium import webdriver
 from seleniumrequests import Firefox, PhantomJS
 import time
+import ssl
 
 
 

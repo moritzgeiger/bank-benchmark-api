@@ -13,6 +13,7 @@ import json
 from google.cloud import storage
 from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
+import ssl
 
 
 # setting global gcloud specs
@@ -32,7 +33,8 @@ class PdfUploader:
     def file_decrypt(self, pdf_url, filename="tempe.pdf"):
         """Accepts pdf urls. Returns PyPDF2 FileReader Objects"""
         print(f'file_decrypt was called for {pdf_url}')
-        response = requests.get(pdf_url)
+        ### banco bai is very needy. need to declare verify=False
+        response = requests.get(pdf_url, verify=False)
         if response.status_code == 200:
             temp = open(filename, "wb")
             temp.write(response.content)
@@ -83,7 +85,8 @@ class PdfUploader:
             # trying to remotely parse the pdfs all pdf pages
             for pdf_url in web_pdfs:
                 try:
-                    remote = urlopen(Request(pdf_url)).read()
+                    # gcontext = ssl.SSLContext()
+                    remote = requests.get(pdf_url, verify=False).content
                     memory = BytesIO(remote)
                     pdf_file = PdfFileReader(memory)
                     # check file encryption - if yes, call decrypter
