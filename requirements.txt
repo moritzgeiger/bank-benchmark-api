@@ -13,6 +13,7 @@ pdfplumber
 selenium-requests
 selenium
 lxml
+statistics
 
 # pdf handling
 PyPDF2
