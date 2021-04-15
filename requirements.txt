@@ -12,7 +12,7 @@ nltk
 pdfplumber
 selenium-requests
 selenium
-certifi
+lxml
 
 # pdf handling
 PyPDF2
