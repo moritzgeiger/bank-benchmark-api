@@ -166,26 +166,92 @@ class HouseCredit:
     #     self.page_house = dictionary['products']['house_credit']['pages']
     #     self.id_bank = dictionary['bp_bank_id']
     #     self.house_dict = dictionary['products']['house_credit']['commissions']
-    def __init__(self,link,page):
+    def __init__( self,link,page, id_bank):
         self.link = link
         self.page_house = page
-        # self.id_bank = dictionary['bp_bank_id']
+        self.id_bank = id_bank
         self.house_dict = house_credit_com
 
 
-#    def total(self):
-#        file = get_pdf(self.link)
-#        result={}
-#        for page in self.page_house:
-#            prices_df=get_prices(file, page, self.house_dict)
-#            result.update({f'page {page}': clean_prices(prices_df)})
-#        final = {}
-#        for page in result.values():
-#            for k in page.keys():
-#        #         print(k)
-#                if 'Nota' not in k:
-#                    final[k] = page[k]
-#        return final
+    def get_pdf(self):
+        print(f'opening url: {self.link}...')
+        remote = urlopen(Request(self.link)).read()
+        memory = BytesIO(remote)
+        return memory
+
+
+    def getting_text(self, file):
+        file = pdfplumber.open(file)
+        print('extract pdf content to text...')
+        print()
+        if len(self.page_house) > 1 :
+            joined_text = []
+            for el in self.page_house:
+                page = file.pages[el]
+                text = page.extract_text()
+                joined_text.append(text)
+            text ='             NEXT          '.join(joined_text)
+            text = text.replace('Isento', '0,00')
+            text = text.replace('n/a', '0,00')
+            text = re.sub('--', str(np.nan), text)
+            return text
+        else:
+            page = file.pages[self.page_house[0]]
+            text = page.extract_text()
+            text = text.replace('Isento', '0,00')
+            text = text.replace('n/a', '0,00')
+            text = re.sub('--', str(np.nan), text)
+            return text
+
+
+    def tokenize(self, text):
+        print('tokenize text...')
+        if len(nltk.sent_tokenize(text)) < 15:
+            text = text.replace('\n','. ')
+            # text = len_sentences(text)
+            text = nltk.sent_tokenize(text)
+            return text
+        text = text.replace('\n',' ')
+        # text = len_sentences(text)
+        text = nltk.sent_tokenize(text)
+        return text
+
+    def n_account(self, text,tokenized):
+        finals = []
+        for sentence in tokenized:
+            if 'Crédito' in sentence or 'Habitação' in sentence:
+                finals.append(sentence)
+
+        return finals
+
+    def names(self, text, tokenized):
+        values = self.n_account(text,tokenized)
+        regular = []
+        if self.id_bank == '0170'  or self.id_bank== '0193':
+            return values
+        elif self.id_bank == '0079':
+            for value in values:
+                product = 'Mútuo a obras e construções (Fora de comercialização)'
+                search = 'Comissão'
+                search2 = 'Crédito / Particulares'
+                search3 ='Aplicável'
+                search4 = 'Nota 1  CréditoHabitação'
+                search5 = 'Incluem-se'
+                value = value.replace('Crédito à habitação e outros créditos hipotecários (cont.)','')
+                value = value.replace('Crédito à habitação e outros créditos hipotecários','')
+                value = value.replace('(cont.)','')
+                value =value.replace('Comissões Acresce  Outras  Euros  Valor  Em %   Imposto condições (Mín/Máx) Anual', '')
+                value = value.replace('Outros Créditos Hipotecários', '')
+                if search not in value and search2 not in value and search3 not in value and search4 not in value and search5 not in value:
+                    if len(value) > 5:
+                        regular.append(value)
+                        regular += [product]
+        elif self.id_bank == '0269':
+            pass
+        return regular
+
+    def n_subproducts(self,text,tokenize):
+        return len(self.names(text,tokenize))
 
     def scrape_all(self):
         house_cred={}
@@ -197,5 +263,25 @@ class HouseCredit:
         else:
             result='No housing credit product found in this bank'
         return result
+
+    def association(self,tokenized,text):
+        new_dict = {}
+        function = self.scrape_all()
+        names = self.names(text,tokenized)
+        for v in function.values():
+            for name in names:
+                print(f'parse product: {name}, fee {v}')
+                new_dict[name]=v
+        return new_dict
+
+    def final(self):
+        print('output was called')
+        file = self.get_pdf()
+        text = self.getting_text(file)
+        tokenized = self.tokenize(text)
+        output = {}
+        output['subproducts'] = self.association(tokenized, text)
+        output['n_subproducts']= self.n_subproducts(tokenized,text)
+        return output
 
 
