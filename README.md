@@ -4,7 +4,6 @@ BASE URL: https://bank-price-api.herokuapp.com
 
 post 'banks/:id/merged_pdfs', to: 'banks#merged_pdfs'
 post 'banks/:id/bank_stats', to:  'banks#bank_stats'
-```
 
 ---------------------------------
 
