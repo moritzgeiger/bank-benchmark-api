@@ -13,12 +13,13 @@ import json
 from datetime import date
 import sys
 from selenium import webdriver
-from seleniumrequests import Firefox
+# from seleniumrequests import Firefox
 import time
 import ssl
 
 
-FIREFOX_BIN = os.environ.get("FIREFOX_BIN")
+GOOGLE_CHROME_PATH = os.environ.get("GOOGLE_CHROME_PATH")
+CHROMEDRIVER_PATH = os.environ.get("CHROMEDRIVER_PATH")
 ## set the global search terms to look for on a banks website. don't choose to many words as it might catch other / irelevant links.
 search_terms = ['preçário', 'pricelist', 'precario']
 
@@ -63,7 +64,14 @@ class PdfSourcing:
                 ## banco bai is too fine to let me on their page, therefore I need selenium
                 print(f'coud not reach url with requests: {url}\n trying Selenium now...')
                 try:
-                    driver = webdriver.Firefox(FIREFOX_BIN)
+                    chrome_options = webdriver.ChromeOptions()
+                    chrome_options.add_argument('--disable-gpu')
+                    chrome_options.add_argument('--no-sandbox')
+                    chrome_options.add_argument("--headless")
+                    chrome_options.binary_location = GOOGLE_CHROME_PATH
+                    driver = webdriver.Chrome(
+                        execution_path=CHROMEDRIVER_PATH,
+                        chrome_options=chrome_options)
                     driver.implicitly_wait(20)
                     driver.get(url)
                     time.sleep(15)
@@ -174,7 +182,14 @@ class PdfSourcing:
                         f'coud not reach url with requests: {price_page}\n trying Selenium now...'
                     )
                     try:
-                        driver = webdriver.Firefox(FIREFOX_BIN)
+                        chrome_options = webdriver.ChromeOptions()
+                        chrome_options.add_argument('--disable-gpu')
+                        chrome_options.add_argument('--no-sandbox')
+                        chrome_options.add_argument("--headless")
+                        chrome_options.binary_location = GOOGLE_CHROME_PATH
+                        driver = webdriver.Chrome(
+                        execution_path=CHROMEDRIVER_PATH,
+                        chrome_options=chrome_options)
                         driver.implicitly_wait(20)
                         driver.get(price_page)
                         time.sleep(15)
