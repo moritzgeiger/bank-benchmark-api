@@ -46,10 +46,16 @@ class PageFinder:
         for product, val in products.items():
             val['pages'] = []
         # avoiding loading time => looking for all product terms on each page instead of one product per loop
+        pre = r'[\d.][\d.] {0,1}'
+        sub = r'[^a-zA-Z0-9\n\.]|\sde\s'
+        add = r'[.\s\S]*particulares.{,5}p[áa]g'
         pt_terms = {key:val.get('portuguese').lower() for (key, val) in products.items()}
-        pt_terms_re = {key:re.sub(r'[^a-zA-Z0-9 \n\.]|\sde\s', '.{,5}', val)+'.+particulares.{,5}p[áa]g' for (key,val) in pt_terms.items()}
+        pt_terms_re = {key:pre+re.sub(sub, r'.{,50}', val)+add for (key,val) in pt_terms.items()}
         for page in pdf.pages:
-            text = page.extract_text().lower()
+            # removing newlines
+            text = page.extract_text().lower().replace('\n', ' ')
+            # stripping whitespaces
+            text = re.sub(r'\s+', ' ', text)
             for product, term in pt_terms_re.items():
                 if re.search(term, text):
                     pagenr = int(page.page_number) -1
