@@ -58,11 +58,11 @@ class PdfSourcing:
                                 f'added link to id {bank_id}: {quote(urljoin(url,url_prices), safe=(":/?"))}'
                             )
                 else:
-                    raise Exception(f'could not reach page: {url}, status code: {r.status_code}')
+                    raise Exception(f'ForbiddenError')
 
-            except requests.exceptions.SSLError:
+            except Exception as e:
                 ## banco bai is too fine to let me on their page, therefore I need selenium
-                print(f'coud not reach url with requests: {url}\n trying Selenium now...')
+                print(f'coud not reach url with requests: {url}, error {e}\n trying Selenium now...')
                 try:
                     chrome_options = webdriver.ChromeOptions()
                     chrome_options.add_argument('--disable-gpu')
@@ -101,7 +101,14 @@ class PdfSourcing:
                         'error': f'provided url not reachable: {url}, error: {e}'
                     }
                     break
-
+            # except Exception as e:
+            #     print(
+            #             f'neither requests nor selenium could reach page {url}\n Error: {e}'
+            #         )
+            #     vals["price_page"] = {
+            #             'error': f'provided url not reachable: {url}, error: {e}'
+            #         }
+                ## just to make sure, the field will not be passed on empty
                 if vals["price_page"] == '':
                     print(f'SeleniumTimeout could not find any matching links on page')
                     vals["price_page"] = {
