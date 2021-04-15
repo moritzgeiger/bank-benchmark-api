@@ -129,9 +129,9 @@ class HouseCredit:
 
     def __init__(self,dictionary):
         self.link = dictionary['bp_pdf_url']
-        self.page_house = dictionary['products']['house_credit']['pages']
+        self.page_house = dictionary['products']['housing_credit']['pages']
         self.id_bank = dictionary['bp_bank_id']
-        self.house_dict = dictionary['products']['house_credit']['commissions']
+        self.house_dict = dictionary['products']['housing_credit']['commissions']
     # def __init__( self,link,page, id_bank):
     #     self.link = link
     #     self.page_house = page
@@ -230,20 +230,22 @@ class HouseCredit:
                 house_cred.update({f'page {page}': clean_prices(df)})
             result=house_cred
         else:
-            result='No housing credit product found in this bank'
+            result = {'error':'No housing credit product found in this bank'}
         return result
 
     def association(self,tokenized,text):
         new_dict = {}
         function = self.scrape_all()
         names = self.names(text,tokenized)
-        for v in function.values():
+        for k, v in function.items():
             for name in names:
+                # new_dict[name] = ''
                 print(f'parse product: {name}, fee {v}')
-                new_dict[name]=v
+                new_dict[f'{name}_{k}'] = v
+
         return new_dict
 
-    def final(self):
+    def output(self):
         print('output was called')
         file = self.get_pdf()
         text = self.getting_text(file)
@@ -251,8 +253,9 @@ class HouseCredit:
         output = {}
         output['subproducts'] = self.association(tokenized, text)
         output['n_subproducts']= self.n_subproducts(tokenized,text)
+        print(f'final output ito be injected: {output}')
         return output
-```
+
 
 
 

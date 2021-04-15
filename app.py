@@ -133,7 +133,7 @@ def get_stats():
                 print(
                     f'finished job for demand deposits and injecting results in response: {demand_deposit}'
                 )
-                housing_credit = HouseCredit(bank).scrape_all()
+                housing_credit = HouseCredit(bank).output()
                 banks[i]['products']['housing_credit'] = housing_credit
                 print(
                     f'finished job for housing credits and injecting results in response: {housing_credit}'
