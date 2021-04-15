@@ -57,6 +57,9 @@ def home():
 @app.route('/merge_pdfs', methods=['POST'])
 def merge_pdfs():
     print('merge_pdfs was called')
+    ident = random.randint(100,999)
+    print(f'job ident: {ident}')
+
     requirements = ['url', 'bp_bank_id', 'last_updated']
     validator = []
     r = request.json
@@ -75,7 +78,6 @@ def merge_pdfs():
     if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick response
         # setting unique identifier for the requested job. will be needed later for file pickup
-        ident = random.randint(100,999)
         def start_sourcing_and_merging(r):
             # runs all the sourcing jobs and prepares for the merging job
             sourcing = PdfSourcing(r)
@@ -107,6 +109,8 @@ def merge_pdfs():
 @app.route('/get_stats', methods=['POST'])
 def get_stats():
     print('get_stats was called')
+    ident = random.randint(1000, 9999)
+    print(f'job ident: {ident}')
     requirements = [
         'bp_pdf_url',
         'bp_bank_id',
@@ -132,7 +136,6 @@ def get_stats():
 
     if all(validator):
         # moving sourcing tasks to the background so that rails app has a quick response
-        ident = random.randint(1000, 9999)
 
         def start_pagefinder_pricescraping(r):
             # runs all the page finding jobs and scraping prices for each requested bank
