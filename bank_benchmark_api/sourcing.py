@@ -62,28 +62,38 @@ class PdfSourcing:
             except requests.exceptions.SSLError:
                 ## banco bai is too fine to let me on their page, therefore I need selenium
                 print(f'coud not reach url with requests: {url}\n trying Selenium now...')
-                driver = webdriver.Firefox(FIREFOX_BIN)
-                driver.implicitly_wait(20)
-                driver.get(url)
-                time.sleep(15)
-                body = driver.page_source
-                soup = BeautifulSoup(driver.page_source,  features="lxml")
-                for link in soup.find_all('a', href=True):
-                    url_prices = str(link.get('href').lower().strip())
-                    lower = str(link.string).lower().strip()
-                    title = str(link.get('title')).strip().lower()
-                    searchstring = ' '.join([url_prices, lower, title])
-                    if any([x in searchstring for x in search]):
-                        print(
-                            f'found terms of {search} in string {searchstring}'
-                        )
-                        # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
-                        # adding findings to bank dictionary
-                        vals["price_page"] = quote(urljoin(url, url_prices),
-                                                   safe=(":/?"))
-                        print(
-                            f'added link to id {bank_id} with Selenium: {quote(urljoin(url,url_prices), safe=(":/?"))}'
-                        )
+                try:
+                    driver = webdriver.Firefox(FIREFOX_BIN)
+                    driver.implicitly_wait(20)
+                    driver.get(url)
+                    time.sleep(15)
+                    body = driver.page_source
+                    soup = BeautifulSoup(driver.page_source,  features="lxml")
+                    for link in soup.find_all('a', href=True):
+                        url_prices = str(link.get('href').lower().strip())
+                        lower = str(link.string).lower().strip()
+                        title = str(link.get('title')).strip().lower()
+                        searchstring = ' '.join([url_prices, lower, title])
+                        if any([x in searchstring for x in search]):
+                            print(
+                                f'found terms of {search} in string {searchstring}'
+                            )
+                            # some links in the source code are relative, some are absolute -- using urljoin - Possible errors: special chars in URL
+                            # adding findings to bank dictionary
+                            vals["price_page"] = quote(urljoin(url, url_prices),
+                                                      safe=(":/?"))
+                            print(
+                                f'added link to id {bank_id} with Selenium: {quote(urljoin(url,url_prices), safe=(":/?"))}'
+                            )
+                except Exception as e:
+                    print(
+                        f'neither requests nor selenium could reach page {url}\n Error: {e}'
+                    )
+                    vals["price_page"] = {
+                        'error': f'provided url not reachable: {url}, error: {e}'
+                    }
+                    break
+
                 if vals["price_page"] == '':
                     print(f'SeleniumTimeout could not find any matching links on page')
                     vals["price_page"] = {
