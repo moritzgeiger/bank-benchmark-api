@@ -290,13 +290,34 @@ class DemandDeposit:
         return finals
 
 
+    def beautiful(self, tokenize,text):
+        change_name = {'statement':'Monthly statement',
+                'documents_copy':'Document copy',
+               'acc_manteinance':'Account maintenance',
+               'withdraw':'Cash withdrawal',
+               'online_service':'Online banking',
+               'cash_deposit':'Cash deposit',
+               'change_holder':'Account owner change',
+                'movement_consultation':'Consultation',
+              'balance_inquiry':'Balance inquiry'}
+        newone = {}
+        beautiful = {}
+        demand_depos = self.demand_depos(tokenize, text)
+        for account in demand_depos:
+            for commission,value in demand_depos[account].items():
+                for k,b in change_name.items():
+                    if commission == k:
+                        beautiful[b]=value
+                newone[account]=beautiful
+        return newone
+
     def output(self):
         print('output was called')
         file = self.get_pdf()
         text = self.getting_text(file)
         tokenized = self.tokenize(text)
         output = {}
-        output['subproducts'] = self.demand_depos(tokenized, text)
+        output['subproducts'] = self.beautiful(tokenized, text)
         specific_bank = self.specific_bank(tokenized, text)
         output['n_subproducts']= self.accounts_offer(specific_bank)
         # output['house_credit'] = {}
