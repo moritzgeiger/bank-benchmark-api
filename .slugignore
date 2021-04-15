@@ -9,3 +9,5 @@ raw_data/
 pwc-credentials-google.json
 bank_benchmark_api/data/banks.json
 notebooks/
+geckodriver.log
+main.css
