@@ -63,6 +63,13 @@ class PageFinder:
                     products[product]['pages'].append(pagenr)
             print(f'continue search in page: {page.page_number}')
 
+        # doublecheck not to miss any page
+        for product, term in pt_terms_re.items():
+            pr = products[product]['pages']
+            products[product]['pages'] = list(range(min(pr), max(pr) + 1))
+
+        print(f'pass on this products table for further scraping: {products}')
+
         # injecting the updated/enriched products dict in the products
         self.single_bank['products'] = products
 
