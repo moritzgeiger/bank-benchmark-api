@@ -61,8 +61,10 @@ class PageFinder:
             text = page.extract_text().lower().replace('\n', ' ')
             # stripping whitespaces
             text = re.sub(r'\s+', ' ', text)
-            page = page.page_number
-            full_pdf[page] = text
+            pagenr = page.page_number
+            full_pdf[pagenr] = text
+            page.flush_cache()
+            print('flushed page cache')
 
         for page, string in full_pdf.items():
             for product, term in pt_terms_re.items():

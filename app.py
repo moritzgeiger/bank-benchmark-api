@@ -140,19 +140,23 @@ def get_stats():
             for i, val in r.items():
                 pagefinder = PageFinder(val)
                 bank = pagefinder.find_page()
-                # forwarding the bank to the scraping job
-                demand_deposit = DemandDeposit(bank).output()
+                # populate banks dictionary
                 banks[i] = {'products':{}}
-                banks[i]['products']['demand_deposit'] = demand_deposit
-                print(
-                    f'finished job for demand deposits and injecting results in response: {demand_deposit}'
-                )
-                housing_credit = HouseCredit(bank).output()
-                banks[i]['products']['housing_credit'] = housing_credit
-                print(
-                    f'finished job for housing credits and injecting results in response: {housing_credit}'
-                )
+                # forwarding the bank to the scraping job(s)
+                if 'demand_deposit' in bank.get('products'):
+                    demand_deposit = DemandDeposit(bank).output()
+                    banks[i] = {'products':{}}
 
+                    banks[i]['products']['demand_deposit'] = demand_deposit
+                    print(
+                        f'finished job for demand deposits and injecting results in response: {demand_deposit}'
+                    )
+                if 'housing_credit' in bank.get('products'):
+                    housing_credit = HouseCredit(bank).output()
+                    banks[i]['products']['housing_credit'] = housing_credit
+                    print(
+                        f'finished job for housing credits and injecting results in response: {housing_credit}'
+                    )
 
             path = f'bank_benchmark_api/data/banks_{ident}.json'
             with open(path, 'w') as file:
