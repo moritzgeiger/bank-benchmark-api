@@ -109,11 +109,13 @@ class PdfSourcing:
             #     vals["price_page"] = {
             #             'error': f'provided url not reachable: {url}, error: {e}'
             #         }
-                ## just to make sure, the field will not be passed on empty
+            ## just to make sure, the field will not be passed on empty
                 if vals["price_page"] == '':
-                    print(f'SeleniumTimeout could not find any matching links on page')
+                    print(
+                        f'neither requests nor selenium could reach page {url}'
+                    )
                     vals["price_page"] = {
-                        'error': f'provided url not reachable: {url}, error: '
+                        'error': f'provided url not reachable: {url}'
                     }
                     continue
 
