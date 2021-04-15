@@ -1,5 +1,3 @@
-
-```
 import pandas as pd
 import numpy as np
 import pdfplumber
@@ -18,7 +16,7 @@ def get_df(pdf,page, dictionary):
     prod_df=pd.DataFrame(doc.pages[page].extract_table())
 
     prices_col=find_prices(prod_df)
-    index_col=find_index(prod_df, house_credit_com)
+    index_col = find_index(prod_df, dictionary)
 
     prices_df=pd.DataFrame()
     prices_df['Commissions']=prod_df[index_col]
@@ -60,9 +58,9 @@ def clean_df(df):
 
 
 def get_pdf(link):
-        remote = urlopen(Request(link)).read()
-        memory = BytesIO(remote)
-        return memory
+    remote = urlopen(Request(link)).read()
+    memory = BytesIO(remote)
+    return memory
 
 
 def scrape_page(url, page, dictionary):
@@ -222,26 +220,27 @@ class HouseCredit:
     def n_subproducts(self,text,tokenize):
         return len(self.names(text,tokenize))
 
-    def scrape_all(self):
-        house_cred={}
-        if len(self.page_house)>0:
-            for page in self.page_house:
-                df=scrape_page(self.link, page, self.house_dict)
-                house_cred.update({f'page {page}': clean_prices(df)})
-            result=house_cred
-        else:
-            result = {'error':'No housing credit product found in this bank'}
-        return result
+    # def scrape_all(self):
+    #     house_cred={}
+    #     if len(self.page_house)>0:
+    #         for page in self.page_house:
+    #             df=scrape_page(self.link, page, self.house_dict)
+    #             house_cred.update({f'page {page}': clean_prices(df)})
+    #         result=house_cred
+    #     else:
+    #         result = {'error':'No housing credit product found in this bank'}
+    #     return result
 
     def association(self,tokenized,text):
         new_dict = {}
-        function = self.scrape_all()
+        function = scrape_all(self.link, self.page_house, self.house_dict)
         names = self.names(text,tokenized)
-        for k, v in function.items():
+        for v in function.values():
             for name in names:
                 # new_dict[name] = ''
+                name = re.sub(r'\s+', ' ', name)
                 print(f'parse product: {name}, fee {v}')
-                new_dict[f'{name}_{k}'] = v
+                new_dict[name] = v
 
         return new_dict
 
@@ -255,7 +254,3 @@ class HouseCredit:
         output['n_subproducts']= self.n_subproducts(tokenized,text)
         print(f'final output ito be injected: {output}')
         return output
-
-
-
-
