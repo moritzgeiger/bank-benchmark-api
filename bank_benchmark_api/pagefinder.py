@@ -63,7 +63,7 @@ class PageFinder:
                     products[product]['pages'].append(pagenr)
             print(f'continue search in page: {page.page_number}')
 
-        # doublecheck not to miss any page
+        # doublecheck not to miss any page // patching
         for product, term in pt_terms_re.items():
             pr = products[product]['pages']
             products[product]['pages'] = list(range(min(pr), max(pr) + 1))
