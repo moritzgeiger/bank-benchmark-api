@@ -89,6 +89,8 @@ class DemandDeposit:
         if lista == {}:
             return {'error': f'wrong page/s provided {self.page_demand}'}
         # print(lista)
+
+        print(f'lista job done. passing on lista: {lista}')
         return lista
 
     def n_account(self, tokenized, text):
@@ -109,6 +111,8 @@ class DemandDeposit:
             if len(account)>1:
                 account = ['Conta'+ x for x in account]
                 finals.append(account)
+
+        print(f'n_account job done. passing on finals: {finals}')
         return finals
 
     def names(self, tokenized, text):
@@ -137,6 +141,8 @@ class DemandDeposit:
             single = ' '.join(name.split(" ")[:2])
             if single not in lista:
                 lista.append(name)
+
+        print(f'names job done. passing on lista: {lista}')
         return lista
 
     def accounts_offer(self, specific_bank):
@@ -164,6 +170,7 @@ class DemandDeposit:
                             indexes_value[value].append(inx)
                         else:
                             indexes_value[value] = [inx]
+        print(f'indexes job done. passing on: names: {indexes_name}, \nvalues: {indexes_value}')
         return indexes_name, indexes_value
 
     def values_sentence(self, tokenized, text):
@@ -193,20 +200,23 @@ class DemandDeposit:
                                 found = price.group()
                                 types[commission]= text[found]
                 sentence_account[conta] = types
+
+        print(f'sentence_account job done. passing on: {sentence_account}')
         return sentence_account
 
     def complete_info(self, tokenized, text):
         sentence_account = self.values_sentence(tokenized, text)
-        sentence_account['General']={}
+        print(f'found these prices as raw data: {sentence_account}')
+        sentence_account['General'] = {}
         values_bank = self.values(tokenized)
-        commissions = [objects.keys() for k,objects in sentence_account.items()]
-        for k,sentences in values_bank.items():
+        commissions = [objects.keys() for k, objects in sentence_account.items()]
+        for k, sentences in values_bank.items():
             if k not in commissions:
                 sentence = sentences[0]
                 price = re.search(r'(\d{1,2},\d{2})',sentence)
                 if price:
                     found = price.group()
-                    sentence_account['General'][k]=found
+                    sentence_account['General'][k] = found
         return sentence_account
 
     def specific_bank(self, tokenized, text):
