@@ -73,8 +73,9 @@ class PdfSourcing:
                         executable_path=CHROMEDRIVER_PATH,
                         chrome_options=chrome_options)
                     driver.implicitly_wait(20)
+                    time.sleep(10)
                     driver.get(url)
-                    time.sleep(15)
+                    time.sleep(10)
                     body = driver.page_source
                     soup = BeautifulSoup(driver.page_source,  features="lxml")
                     for link in soup.find_all('a', href=True):
@@ -191,8 +192,9 @@ class PdfSourcing:
                             executable_path=CHROMEDRIVER_PATH,
                             chrome_options=chrome_options)
                         driver.implicitly_wait(20)
+                        time.sleep(10)
                         driver.get(price_page)
-                        time.sleep(15)
+                        time.sleep(10)
                         body = driver.page_source
                         soup = BeautifulSoup(driver.page_source, features="lxml")
                         print(f'looking for pdfs with selenium in: {price_page}')
