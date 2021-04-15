@@ -247,7 +247,10 @@ class HouseCredit:
                         regular.append(value)
                         regular += [product]
         elif self.id_bank == '0269':
-            pass
+            for i,sentence in enumerate(values):
+                if 'Crédito à habitação e outros créditos hipotecários' in sentence:
+                    regular.append(' '.join([sentence,values[i+1]]))
+
         return regular
 
     def n_subproducts(self,text,tokenize):
