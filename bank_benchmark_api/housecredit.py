@@ -191,8 +191,11 @@ class HouseCredit:
     def names(self, text, tokenized):
         values = self.n_account(text,tokenized)
         regular = []
-        if self.id_bank == '0170'  or self.id_bank== '0193':
-            return values
+        if self.id_bank == '0170':  #or self.id_bank== '0193':
+            for value in values:
+                if 'OPERAÇÕES DE CRÉDITO (PARTICULARES)' in value:
+                    regular.append(value)
+
         elif self.id_bank == '0079':
             for value in values:
                 product = 'Mútuo a obras e construções (Fora de comercialização)'
@@ -234,13 +237,14 @@ class HouseCredit:
     def association(self,tokenized,text):
         new_dict = {}
         function = scrape_all(self.link, self.page_house, self.house_dict)
+        print(f"/////////////// SCRAPE ALL /////////////////////\n {function} \n ///////////////////// END SCRAPE ALL /////////////////")
         names = self.names(text,tokenized)
-        for v in function.values():
+        for k, v in function.items():
             for name in names:
                 # new_dict[name] = ''
                 name = re.sub(r'\s+', ' ', name)
                 print(f'parse product: {name}, fee {v}')
-                new_dict[name] = v
+                new_dict[f'{name}_{k}'] = v
 
         return new_dict
 
