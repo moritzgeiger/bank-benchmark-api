@@ -18,7 +18,7 @@ import time
 import ssl
 
 
-FIREFOX_BIN = os.environ.get("FIREFOX_BIN")
+GECKODRIVER_PATH = os.environ.get("GECKODRIVER_PATH")
 ## set the global search terms to look for on a banks website. don't choose to many words as it might catch other / irelevant links.
 search_terms = ['preçário', 'pricelist', 'precario']
 
@@ -63,7 +63,8 @@ class PdfSourcing:
                 ## banco bai is too fine to let me on their page, therefore I need selenium
                 print(f'coud not reach url with requests: {url}\n trying Selenium now...')
                 try:
-                    driver = webdriver.Firefox(FIREFOX_BIN)
+                    driver = webdriver.Firefox(
+                        executable_path=GECKODRIVER_PATH)
                     driver.implicitly_wait(20)
                     driver.get(url)
                     time.sleep(15)
@@ -174,7 +175,8 @@ class PdfSourcing:
                         f'coud not reach url with requests: {price_page}\n trying Selenium now...'
                     )
                     try:
-                        driver = webdriver.Firefox(FIREFOX_BIN)
+                        driver = webdriver.Firefox(
+                            executable_path=GECKODRIVER_PATH)
                         driver.implicitly_wait(20)
                         driver.get(price_page)
                         time.sleep(15)
