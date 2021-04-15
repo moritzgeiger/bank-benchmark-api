@@ -123,6 +123,6 @@ class PdfUploader:
             values['list_pdfs']['cloud_merged_url'] = cloud_url
             print(f'updated banks dict with cloud link: {cloud_url}')
 
-        print(f'pdf_uploader done. Json ready to be sent to rails endpoint')
+        print(f'pdf_uploader done. Json ready to be picked up by rails app via /retievepdfs')
 
         return self.bank_dict

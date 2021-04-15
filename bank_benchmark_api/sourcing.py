@@ -18,7 +18,7 @@ import time
 import ssl
 
 
-
+FIREFOX_BIN = os.environ.get("FIREFOX_BIN")
 ## set the global search terms to look for on a banks website. don't choose to many words as it might catch other / irelevant links.
 search_terms = ['preçário', 'pricelist', 'precario']
 
@@ -62,7 +62,7 @@ class PdfSourcing:
             except requests.exceptions.SSLError:
                 ## banco bai is too fine to let me on their page, therefore I need selenium
                 print(f'coud not reach url with requests: {url}\n trying Selenium now...')
-                driver = webdriver.Firefox()
+                driver = webdriver.Firefox(FIREFOX_BIN)
                 driver.implicitly_wait(20)
                 driver.get(url)
                 time.sleep(15)
@@ -163,27 +163,34 @@ class PdfSourcing:
                     print(
                         f'coud not reach url with requests: {price_page}\n trying Selenium now...'
                     )
-                    driver = webdriver.Firefox()
-                    driver.implicitly_wait(20)
-                    driver.get(price_page)
-                    time.sleep(15)
-                    body = driver.page_source
-                    soup = BeautifulSoup(driver.page_source, features="lxml")
-                    print(f'looking for pdfs with selenium in: {price_page}')
-                    for link in soup.find_all('a', href=True):
-                        href = link.get('href')
-                        # some weirdos provide .ashx files not direct .pdfs
-                        if any([x in href for x in ['.pdf', '.ashx']]):
-                            # some pdf links are absolute links, some relative
-                            pdf = quote(urljoin(vals.get('url'), href), safe = (":/?"))
-                            vals['list_pdfs']['urls'].append(f'{pdf}')
-                            print(f'found and added pdf: {pdf}')
+                    try:
+                        driver = webdriver.Firefox(FIREFOX_BIN)
+                        driver.implicitly_wait(20)
+                        driver.get(price_page)
+                        time.sleep(15)
+                        body = driver.page_source
+                        soup = BeautifulSoup(driver.page_source, features="lxml")
+                        print(f'looking for pdfs with selenium in: {price_page}')
+                        for link in soup.find_all('a', href=True):
+                            href = link.get('href')
+                            # some weirdos provide .ashx files not direct .pdfs
+                            if any([x in href for x in ['.pdf', '.ashx']]):
+                                # some pdf links are absolute links, some relative
+                                pdf = quote(urljoin(vals.get('url'), href), safe = (":/?"))
+                                vals['list_pdfs']['urls'].append(f'{pdf}')
+                                print(f'found and added pdf: {pdf}')
 
-                    print(f'final list of pdfs added: {vals.get("list_pdfs")}')
+                        print(f'final list of pdfs added with selenium: {vals.get("list_pdfs")}')
+                    except Exception as e:
+                        print(f'neither requests nor selenium could reach page {price_page}\n Error: {e}')
+                        vals['list_pdfs']['urls'] = {
+                            'error': f'no pdfs on page available: {price_page}'
+                        }
+                        break
 
             if vals['list_pdfs']['urls'] == []:
                 print(
-                    f'SeleniumTimeout could not find any matching pdfs on {price_page}'
+                    f'Selenium could not find any matching pdfs on {price_page}'
                 )
                 vals['list_pdfs']['urls'] = {
                     'error':
@@ -207,29 +214,29 @@ class PdfSourcing:
             vals["status"] = "ok"
         return self.bank_dict
 
+## depreciated for now
+# def sum_sizes(self):
+#     for bank_id, vals in self.bank_dict.items():
+#         print(f"checking filesizes of pdfs for {vals.get('price_page')}")
+#         pdfs = vals.get('list_pdfs')
+#         if pdfs == []:
+#             print(f"no pdfs provided for {vals.get('price_page')}")
+#             break
+#         else:
+#             filesizes = []
+#             for pdf in pdfs:
+#                 try:
+#                     remote = urlopen(Request(pdf)).read()
+#                     memory = BytesIO(remote)
+#                     # file = PdfFileReader(memory)
+#                     filesizes.append(sys.getsizeof(memory))
+#                 except Exception as e:
+#                     print(f'cannot reach: {pdf}, error: {e}')
 
-    def sum_sizes(self):
-        for bank_id, vals in self.bank_dict.items():
-            print(f"checking filesizes of pdfs for {vals.get('price_page')}")
-            pdfs = vals.get('list_pdfs')
-            if pdfs == []:
-                print(f"no pdfs provided for {vals.get('price_page')}")
-                break
-            else:
-                filesizes = []
-                for pdf in pdfs:
-                    try:
-                        remote = urlopen(Request(pdf)).read()
-                        memory = BytesIO(remote)
-                        # file = PdfFileReader(memory)
-                        filesizes.append(sys.getsizeof(memory))
-                    except Exception as e:
-                        print(f'cannot reach: {pdf}, error: {e}')
+#             vals['sum_sizes'] = sum(filesizes)
+#             print(f'filesizes added to {vals.get("url")}')
 
-                vals['sum_sizes'] = sum(filesizes)
-                print(f'filesizes added to {vals.get("url")}')
-
-        return self.bank_dict
+#     return self.bank_dict
 
     def rerun_sourcing(self):
 
@@ -238,6 +245,7 @@ class PdfSourcing:
         banks = self.get_banks_pdf_urls()
         banks = self.get_num_pdfs()
         banks = self.last_updated()
+        # sum_sizes wont be used for the app in this stage
         # banks = self.sum_sizes()
 
         return banks
