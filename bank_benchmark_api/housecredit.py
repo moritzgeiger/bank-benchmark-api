@@ -38,7 +38,10 @@ def find_index(df,dictionary):
     index_col=list()
     for x in range(df.shape[0]):
         for y in range(find_prices(df)):
-            if str(df[y][x])=='None' or str(df[y][x])=='' or 'Nota' in str(df[y][x]):
+            try:
+                if str(df[y][x])=='None' or str(df[y][x])=='' or 'Nota' in str(df[y][x]):
+                    pass
+            except:
                 pass
             else:
                 words = [word for word in str(df[y][x]).split(' ')]
@@ -190,11 +193,13 @@ class HouseCredit:
 
     def names(self, text, tokenized):
         values = self.n_account(text,tokenized)
+        print(f'found these headers in parsed pages: {values}')
         regular = []
         if self.id_bank == '0170':  #or self.id_bank== '0193':
             for value in values:
                 if 'OPERAÇÕES DE CRÉDITO (PARTICULARES)' in value:
-                    regular.append(value)
+                    regular.append(
+                        value.replace('OPERAÇÕES DE CRÉDITO (PARTICULARES)', ''))
 
         elif self.id_bank == '0079':
             for value in values:
@@ -239,12 +244,18 @@ class HouseCredit:
         function = scrape_all(self.link, self.page_house, self.house_dict)
         print(f"/////////////// SCRAPE ALL /////////////////////\n {function} \n ///////////////////// END SCRAPE ALL /////////////////")
         names = self.names(text,tokenized)
-        for k, v in function.items():
-            for name in names:
+        print(f'assigning names to the scraped dictionary.')
+        if len(function.values()) > 1:
+            for i, v in enumerate(function.values()):
                 # new_dict[name] = ''
+                name = names[i]
                 name = re.sub(r'\s+', ' ', name)
-                print(f'parse product: {name}, fee {v}')
-                new_dict[f'{name}_{k}'] = v
+                print(f'name : {name}')
+                new_dict[name] = v
+
+        else:
+            print(f'no names provided in: {names}')
+            new_dict['n/a'] = function.values()
 
         return new_dict
 
