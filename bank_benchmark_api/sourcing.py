@@ -67,6 +67,7 @@ class PdfSourcing:
                     chrome_options = webdriver.ChromeOptions()
                     chrome_options.add_argument('--disable-gpu')
                     chrome_options.add_argument('--no-sandbox')
+                    chrome_options.add_argument("--headless")
                     chrome_options.binary_location = GOOGLE_CHROME_PATH
                     driver = webdriver.Chrome(
                         execution_path=CHROMEDRIVER_PATH,
@@ -184,6 +185,7 @@ class PdfSourcing:
                         chrome_options = webdriver.ChromeOptions()
                         chrome_options.add_argument('--disable-gpu')
                         chrome_options.add_argument('--no-sandbox')
+                        chrome_options.add_argument("--headless")
                         chrome_options.binary_location = GOOGLE_CHROME_PATH
                         driver = webdriver.Chrome(
                         execution_path=CHROMEDRIVER_PATH,
