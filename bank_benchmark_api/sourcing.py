@@ -73,8 +73,9 @@ class PdfSourcing:
                         executable_path=CHROMEDRIVER_PATH,
                         chrome_options=chrome_options)
                     driver.implicitly_wait(20)
+                    time.sleep(10)
                     driver.get(url)
-                    time.sleep(15)
+                    time.sleep(10)
                     body = driver.page_source
                     soup = BeautifulSoup(driver.page_source,  features="lxml")
                     for link in soup.find_all('a', href=True):
@@ -108,11 +109,13 @@ class PdfSourcing:
             #     vals["price_page"] = {
             #             'error': f'provided url not reachable: {url}, error: {e}'
             #         }
-                ## just to make sure, the field will not be passed on empty
+            ## just to make sure, the field will not be passed on empty
                 if vals["price_page"] == '':
-                    print(f'SeleniumTimeout could not find any matching links on page')
+                    print(
+                        f'neither requests nor selenium could reach page {url}'
+                    )
                     vals["price_page"] = {
-                        'error': f'provided url not reachable: {url}, error: '
+                        'error': f'provided url not reachable: {url}'
                     }
                     continue
 
@@ -198,8 +201,9 @@ class PdfSourcing:
                             executable_path=CHROMEDRIVER_PATH,
                             chrome_options=chrome_options)
                         driver.implicitly_wait(20)
+                        time.sleep(10)
                         driver.get(price_page)
-                        time.sleep(15)
+                        time.sleep(10)
                         body = driver.page_source
                         soup = BeautifulSoup(driver.page_source, features="lxml")
                         print(f'looking for pdfs with selenium in: {price_page}')
