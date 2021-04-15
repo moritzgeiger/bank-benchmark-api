@@ -308,7 +308,7 @@ class DemandDeposit:
                 for k,b in change_name.items():
                     if commission == k:
                         beautiful[b]=value
-                newone[account]=beautiful
+                    newone[account]=beautiful
         return newone
 
     def output(self):
