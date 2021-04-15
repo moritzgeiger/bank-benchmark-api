@@ -51,17 +51,26 @@ class PageFinder:
         add = r'[.\s\S]*particulares.{,5}p[áa]g'
         pt_terms = {key:val.get('portuguese').lower() for (key, val) in products.items()}
         pt_terms_re = {key:pre+re.sub(sub, r'.{,50}', val)+add for (key,val) in pt_terms.items()}
+
+        ## because heroku is breaking in this loop, trying to split the jobs of loading page and searching for string
+        full_pdf = {}
+        print('assembling pages in preload')
         for page in pdf.pages:
             # removing newlines
+            print(f'page: {page.page_number}')
             text = page.extract_text().lower().replace('\n', ' ')
             # stripping whitespaces
             text = re.sub(r'\s+', ' ', text)
+            page = page.page_number
+            full_pdf[page] = text
+
+        for page, string in full_pdf.items():
             for product, term in pt_terms_re.items():
-                if re.search(term, text):
-                    pagenr = int(page.page_number) -1
-                    print(f'found related terms on page {pagenr} for {product}')
-                    products[product]['pages'].append(pagenr)
-            print(f'continue search in page: {page.page_number}')
+                if re.search(term, string):
+                    page = int(page) - 1
+                    print(f'found related terms on page {page} for {product}')
+                    products[product]['pages'].append(page)
+            print(f'continue search in page: {page}')
 
         # doublecheck not to miss any page // patching
         for product, term in pt_terms_re.items():

@@ -60,6 +60,12 @@ def merge_pdfs():
     requirements = ['url', 'bp_bank_id', 'last_updated']
     validator = []
     r = request.json
+    print(f'request datatype: {type(r)}')
+    if r == str or r == None:
+        return jsonify({
+            'status': 'error',
+            'message': f'wrong input type: {type(r)}'
+        })
     for vals in r.values():
         print(f'checking if requirements for each bank are in {vals.keys()}')
         val_bank = all([x in vals.keys() for x in requirements])
@@ -110,6 +116,14 @@ def get_stats():
     ]
     validator = []
     r = request.json
+    print(f'request datatype: {type(r)}')
+    if r == str or r == None:
+        return jsonify({
+            'status':
+            'error',
+            'message':
+            f'wrong input type: {type(r)}'
+        })
     for vals in r.values():
         print(f'checking if requirements for each bank are in {vals.keys()}')
         val_bank = all([x in vals.keys() for x in requirements])
