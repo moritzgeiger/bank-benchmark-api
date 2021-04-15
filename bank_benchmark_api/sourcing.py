@@ -70,7 +70,7 @@ class PdfSourcing:
                     chrome_options.add_argument("--headless")
                     chrome_options.binary_location = GOOGLE_CHROME_PATH
                     driver = webdriver.Chrome(
-                        execution_path=CHROMEDRIVER_PATH,
+                        executable_path=CHROMEDRIVER_PATH,
                         chrome_options=chrome_options)
                     driver.implicitly_wait(20)
                     driver.get(url)
@@ -188,8 +188,8 @@ class PdfSourcing:
                         chrome_options.add_argument("--headless")
                         chrome_options.binary_location = GOOGLE_CHROME_PATH
                         driver = webdriver.Chrome(
-                        execution_path=CHROMEDRIVER_PATH,
-                        chrome_options=chrome_options)
+                            executable_path=CHROMEDRIVER_PATH,
+                            chrome_options=chrome_options)
                         driver.implicitly_wait(20)
                         driver.get(price_page)
                         time.sleep(15)
