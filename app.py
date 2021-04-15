@@ -19,6 +19,7 @@ from bank_benchmark_api.uploader import PdfUploader
 from bank_benchmark_api.sourcing import PdfSourcing
 from bank_benchmark_api.pagefinder import PageFinder
 from bank_benchmark_api.demand_deposit_scrap import DemandDeposit
+from bank_benchmark_api.housecredit import HouseCredit
 
 
 # # google creds ## lalala
@@ -131,9 +132,12 @@ def get_stats():
                 banks[i]['products']['demand_deposit'] = demand_deposit
                 print(
                     f'finished job for demand deposits and injecting results in response: {demand_deposit}'
-                )  # TODO pedro housing appending
-                # housing = Housing(val).get
-                # banks[i]['products']['housing'] = housing
+                )
+                housing_credit = HouseCredit(bank).scrape_all()
+                banks[i]['products']['housing_credit'] = housing_credit
+                print(
+                    f'finished job for housing credits and injecting results in response: {housing_credit}'
+                )
 
 
             path = f'bank_benchmark_api/data/banks_{ident}.json'
