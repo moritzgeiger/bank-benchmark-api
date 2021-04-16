@@ -236,9 +236,12 @@ class HouseCredit:
                     regular.append(value.replace('OPERAÇÕES DE CRÉDITO (PARTICULARES)', ''))
 
         elif self.id_bank== '0193':
-            for value in values:
-                if 'Banco CTT, S.A. Operações Crédito-Particulares - Pág.1/2'not in value:
-                    regular.append(value)
+            # ctt
+            try:
+                values.pop('Banco CTT, S.A. Operações Crédito-Particulares - Pág.1/2')
+                regular = values
+            except:
+                regular = [None]
 
 
         elif self.id_bank == '0079':
@@ -262,8 +265,8 @@ class HouseCredit:
             for i,sentence in enumerate(values):
                 if 'Crédito à habitação e outros créditos hipotecários' in sentence:
                     regular.append(' '.join([sentence,values[i+1]]))
-        for i,reg in enumerate(regular):
-            print(f'\n\n\n\n\n\n\n\n name {i} : {reg} \n\n\n\n\n\n\n\n')
+        # for i,reg in enumerate(regular):
+        #     print(f'\n\n\n\n\n\n\n\n name {i} : {reg} \n\n\n\n\n\n\n\n')
         return regular
 
     def n_subproducts(self,text,tokenize):
