@@ -1,8 +1,9 @@
 {
   "1": {
-    "url": "https: //www.abanca.pt",
-    "bp_pdf_url": "https: //clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf",
-    "cloud_merged_url": "https: //storage.googleapis.com/bank_price_pdfs/1_all_products_210412130040.pdf",
+    "url": "https://www.abanca.pt",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf",
+    "bp_bank_id": "0170",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/1_all_products_210412130040.pdf",
     "products": {
       "demand_deposit": {
         "commissions": {
@@ -181,9 +182,10 @@
     }
   },
   "2": {
-    "url": "https: //www.bankinter.pt",
-    "bp_pdf_url": "https: //clientebancario.bportugal.pt/sites/default/files/precario/0269_/0269_PRE.pdf",
-    "cloud_merged_url": "https: //storage.googleapis.com/bank_price_pdfs/2_all_products_210412130350.pdf",
+    "url": "https://www.bankinter.pt",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0269_/0269_PRE.pdf",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/2_all_products_210412130350.pdf",
+    "bp_bank_id": "0269",
     "products": {
       "demand_deposit": {
         "commissions": {
@@ -369,9 +371,10 @@
     }
   },
   "3": {
-    "url": "https: //www.bancobic.ao",
-    "bp_pdf_url": "https: //clientebancario.bportugal.pt/sites/default/files/precario/0079_/0079_PRE_0.pdf",
-    "cloud_merged_url": "https: //storage.googleapis.com/bank_price_pdfs/3_all_products_210412130840.pdf",
+    "url": "https://www.bancobic.ao",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0079_/0079_PRE_0.pdf",
+    "bp_bank_id": "0079",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/3_all_products_210412130840.pdf",
     "products": {
       "demand_deposit": {
         "commissions": {
@@ -554,9 +557,10 @@
     }
   },
   "4": {
-    "url": "https: //www.bancobai.ao",
-    "bp_pdf_url": "https: //clientebancario.bportugal.pt/sites/default/files/precario/0008_/0008_PRE.pdf",
-    "cloud_merged_url": "https: //storage.googleapis.com/bank_price_pdfs/4_all_products_210412130952.pdf",
+    "url": "https://www.bancobai.ao",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0008_/0008_PRE.pdf",
+    "bp_bank_id": "0008",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/4_all_products_210412130952.pdf",
     "products": {
       "demand_deposit": {
         "commissions": {
@@ -731,9 +735,10 @@
     }
   },
   "5": {
-    "url": "https: //www.bancoctt.pt/",
-    "bp_pdf_url": "https: //clientebancario.bportugal.pt/sites/default/files/precario/0193_/0193_PRE.pdf",
-    "cloud_merged_url": "https: //storage.googleapis.com/bank_price_pdfs/5_all_products_210412131014.pdf",
+    "url": "https://www.bancoctt.pt/",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0193_/0193_PRE.pdf",
+    "bp_bank_id": "0193",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/5_all_products_210412131014.pdf",
     "products": {
       "demand_deposit": {
         "commissions": {
