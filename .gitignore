@@ -8,3 +8,4 @@ raw_data/
 *.pdf
 pwc-credentials-google.json
 bank_benchmark_api/data/banks.json
+notebooks/
