@@ -3,6 +3,7 @@ import numpy as np
 import pdfplumber
 import re
 import nltk
+import requests
 from urllib.parse import urljoin, quote_plus, quote, urlencode
 from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
@@ -11,12 +12,14 @@ class DemandDeposit:
     def __init__(self,dictionary):
         self.dict_demand = dictionary['products']['demand_deposit']['commissions']
         self.page_demand = dictionary['products']['demand_deposit']['pages']
+        self.page_demand = [int(x) for x in self.page_demand]
+        print(f'provided pages: {self.page_demand}')
         self.link = dictionary['bp_pdf_url']
         self.id_bank = dictionary['bp_bank_id']
 
     def get_pdf(self):
         print(f'opening url: {self.link}...')
-        remote = urlopen(Request(self.link)).read()
+        remote = remote = requests.get(self.link, verify=False).content
         memory = BytesIO(remote)
         return memory
 
@@ -24,7 +27,6 @@ class DemandDeposit:
     def getting_text(self, file):
         file = pdfplumber.open(file)
         print('extract pdf content to text...')
-        print()
         if len(self.page_demand) > 1 :
             joined_text = []
             for el in self.page_demand:
@@ -255,7 +257,10 @@ class DemandDeposit:
                 "Conta regulada pelo Decreto-Lei n.º 27 C/2000, de 10 de março, com alterações posteriores."
             ]
             for pop in popper:
-                abanca_last.pop(pop)
+                try:
+                    abanca_last.pop(pop)
+                except:
+                  continue
             return abanca_last
 
         elif self.id_bank == '0008':
