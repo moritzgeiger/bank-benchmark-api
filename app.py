@@ -141,21 +141,21 @@ def get_stats():
             # runs all the page finding jobs and scraping prices for each requested bank
             banks = {}
             for i, val in r.items():
-                pagefinder = PageFinder(val)
-                bank = pagefinder.find_page()
+                # pagefinder = PageFinder(val)
+                # bank = pagefinder.find_page()
                 # populate banks dictionary
                 banks[i] = {'products':{}}
                 # forwarding the bank to the scraping job(s)
-                if 'demand_deposit' in bank.get('products'):
-                    demand_deposit = DemandDeposit(bank).output()
+                if 'demand_deposit' in val.get('products'):
+                    demand_deposit = DemandDeposit(val).output()
                     banks[i] = {'products':{}}
 
                     banks[i]['products']['demand_deposit'] = demand_deposit
                     print(
                         f'finished job for demand deposits and injecting results in response: {demand_deposit}'
                     )
-                if 'housing_credit' in bank.get('products'):
-                    housing_credit = HouseCredit(bank).output()
+                if 'housing_credit' in val.get('products'):
+                    housing_credit = HouseCredit(val).output()
                     banks[i]['products']['housing_credit'] = housing_credit
                     print(
                         f'finished job for housing credits and injecting results in response: {housing_credit}'
