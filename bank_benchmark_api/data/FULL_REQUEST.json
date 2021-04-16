@@ -1,0 +1,917 @@
+{
+  "1": {
+    "url": "https://www.abanca.pt",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0170_/0170_PRE.pdf",
+    "bp_bank_id": "0170",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/1_all_products_210412130040.pdf",
+    "products": {
+      "demand_deposit": {
+        "commissions": {
+          "statement": [
+            "Emissão de extrato",
+            "Extrato Integrado",
+            "Extrato Mensal",
+            "Extrato integrado",
+            "Extrato avulso"
+          ],
+          "documents_copy": [
+            "Fotocópias de segundas vias de talões de depósito",
+            "Emissão 2ªs Vias de Avisos e Outros Documentos",
+            "Extracto avulso",
+            "Segundas vias (pedido na agência)"
+          ],
+          "acc_manteinance": [
+            "Manutenção de conta",
+            "Comissão de manutenção de conta",
+            "Comissão de Manutenção de Conta",
+            "Manutenção de Conta Pacote",
+            "Manutenção de Conta Base",
+            "Manutenção de Conta Serviços Mínimos Bancários"
+          ],
+          "withdraw": [
+            "Levantamento de numerário",
+            "Levantamento de numerário ao balcão",
+            "Comissão de Levantamento",
+            "Levantamento de Numerário ao Balcão",
+            "Levantamento de Numerário ao Balcão"
+          ],
+          "online_service": [
+            "Adesão ao serviço de banca à distância",
+            "Adesão ao serviço online"
+          ],
+          "cash_deposit": [
+            "Depósito de moedas metálicas",
+            "Depósito de moedas",
+            " Depósito em moeda metálica (>= 100 moedas)",
+            "Depósito de moedas ao balcão",
+            "Depósito de dinheiro ao balcão",
+            "Depósito em moeda metálica (>= 100 moedas)"
+          ],
+          "change_holder": [
+            "Alteração de titulares",
+            "Alteração de titularidade",
+            "Comissão de Alteração de Titularidade",
+            "Alteração de titularidade / intervenientes",
+            "Alteração de titularidade (titular/ representante)"
+          ],
+          "bank_overdraft": [
+            "Comissões por descoberto bancário",
+            "Descoberto bancário",
+            "Comissões por Descoberto Bancário"
+          ],
+          "movement_consultation": [
+            "Consulta de Movimentos de conta DO com",
+            "Consulta de movimentos ao balcão"
+          ],
+          "balance_inquiry": [
+            "Pedido de saldo ao balcão",
+            "Consulta de Saldo de conta DO com comprovativo"
+          ]
+        },
+        "portuguese": "Contas de Depósito",
+        "pages": [
+          "4"
+        ]
+      },
+      "housing_credit": {
+        "commissions": {
+          "admin": [
+            "Comissões associadas a atos administrativos 4.1 Não realização da escritura",
+            "Alteração do local da escritura",
+            "Declarações de dívida",
+            "Mudança de regime de crédito",
+            "Declarações de dívida",
+            "Pedido de 2ª via de Caderneta Predial",
+            "Emissão de declarações não obrigatórias por lei",
+            "Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente",
+            "Emissão de 2º vias de Declaração para efeitos de IRS",
+            "Emissão de 2ª vias de faturas",
+            "Declaração de Dívida para Fins Diversos",
+            "Declaração de Encargos com Prestações"
+          ],
+          "certificates": [
+            "Emolumentos do registo predial",
+            "registo predial",
+            "Certidão permanente on-line"
+          ],
+          "debt_recovery": [
+            "Comissão de recuperação de valores em dívida",
+            "Prestação até 50.000 €",
+            "Prestação > 50.000 €",
+            "Comissão de recuperação de valores em dívida",
+            "Prestação > 50.000,00€",
+            "Prestação ≤ 50.000,00€"
+          ],
+          "displacement": [
+            "Comissão de deslocação",
+            "Até 100 Kms",
+            "101 a 250 Kms",
+            "> 250 Kms "
+          ],
+          "early_payment": [
+            "Comissão de reembolso antecipado parcial",
+            "Taxa fixa",
+            "Taxa variável",
+            "Taxa fixa",
+            "Comissão de reembolso antecipado total",
+            "Comissão de antecipação",
+            "(pré.aviso 7 dias)",
+            "Comissão de compra antecipada",
+            "(pré-aviso 10 dias)",
+            "Comissão de Reembolso Antecipado Parcial",
+            "Comissão de reembolso antecipado total"
+          ],
+          "evaluation": [
+            "Avaliação",
+            "Imóvel residencial",
+            "Garagens e arrecadações não anexas ao imóvel residencial",
+            "Avaliação do Imóvel"
+          ],
+          "formalization": [
+            "Comissão de formalização",
+            "Formalização"
+          ],
+          "process": [
+            "Processo",
+            "Abertura de Processo",
+            "Desistência ou não conclusão do processo por motivos imputáveis ao cliente"
+          ],
+          "inspections": [
+            "Vistorias",
+            "em caso de construção ou realização de obras"
+          ],
+          "reanalysis": [
+            "Reanálise"
+          ],
+          "settlement": [
+            "Comissão de Liquidação de Prestação",
+            "Liquidação de Prestação"
+          ],
+          "solicitors_notary": [
+            "Emolumentos notariais",
+            "Solicitadoria",
+            "Notiário"
+          ],
+          "statements": [
+            "Emissão de extratos de conta de empréstimos liquidados",
+            "extrato",
+            "extratos",
+            "extrato de conta",
+            "extrato mensal"
+          ],
+          "taxes": [
+            "Imposto do Selo sobre concessão de crédito",
+            "imposto",
+            "imposto de selo",
+            "impostos"
+          ],
+          "termination": [
+            "Cessação da posição contratual",
+            "cessação",
+            "rescisão",
+            "encerramento"
+          ]
+        },
+        "portuguese": "Crédito à habitação e outros créditos hipotecários",
+        "pages": [
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    }
+  },
+  "2": {
+    "url": "https://www.bankinter.pt",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0269_/0269_PRE.pdf",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/2_all_products_210412130350.pdf",
+    "bp_bank_id": "0269",
+    "products": {
+      "demand_deposit": {
+        "commissions": {
+          "statement": [
+            "Emissão de extrato",
+            "Extrato Integrado",
+            "Extrato Mensal",
+            "Extrato integrado",
+            "Extrato avulso"
+          ],
+          "documents_copy": [
+            "Fotocópias de segundas vias de talões de depósito",
+            "Emissão 2ªs Vias de Avisos e Outros Documentos",
+            "Extracto avulso",
+            "Segundas vias (pedido na agência)"
+          ],
+          "acc_manteinance": [
+            "Manutenção de conta",
+            "Comissão de manutenção de conta",
+            "Comissão de Manutenção de Conta",
+            "Manutenção de Conta Pacote",
+            "Manutenção de Conta Base",
+            "Manutenção de Conta Serviços Mínimos Bancários"
+          ],
+          "withdraw": [
+            "Levantamento de numerário",
+            "Levantamento de numerário ao balcão",
+            "Comissão de Levantamento",
+            "Levantamento de Numerário ao Balcão",
+            "Levantamento de Numerário ao Balcão"
+          ],
+          "online_service": [
+            "Adesão ao serviço de banca à distância",
+            "Adesão ao serviço online"
+          ],
+          "cash_deposit": [
+            "Depósito de moedas metálicas",
+            "Depósito de moedas",
+            " Depósito em moeda metálica (>= 100 moedas)",
+            "Depósito de moedas ao balcão",
+            "Depósito de dinheiro ao balcão",
+            "Depósito em moeda metálica (>= 100 moedas)"
+          ],
+          "change_holder": [
+            "Alteração de titulares",
+            "Alteração de titularidade",
+            "Comissão de Alteração de Titularidade",
+            "Alteração de titularidade / intervenientes",
+            "Alteração de titularidade (titular/ representante)"
+          ],
+          "bank_overdraft": [
+            "Comissões por descoberto bancário",
+            "Descoberto bancário",
+            "Comissões por Descoberto Bancário"
+          ],
+          "movement_consultation": [
+            "Consulta de Movimentos de conta DO com",
+            "Consulta de movimentos ao balcão"
+          ],
+          "balance_inquiry": [
+            "Pedido de saldo ao balcão",
+            "Consulta de Saldo de conta DO com comprovativo"
+          ]
+        },
+        "portuguese": "Contas de Depósito",
+        "pages": [
+          "4"
+        ]
+      },
+      "housing_credit": {
+        "commissions": {
+          "admin": [
+            "Comissões associadas a atos administrativos 4.1 Não realização da escritura",
+            "Alteração do local da escritura",
+            "Declarações de dívida",
+            "Mudança de regime de crédito",
+            "Declarações de dívida",
+            "Pedido de 2ª via de Caderneta Predial",
+            "Emissão de declarações não obrigatórias por lei",
+            "Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente",
+            "Emissão de 2º vias de Declaração para efeitos de IRS",
+            "Emissão de 2ª vias de faturas",
+            "Declaração de Dívida para Fins Diversos",
+            "Declaração de Encargos com Prestações"
+          ],
+          "certificates": [
+            "Emolumentos do registo predial",
+            "registo predial",
+            "Certidão permanente on-line"
+          ],
+          "debt_recovery": [
+            "Comissão de recuperação de valores em dívida",
+            "Prestação até 50.000 €",
+            "Prestação > 50.000 €",
+            "Comissão de recuperação de valores em dívida",
+            "Prestação > 50.000,00€",
+            "Prestação ≤ 50.000,00€"
+          ],
+          "displacement": [
+            "Comissão de deslocação",
+            "Até 100 Kms",
+            "101 a 250 Kms",
+            "> 250 Kms "
+          ],
+          "early_payment": [
+            "Comissão de reembolso antecipado parcial",
+            "Taxa fixa",
+            "Taxa variável",
+            "Taxa fixa",
+            "Comissão de reembolso antecipado total",
+            "Comissão de antecipação",
+            "(pré.aviso 7 dias)",
+            "Comissão de compra antecipada",
+            "(pré-aviso 10 dias)",
+            "Comissão de Reembolso Antecipado Parcial",
+            "Comissão de reembolso antecipado total"
+          ],
+          "evaluation": [
+            "Avaliação",
+            "Imóvel residencial",
+            "Garagens e arrecadações não anexas ao imóvel residencial",
+            "Avaliação do Imóvel"
+          ],
+          "formalization": [
+            "Comissão de formalização",
+            "Formalização"
+          ],
+          "process": [
+            "Processo",
+            "Abertura de Processo",
+            "Desistência ou não conclusão do processo por motivos imputáveis ao cliente"
+          ],
+          "inspections": [
+            "Vistorias",
+            "em caso de construção ou realização de obras"
+          ],
+          "reanalysis": [
+            "Reanálise"
+          ],
+          "settlement": [
+            "Comissão de Liquidação de Prestação",
+            "Liquidação de Prestação"
+          ],
+          "solicitors_notary": [
+            "Emolumentos notariais",
+            "Solicitadoria",
+            "Notiário"
+          ],
+          "statements": [
+            "Emissão de extratos de conta de empréstimos liquidados",
+            "extrato",
+            "extratos",
+            "extrato de conta",
+            "extrato mensal"
+          ],
+          "taxes": [
+            "Imposto do Selo sobre concessão de crédito",
+            "imposto",
+            "imposto de selo",
+            "impostos"
+          ],
+          "termination": [
+            "Cessação da posição contratual",
+            "cessação",
+            "rescisão",
+            "encerramento"
+          ]
+        },
+        "portuguese": "Crédito à habitação e outros créditos hipotecários",
+        "pages": [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    }
+  },
+  "3": {
+    "url": "https://www.bancobic.ao",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0079_/0079_PRE_0.pdf",
+    "bp_bank_id": "0079",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/3_all_products_210412130840.pdf",
+    "products": {
+      "demand_deposit": {
+        "commissions": {
+          "statement": [
+            "Emissão de extrato",
+            "Extrato Integrado",
+            "Extrato Mensal",
+            "Extrato integrado",
+            "Extrato avulso"
+          ],
+          "documents_copy": [
+            "Fotocópias de segundas vias de talões de depósito",
+            "Emissão 2ªs Vias de Avisos e Outros Documentos",
+            "Extracto avulso",
+            "Segundas vias (pedido na agência)"
+          ],
+          "acc_manteinance": [
+            "Manutenção de conta",
+            "Comissão de manutenção de conta",
+            "Comissão de Manutenção de Conta",
+            "Manutenção de Conta Pacote",
+            "Manutenção de Conta Base",
+            "Manutenção de Conta Serviços Mínimos Bancários"
+          ],
+          "withdraw": [
+            "Levantamento de numerário",
+            "Levantamento de numerário ao balcão",
+            "Comissão de Levantamento",
+            "Levantamento de Numerário ao Balcão",
+            "Levantamento de Numerário ao Balcão"
+          ],
+          "online_service": [
+            "Adesão ao serviço de banca à distância",
+            "Adesão ao serviço online"
+          ],
+          "cash_deposit": [
+            "Depósito de moedas metálicas",
+            "Depósito de moedas",
+            " Depósito em moeda metálica (>= 100 moedas)",
+            "Depósito de moedas ao balcão",
+            "Depósito de dinheiro ao balcão",
+            "Depósito em moeda metálica (>= 100 moedas)"
+          ],
+          "change_holder": [
+            "Alteração de titulares",
+            "Alteração de titularidade",
+            "Comissão de Alteração de Titularidade",
+            "Alteração de titularidade / intervenientes",
+            "Alteração de titularidade (titular/ representante)"
+          ],
+          "bank_overdraft": [
+            "Comissões por descoberto bancário",
+            "Descoberto bancário",
+            "Comissões por Descoberto Bancário"
+          ],
+          "movement_consultation": [
+            "Consulta de Movimentos de conta DO com",
+            "Consulta de movimentos ao balcão"
+          ],
+          "balance_inquiry": [
+            "Pedido de saldo ao balcão",
+            "Consulta de Saldo de conta DO com comprovativo"
+          ]
+        },
+        "portuguese": "Contas de Depósito",
+        "pages": [
+          "4",
+          "6"
+        ]
+      },
+      "housing_credit": {
+        "commissions": {
+          "admin": [
+            "Comissões associadas a atos administrativos 4.1 Não realização da escritura",
+            "Alteração do local da escritura",
+            "Declarações de dívida",
+            "Mudança de regime de crédito",
+            "Declarações de dívida",
+            "Pedido de 2ª via de Caderneta Predial",
+            "Emissão de declarações não obrigatórias por lei",
+            "Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente",
+            "Emissão de 2º vias de Declaração para efeitos de IRS",
+            "Emissão de 2ª vias de faturas",
+            "Declaração de Dívida para Fins Diversos",
+            "Declaração de Encargos com Prestações"
+          ],
+          "certificates": [
+            "Emolumentos do registo predial",
+            "registo predial",
+            "Certidão permanente on-line"
+          ],
+          "debt_recovery": [
+            "Comissão de recuperação de valores em dívida",
+            "Prestação até 50.000 €",
+            "Prestação > 50.000 €",
+            "Comissão de recuperação de valores em dívida",
+            "Prestação > 50.000,00€",
+            "Prestação ≤ 50.000,00€"
+          ],
+          "displacement": [
+            "Comissão de deslocação",
+            "Até 100 Kms",
+            "101 a 250 Kms",
+            "> 250 Kms "
+          ],
+          "early_payment": [
+            "Comissão de reembolso antecipado parcial",
+            "Taxa fixa",
+            "Taxa variável",
+            "Taxa fixa",
+            "Comissão de reembolso antecipado total",
+            "Comissão de antecipação",
+            "(pré.aviso 7 dias)",
+            "Comissão de compra antecipada",
+            "(pré-aviso 10 dias)",
+            "Comissão de Reembolso Antecipado Parcial",
+            "Comissão de reembolso antecipado total"
+          ],
+          "evaluation": [
+            "Avaliação",
+            "Imóvel residencial",
+            "Garagens e arrecadações não anexas ao imóvel residencial",
+            "Avaliação do Imóvel"
+          ],
+          "formalization": [
+            "Comissão de formalização",
+            "Formalização"
+          ],
+          "process": [
+            "Processo",
+            "Abertura de Processo",
+            "Desistência ou não conclusão do processo por motivos imputáveis ao cliente"
+          ],
+          "inspections": [
+            "Vistorias",
+            "em caso de construção ou realização de obras"
+          ],
+          "reanalysis": [
+            "Reanálise"
+          ],
+          "settlement": [
+            "Comissão de Liquidação de Prestação",
+            "Liquidação de Prestação"
+          ],
+          "solicitors_notary": [
+            "Emolumentos notariais",
+            "Solicitadoria",
+            "Notiário"
+          ],
+          "statements": [
+            "Emissão de extratos de conta de empréstimos liquidados",
+            "extrato",
+            "extratos",
+            "extrato de conta",
+            "extrato mensal"
+          ],
+          "taxes": [
+            "Imposto do Selo sobre concessão de crédito",
+            "imposto",
+            "imposto de selo",
+            "impostos"
+          ],
+          "termination": [
+            "Cessação da posição contratual",
+            "cessação",
+            "rescisão",
+            "encerramento"
+          ]
+        },
+        "portuguese": "Crédito à habitação e outros créditos hipotecários",
+        "pages": [
+          "7",
+          "8",
+          "9",
+          "10",
+          "12",
+          "13"
+        ]
+      }
+    }
+  },
+  "4": {
+    "url": "https://www.bancobai.ao",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0008_/0008_PRE.pdf",
+    "bp_bank_id": "0008",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/4_all_products_210412130952.pdf",
+    "products": {
+      "demand_deposit": {
+        "commissions": {
+          "statement": [
+            "Emissão de extrato",
+            "Extrato Integrado",
+            "Extrato Mensal",
+            "Extrato integrado",
+            "Extrato avulso"
+          ],
+          "documents_copy": [
+            "Fotocópias de segundas vias de talões de depósito",
+            "Emissão 2ªs Vias de Avisos e Outros Documentos",
+            "Extracto avulso",
+            "Segundas vias (pedido na agência)"
+          ],
+          "acc_manteinance": [
+            "Manutenção de conta",
+            "Comissão de manutenção de conta",
+            "Comissão de Manutenção de Conta",
+            "Manutenção de Conta Pacote",
+            "Manutenção de Conta Base",
+            "Manutenção de Conta Serviços Mínimos Bancários"
+          ],
+          "withdraw": [
+            "Levantamento de numerário",
+            "Levantamento de numerário ao balcão",
+            "Comissão de Levantamento",
+            "Levantamento de Numerário ao Balcão",
+            "Levantamento de Numerário ao Balcão"
+          ],
+          "online_service": [
+            "Adesão ao serviço de banca à distância",
+            "Adesão ao serviço online"
+          ],
+          "cash_deposit": [
+            "Depósito de moedas metálicas",
+            "Depósito de moedas",
+            " Depósito em moeda metálica (>= 100 moedas)",
+            "Depósito de moedas ao balcão",
+            "Depósito de dinheiro ao balcão",
+            "Depósito em moeda metálica (>= 100 moedas)"
+          ],
+          "change_holder": [
+            "Alteração de titulares",
+            "Alteração de titularidade",
+            "Comissão de Alteração de Titularidade",
+            "Alteração de titularidade / intervenientes",
+            "Alteração de titularidade (titular/ representante)"
+          ],
+          "bank_overdraft": [
+            "Comissões por descoberto bancário",
+            "Descoberto bancário",
+            "Comissões por Descoberto Bancário"
+          ],
+          "movement_consultation": [
+            "Consulta de Movimentos de conta DO com",
+            "Consulta de movimentos ao balcão"
+          ],
+          "balance_inquiry": [
+            "Pedido de saldo ao balcão",
+            "Consulta de Saldo de conta DO com comprovativo"
+          ]
+        },
+        "portuguese": "Contas de Depósito",
+        "pages": [
+          "4"
+        ]
+      },
+      "housing_credit": {
+        "commissions": {
+          "admin": [
+            "Comissões associadas a atos administrativos 4.1 Não realização da escritura",
+            "Alteração do local da escritura",
+            "Declarações de dívida",
+            "Mudança de regime de crédito",
+            "Declarações de dívida",
+            "Pedido de 2ª via de Caderneta Predial",
+            "Emissão de declarações não obrigatórias por lei",
+            "Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente",
+            "Emissão de 2º vias de Declaração para efeitos de IRS",
+            "Emissão de 2ª vias de faturas",
+            "Declaração de Dívida para Fins Diversos",
+            "Declaração de Encargos com Prestações"
+          ],
+          "certificates": [
+            "Emolumentos do registo predial",
+            "registo predial",
+            "Certidão permanente on-line"
+          ],
+          "debt_recovery": [
+            "Comissão de recuperação de valores em dívida",
+            "Prestação até 50.000 €",
+            "Prestação > 50.000 €",
+            "Comissão de recuperação de valores em dívida",
+            "Prestação > 50.000,00€",
+            "Prestação ≤ 50.000,00€"
+          ],
+          "displacement": [
+            "Comissão de deslocação",
+            "Até 100 Kms",
+            "101 a 250 Kms",
+            "> 250 Kms "
+          ],
+          "early_payment": [
+            "Comissão de reembolso antecipado parcial",
+            "Taxa fixa",
+            "Taxa variável",
+            "Taxa fixa",
+            "Comissão de reembolso antecipado total",
+            "Comissão de antecipação",
+            "(pré.aviso 7 dias)",
+            "Comissão de compra antecipada",
+            "(pré-aviso 10 dias)",
+            "Comissão de Reembolso Antecipado Parcial",
+            "Comissão de reembolso antecipado total"
+          ],
+          "evaluation": [
+            "Avaliação",
+            "Imóvel residencial",
+            "Garagens e arrecadações não anexas ao imóvel residencial",
+            "Avaliação do Imóvel"
+          ],
+          "formalization": [
+            "Comissão de formalização",
+            "Formalização"
+          ],
+          "process": [
+            "Processo",
+            "Abertura de Processo",
+            "Desistência ou não conclusão do processo por motivos imputáveis ao cliente"
+          ],
+          "inspections": [
+            "Vistorias",
+            "em caso de construção ou realização de obras"
+          ],
+          "reanalysis": [
+            "Reanálise"
+          ],
+          "settlement": [
+            "Comissão de Liquidação de Prestação",
+            "Liquidação de Prestação"
+          ],
+          "solicitors_notary": [
+            "Emolumentos notariais",
+            "Solicitadoria",
+            "Notiário"
+          ],
+          "statements": [
+            "Emissão de extratos de conta de empréstimos liquidados",
+            "extrato",
+            "extratos",
+            "extrato de conta",
+            "extrato mensal"
+          ],
+          "taxes": [
+            "Imposto do Selo sobre concessão de crédito",
+            "imposto",
+            "imposto de selo",
+            "impostos"
+          ],
+          "termination": [
+            "Cessação da posição contratual",
+            "cessação",
+            "rescisão",
+            "encerramento"
+          ]
+        },
+        "portuguese": "Crédito à habitação e outros créditos hipotecários",
+        "pages": []
+      }
+    }
+  },
+  "5": {
+    "url": "https://www.bancoctt.pt/",
+    "bp_pdf_url": "https://clientebancario.bportugal.pt/sites/default/files/precario/0193_/0193_PRE.pdf",
+    "bp_bank_id": "0193",
+    "cloud_merged_url": "https://storage.googleapis.com/bank_price_pdfs/5_all_products_210412131014.pdf",
+    "products": {
+      "demand_deposit": {
+        "commissions": {
+          "statement": [
+            "Emissão de extrato",
+            "Extrato Integrado",
+            "Extrato Mensal",
+            "Extrato integrado",
+            "Extrato avulso"
+          ],
+          "documents_copy": [
+            "Fotocópias de segundas vias de talões de depósito",
+            "Emissão 2ªs Vias de Avisos e Outros Documentos",
+            "Extracto avulso",
+            "Segundas vias (pedido na agência)"
+          ],
+          "acc_manteinance": [
+            "Manutenção de conta",
+            "Comissão de manutenção de conta",
+            "Comissão de Manutenção de Conta",
+            "Manutenção de Conta Pacote",
+            "Manutenção de Conta Base",
+            "Manutenção de Conta Serviços Mínimos Bancários"
+          ],
+          "withdraw": [
+            "Levantamento de numerário",
+            "Levantamento de numerário ao balcão",
+            "Comissão de Levantamento",
+            "Levantamento de Numerário ao Balcão",
+            "Levantamento de Numerário ao Balcão"
+          ],
+          "online_service": [
+            "Adesão ao serviço de banca à distância",
+            "Adesão ao serviço online"
+          ],
+          "cash_deposit": [
+            "Depósito de moedas metálicas",
+            "Depósito de moedas",
+            " Depósito em moeda metálica (>= 100 moedas)",
+            "Depósito de moedas ao balcão",
+            "Depósito de dinheiro ao balcão",
+            "Depósito em moeda metálica (>= 100 moedas)"
+          ],
+          "change_holder": [
+            "Alteração de titulares",
+            "Alteração de titularidade",
+            "Comissão de Alteração de Titularidade",
+            "Alteração de titularidade / intervenientes",
+            "Alteração de titularidade (titular/ representante)"
+          ],
+          "bank_overdraft": [
+            "Comissões por descoberto bancário",
+            "Descoberto bancário",
+            "Comissões por Descoberto Bancário"
+          ],
+          "movement_consultation": [
+            "Consulta de Movimentos de conta DO com",
+            "Consulta de movimentos ao balcão"
+          ],
+          "balance_inquiry": [
+            "Pedido de saldo ao balcão",
+            "Consulta de Saldo de conta DO com comprovativo"
+          ]
+        },
+        "portuguese": "Contas de Depósito",
+        "pages": [
+          "4"
+        ]
+      },
+      "housing_credit": {
+        "commissions": {
+          "admin": [
+            "Comissões associadas a atos administrativos 4.1 Não realização da escritura",
+            "Alteração do local da escritura",
+            "Declarações de dívida",
+            "Mudança de regime de crédito",
+            "Declarações de dívida",
+            "Pedido de 2ª via de Caderneta Predial",
+            "Emissão de declarações não obrigatórias por lei",
+            "Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente",
+            "Emissão de 2º vias de Declaração para efeitos de IRS",
+            "Emissão de 2ª vias de faturas",
+            "Declaração de Dívida para Fins Diversos",
+            "Declaração de Encargos com Prestações"
+          ],
+          "certificates": [
+            "Emolumentos do registo predial",
+            "registo predial",
+            "Certidão permanente on-line"
+          ],
+          "debt_recovery": [
+            "Comissão de recuperação de valores em dívida",
+            "Prestação até 50.000 €",
+            "Prestação > 50.000 €",
+            "Comissão de recuperação de valores em dívida",
+            "Prestação > 50.000,00€",
+            "Prestação ≤ 50.000,00€"
+          ],
+          "displacement": [
+            "Comissão de deslocação",
+            "Até 100 Kms",
+            "101 a 250 Kms",
+            "> 250 Kms "
+          ],
+          "early_payment": [
+            "Comissão de reembolso antecipado parcial",
+            "Taxa fixa",
+            "Taxa variável",
+            "Taxa fixa",
+            "Comissão de reembolso antecipado total",
+            "Comissão de antecipação",
+            "(pré.aviso 7 dias)",
+            "Comissão de compra antecipada",
+            "(pré-aviso 10 dias)",
+            "Comissão de Reembolso Antecipado Parcial",
+            "Comissão de reembolso antecipado total"
+          ],
+          "evaluation": [
+            "Avaliação",
+            "Imóvel residencial",
+            "Garagens e arrecadações não anexas ao imóvel residencial",
+            "Avaliação do Imóvel"
+          ],
+          "formalization": [
+            "Comissão de formalização",
+            "Formalização"
+          ],
+          "process": [
+            "Processo",
+            "Abertura de Processo",
+            "Desistência ou não conclusão do processo por motivos imputáveis ao cliente"
+          ],
+          "inspections": [
+            "Vistorias",
+            "em caso de construção ou realização de obras"
+          ],
+          "reanalysis": [
+            "Reanálise"
+          ],
+          "settlement": [
+            "Comissão de Liquidação de Prestação",
+            "Liquidação de Prestação"
+          ],
+          "solicitors_notary": [
+            "Emolumentos notariais",
+            "Solicitadoria",
+            "Notiário"
+          ],
+          "statements": [
+            "Emissão de extratos de conta de empréstimos liquidados",
+            "extrato",
+            "extratos",
+            "extrato de conta",
+            "extrato mensal"
+          ],
+          "taxes": [
+            "Imposto do Selo sobre concessão de crédito",
+            "imposto",
+            "imposto de selo",
+            "impostos"
+          ],
+          "termination": [
+            "Cessação da posição contratual",
+            "cessação",
+            "rescisão",
+            "encerramento"
+          ]
+        },
+        "portuguese": "Crédito à habitação e outros créditos hipotecários",
+        "pages": [
+          "6"
+        ]
+      }
+    }
+  }
+}

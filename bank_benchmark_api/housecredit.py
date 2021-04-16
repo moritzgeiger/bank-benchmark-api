@@ -122,7 +122,7 @@ def scrape_all(url, pages, dictionary):
             house_cred.update({f'page {page}': clean_prices(df)})
         result=house_cred
     else:
-        result='No housing credit product found in this bank'
+        result={'error':'No housing credit product found in this bank'}
     return result
 
 
@@ -131,6 +131,7 @@ class HouseCredit:
     def __init__(self,dictionary):
         self.link = dictionary['bp_pdf_url']
         self.page_house = dictionary['products']['housing_credit']['pages']
+        self.page_house = [int(x) for x in self.page_house]
         self.id_bank = dictionary['bp_bank_id']
         self.house_dict = dictionary['products']['housing_credit']['commissions']
     # def __init__( self,link,page, id_bank):
@@ -150,7 +151,6 @@ class HouseCredit:
     def getting_text(self, file):
         file = pdfplumber.open(file)
         print('extract pdf content to text...')
-        print()
         if len(self.page_house) > 1 :
             joined_text = []
             for el in self.page_house:
@@ -162,6 +162,9 @@ class HouseCredit:
             text = text.replace('n/a', '0,00')
             text = re.sub('--', str(np.nan), text)
             return text
+          ### no pages provided for banco bai
+        elif len(self.page_house) == 0:
+            return 'No product here'
         else:
             page = file.pages[self.page_house[0]]
             text = page.extract_text()
@@ -201,10 +204,19 @@ class HouseCredit:
                     regular.append(value.replace('OPERAÇÕES DE CRÉDITO (PARTICULARES)', ''))
 
         elif self.id_bank== '0193':
+<<<<<<< HEAD
             for value in values:
                 if 'Banco CTT, S.A. Operações Crédito-Particulares - Pág.1/2'not in value:
                     regular.append(value)
 
+=======
+            # ctt
+            try:
+                values.pop('Banco CTT, S.A. Operações Crédito-Particulares - Pág.1/2')
+                regular = values
+            except:
+                regular = [None]
+>>>>>>> e610cf4064273b61182861f86055b43668861c84
 
         elif self.id_bank == '0079':
             for value in values:
@@ -262,7 +274,7 @@ class HouseCredit:
 
         else:
             print(f'no names provided in: {names}')
-            new_dict['n/a'] = function.values()
+            new_dict['n/a'] = list(function.values())
 
         return new_dict
 
