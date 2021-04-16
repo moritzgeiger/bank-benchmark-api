@@ -198,8 +198,11 @@ class HouseCredit:
         if self.id_bank == '0170':  #or self.id_bank== '0193':
             for value in values:
                 if 'OPERAÇÕES DE CRÉDITO (PARTICULARES)' in value:
-                    regular.append(
-                        value.replace('OPERAÇÕES DE CRÉDITO (PARTICULARES)', ''))
+                    regular.append(value.replace('OPERAÇÕES DE CRÉDITO (PARTICULARES)', ''))
+
+        elif self.id_bank== '0193':
+            values.pop('Banco CTT, S.A. Operações Crédito-Particulares - Pág.1/2')
+            regular = values
 
         elif self.id_bank == '0079':
             for value in values:
