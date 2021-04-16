@@ -90,7 +90,7 @@ class DemandDeposit:
             return {'error': f'wrong page/s provided {self.page_demand}'}
         # print(lista)
 
-        print(f'lista job done. passing on lista: {lista}')
+        print(f'\n\n\n\n\n\n\n\nlista (values) job done. passing on lista: {lista}')
         return lista
 
     def n_account(self, tokenized, text):
@@ -112,7 +112,7 @@ class DemandDeposit:
                 account = ['Conta'+ x for x in account]
                 finals.append(account)
 
-        print(f'n_account job done. passing on finals: {finals}')
+        # print(f'\n\n\n\n\n\n\n n_account job done. passing on finals: {finals}')
         return finals
 
     def names(self, tokenized, text):
@@ -142,7 +142,7 @@ class DemandDeposit:
             if single not in lista:
                 lista.append(name)
 
-        print(f'names job done. passing on lista: {lista}')
+        print(f'\n\n\n\n\n\n\n\n\nnames job done. passing on lista: {lista}')
         return lista
 
     def accounts_offer(self, specific_bank):
@@ -170,7 +170,7 @@ class DemandDeposit:
                             indexes_value[value].append(inx)
                         else:
                             indexes_value[value] = [inx]
-        print(f'indexes job done. passing on: names: {indexes_name}, \nvalues: {indexes_value}')
+        print(f'\n\n\n\n\n\n\n\nindexes job done. passing on: names: {indexes_name}, \nvalues: {indexes_value}')
         return indexes_name, indexes_value
 
     def values_sentence(self, tokenized, text):
@@ -187,26 +187,29 @@ class DemandDeposit:
                 for element in number_comm:
                     if element >= idx and (element<closer or closer == 0):
                         closer = element
-                        if r'(\d{1,2},\d{2})' not in text[element]:
-                            sentence = text[element]
-                            sentence = ' '.join([sentence, text[element+1]])
+                        if r'(\d{1,2},\d{2})' not in tokenized[element]:
+                            sentence = tokenized[element]
+                            sentence = ' '.join(
+                                [sentence, tokenized[element + 1]])
                             price = re.search(r'(\d{1,2},\d{2})',sentence)
                             if price:
                                 found = price.group()
+                                print(f'found price in sentence {element}, price: {found}')
                                 types[commission] = found
                         else:
                             price = re.search(r'(\d{1,2},\d{2})',sentence)
                             if price:
                                 found = price.group()
-                                types[commission]= text[found]
+                                types[commission] = tokenized[found]
                 sentence_account[conta] = types
 
-        print(f'sentence_account job done. passing on: {sentence_account}')
+        print(f'\n\n\n\n\n\nsentence_account job done. passing on: {sentence_account}')
         return sentence_account
 
     def complete_info(self, tokenized, text):
+        # if commission is not given then prices will be passed to 'General'
         sentence_account = self.values_sentence(tokenized, text)
-        print(f'found these prices as raw data: {sentence_account}')
+        print(f'\n\n\n\n\n\nfound these prices as raw data: {sentence_account}')
         sentence_account['General'] = {}
         values_bank = self.values(tokenized)
         commissions = [objects.keys() for k, objects in sentence_account.items()]
@@ -217,11 +220,12 @@ class DemandDeposit:
                 if price:
                     found = price.group()
                     sentence_account['General'][k] = found
+        # print(f'complete_info job done. passing sentence_account {sentence_account}')
         return sentence_account
 
     def specific_bank(self, tokenized, text):
         complete_info = self.complete_info(tokenized, text)
-        print(f'dealing with bank specifics for this content: {complete_info}')
+        print(f'\n\n\n\ndealing with bank specifics for this content from complete_info: {complete_info}')
 
         if self.id_bank == '0269':
             # """bankinter"""
@@ -313,13 +317,15 @@ class DemandDeposit:
         newone = {}
         beautiful = {}
         demand_depos = self.demand_depos(tokenize, text)
-        for account in demand_depos:
-            for commission,value in demand_depos[account].items():
-                for k,b in change_name.items():
-                    if commission == k:
-                        beautiful[b]=value
-                newone[account]=beautiful
-        return newone
+        print(f'beautiful job called with input: {demand_depos}')
+        for account, fees in demand_depos.items():
+            for k, b in change_name.items():
+                try:
+                    fees[b] = fees.pop(k)
+                except:
+                    pass
+        print(f'output of beautyfier: {demand_depos}')
+        return demand_depos
 
     def output(self):
         print('output was called')
@@ -328,6 +334,7 @@ class DemandDeposit:
         tokenized = self.tokenize(text)
         output = {}
         output['subproducts'] = self.beautiful(tokenized, text)
+        print(f'output of beautiful: {output["subproducts"]}')
         specific_bank = self.specific_bank(tokenized, text)
         output['n_subproducts']= self.accounts_offer(specific_bank)
         # output['house_credit'] = {}
