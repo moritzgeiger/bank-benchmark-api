@@ -8,7 +8,43 @@ from urllib.request import Request, urlopen
 from io import StringIO, BytesIO
 import statistics
 
-
+house_credit_com = {'admin':['Comissões associadas a atos administrativos 4.1 Não realização da escritura',
+                             'Alteração do local da escritura',
+                             'Declarações de dívida',
+                             'Mudança de regime de crédito',
+                             'Declarações de dívida',
+                             'Pedido de 2ª via de Caderneta Predial',
+                             'Emissão de declarações não obrigatórias por lei',
+                             'Emissão de 2ª vias de Declaração para efeitos de IRS – Urgente',
+                             'Emissão de 2º vias de Declaração para efeitos de IRS',
+                             'Emissão de 2ª vias de faturas',
+                             'Declaração de Dívida para Fins Diversos',
+                             'Declaração de Encargos com Prestações'],
+                    'certificates':['Emolumentos do registo predial', 'registo predial',
+                                    'Certidão permanente on-line'],
+                    'debt_recovery':['Comissão de recuperação de valores em dívida', 'Prestação até 50.000 €',
+                                    'Prestação > 50.000 €', 'Comissão de recuperação de valores em dívida',
+                                    'Prestação > 50.000,00€', 'Prestação ≤ 50.000,00€'],
+                    'displacement':['Comissão de deslocação', 'Até 100 Kms', '101 a 250 Kms', '> 250 Kms '],
+                    'early_payment':['Comissão de reembolso antecipado parcial', 'Taxa fixa', 'Taxa variável',
+                                    'Taxa fixa', 'Comissão de reembolso antecipado total', 'Comissão de antecipação',
+                                    '(pré.aviso 7 dias)', 'Comissão de compra antecipada', '(pré-aviso 10 dias)',
+                                    'Comissão de Reembolso Antecipado Parcial',
+                                    'Comissão de reembolso antecipado total'],
+                    'evaluation':['Avaliação', 'Imóvel residencial',
+                                 'Garagens e arrecadações não anexas ao imóvel residencial', 'Avaliação do Imóvel'],
+                    'formalization':['Comissão de formalização', 'Formalização'],
+                    'process':['Processo', 'Abertura de Processo',
+                              'Desistência ou não conclusão do processo por motivos imputáveis ao cliente'],
+                    'inspections':['Vistorias', 'em caso de construção ou realização de obras'],
+                    'reanalysis':['Reanálise'],
+                    'settlement':['Comissão de Liquidação de Prestação', 'Liquidação de Prestação'],
+                    'solicitors_notary':['Emolumentos notariais', 'Solicitadoria', 'Notiário'],
+                    'statements':['Emissão de extratos de conta de empréstimos liquidados', 'extrato', 'extratos',
+                                  'extrato de conta', 'extrato mensal'],
+                    'taxes':['Imposto do Selo sobre concessão de crédito', 'imposto', 'imposto de selo', 'impostos'],
+                    'termination':['Cessação da posição contratual', 'cessação', 'rescisão', 'encerramento']
+                    }
 
 
 def get_df(pdf,page, dictionary):
@@ -16,7 +52,7 @@ def get_df(pdf,page, dictionary):
     prod_df=pd.DataFrame(doc.pages[page].extract_table())
 
     prices_col=find_prices(prod_df)
-    index_col = find_index(prod_df, dictionary)
+    index_col=find_index(prod_df, house_credit_com)
 
     prices_df=pd.DataFrame()
     prices_df['Commissions']=prod_df[index_col]
@@ -38,10 +74,7 @@ def find_index(df,dictionary):
     index_col=list()
     for x in range(df.shape[0]):
         for y in range(find_prices(df)):
-            try:
-                if str(df[y][x])=='None' or str(df[y][x])=='' or 'Nota' in str(df[y][x]):
-                    pass
-            except:
+            if str(df[y][x])=='None' or str(df[y][x])=='' or 'Nota' in str(df[y][x]):
                 pass
             else:
                 words = [word for word in str(df[y][x]).split(' ')]
@@ -61,9 +94,9 @@ def clean_df(df):
 
 
 def get_pdf(link):
-    remote = urlopen(Request(link)).read()
-    memory = BytesIO(remote)
-    return memory
+        remote = urlopen(Request(link)).read()
+        memory = BytesIO(remote)
+        return memory
 
 
 def scrape_page(url, page, dictionary):
@@ -128,16 +161,18 @@ def scrape_all(url, pages, dictionary):
 
 class HouseCredit:
 
-    def __init__(self,dictionary):
-        self.link = dictionary['bp_pdf_url']
-        self.page_house = dictionary['products']['housing_credit']['pages']
-        self.id_bank = dictionary['bp_bank_id']
-        self.house_dict = dictionary['products']['housing_credit']['commissions']
-    # def __init__( self,link,page, id_bank):
-    #     self.link = link
-    #     self.page_house = page
-    #     self.id_bank = id_bank
-    #     self.house_dict = house_credit_com
+    # def __init__(self,dictionary):
+    #     self.link = dictionary['bp_pdf_url']
+    #     self.page_house = dictionary['products']['house_credit']['pages']
+    #     self.id_bank = dictionary['bp_bank_id']
+    #     self.house_dict = dictionary['products']['house_credit']['commissions']
+    def __init__(self,link,page, id_bank):
+        self.link = link
+        self.page_house = page
+        self.id_bank = id_bank
+        self.house_dict = house_credit_com
+
+
 
 
     def get_pdf(self):
@@ -227,8 +262,8 @@ class HouseCredit:
             for i,sentence in enumerate(values):
                 if 'Crédito à habitação e outros créditos hipotecários' in sentence:
                     regular.append(' '.join([sentence,values[i+1]]))
-        # for i,reg in enumerate(regular):
-        #     print(f'\n\n\n\n\n\n\n\n name {i} : {reg} \n\n\n\n\n\n\n\n')
+        for i,reg in enumerate(regular):
+            print(f'\n\n\n\n\n\n\n\n name {i} : {reg} \n\n\n\n\n\n\n\n')
         return regular
 
     def n_subproducts(self,text,tokenize):
