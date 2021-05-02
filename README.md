@@ -2,8 +2,12 @@
 
 BASE URL: https://bank-price-api.herokuapp.com
 
-post 'banks/:id/merged_pdfs', to: 'banks#merged_pdfs'
-post 'banks/:id/bank_stats', to:  'banks#bank_stats'
+This is an internal API open for communication with this bank pricing dashbard:
+```https://matrix-pwc.herokuapp.com/```
+
+The API can receive two kinds of requests to do the following jobs:
+- Looking for PDFs on the internet which contain importand bank price information and returning the files to the app.
+- Scraping price data from given PDF files and reassembling it in a readable format.
 
 ---------------------------------
 
@@ -244,7 +248,8 @@ post 'banks/:id/bank_stats', to:  'banks#bank_stats'
 
 retrieve the sourcing job you have requested from /merge_pdfs (takes a couple of minutes).
 mandatory argument: 'ident' => pass the 3-digit number you were given from the /merge_pdfs immediate response.
-
+Example:
+```https://bank-price-api.herokuapp.com/retrievepdfs?ident=123```
 
 --------------------------
 # GET /retrievestats
