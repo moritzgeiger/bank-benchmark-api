@@ -3,10 +3,10 @@
 BASE URL: https://bank-price-api.herokuapp.com
 
 This is an internal API open for communication with this bank pricing dashbard:
-```https://matrix-pwc.herokuapp.com/```
+https://matrix-pwc.herokuapp.com/
 
 The API can receive two kinds of requests to do the following jobs:
-- Looking for PDFs on the internet which contain importand bank price information and returning the files to the app.
+- Looking for PDFs on the internet which contain important bank price information and returning the files to the app.
 - Scraping price data from given PDF files and reassembling it in a readable format.
 
 ---------------------------------
